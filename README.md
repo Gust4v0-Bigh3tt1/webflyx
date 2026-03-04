@@ -1,0 +1,1 @@
+self made project to learn Git with boot.dev's guidence
