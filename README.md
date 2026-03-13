@@ -10,7 +10,7 @@ Command Syntax:
         -For example, to create a new directory in your terminal, you would run:
             -'mkdir' <directory-name>
                 -'mkdir' is the command
-                -<directory-name> is a required argument''
+                -<directory-name> is a required argument
         Flags:
             - A flag is like a special instruction you give to a command, usually starting with a -. For example, '-m' tells Git "I want to attach a message to this record."
 
@@ -58,7 +58,7 @@ Porcelain and Plumbing(90/10 % rule):
             -git rev-parse <name> (*4)
     (*1):[scope] is global
     (*2):(git add ., where the . acts as the <file-path> for "everything in the current directory.")
-    (*3):<tree-ish>: This is a fancy Git term for "something that points to a tree." Usually, this is the hash of a tree object, or simply HEAD
+    (*3):<tree-ish>: This is a fancy Git term for "something that points to a tree." Usually, this is the hash of a tree object, or simply HEAD, it lists all the files and sub-folders inside that tree. It shows you their permissions, whether they are a blob (a file) or another tree (a folder), and their unique hashes.
     (*4):<name>:It tells you the full 40-character SHA-1 hash that the name points to. If you ask Git git rev-parse HEAD, it will tell you the exact hash of the commit you are currently standing on.
 
 The Three States:
@@ -102,24 +102,33 @@ The Three States:
                 -If you have a project with 100 files, but you only change one file and make a new commit, Git is smart! It doesn't save 100 new files. It only saves the one you changed and points the new commit to the 99 hashes it already has from the previous commit.
 
 
-Half of Git:
+Half of Git(50/100%):
     Half of your workflow as a developer will just be 3 simple commands:
-        -git status
-        -git add
-        -git commit
-    It's most of what you need to work effectively as a solo developer. Another 40% of Git is about collaborating and storing your work on a remote server.
-    The last 10% is mostly about fixing mistakes, rolling back changes, and other advanced topics.
+        -git status: To see what's happening in your room right now.
+        -git add: To point the camera at what you want to save.
+        -git commit: To snap the photo and save it forever.
+    It's most of what you need to work effectively as a solo developer. Another 40% of Git is about collaborating and storing your work on a remote server (sharing your photo album with others), the commands are:
+        -'git remote add <name> <url>' (Adding a "Post Office" to send your photos to).
+        -'git push [remote] [branch]' (Sending your photos to the server).
+        -'git pull [remote] [branch]' (Getting photos from your friends' albums).
+    The last 10% is mostly about fixing mistakes, rolling back changes, and other advanced topics and "Emergency Spells" for when things go wrong:
+        -Reverting: How to undo a photo if you don't like it.
+        -Resetting: Moving your camera back to a previous spot in the room.
+        -Branching & Merging: How to have two different versions of the room at the same time and then bring them together.
 
-Content Addressing:
-    Git identifies files (blobs) and commits by a unique SHA-1 hash based on their content. If the content doesn't change, the hash doesn't change.
+Content Addressing(The Secret Library):
+    Git doesn't find your files by their names (like notes.txt). Instead, it gives every single thing a unique ID Number called a Hash.
+    It’s like a library where every book is filed by its exact fingerprint.
+    If you change even a single letter in a book, its fingerprint changes, and Git gives it a new spot on the shelf. This way, nothing ever gets lost or mixed up!
+    Object Types (The Library Shelves):
+        -Blob (File): Stores the content of a single file. (The Leaf).
+        -Tree (Folder): Stores a list of Blobs and other Trees. (The Branch).
+        -Commit (Snapshot): Points to a specific Tree to show how the whole project looked at one time.
 
 
 Inspection Tools:
-    git status: Shows the state of the working directory and staging area.
-
-    git log: Displays the history of commits.
-
-    git cat-file -p: Allows you to peer into Git's internal objects to see the actual content of blobs, trees, and commits.
-
-
-()
+    Sometimes you need to look "under the hood" to see what Git is thinking. These are your tools:
+        -git status: Your Map. It shows you where you are and what you've changed since the last photo.
+        -git log: Your Photo Album. It shows you a list of every photo you’ve ever taken, who took it, and when.
+        -git cat-file -p <hash>: Your X-Ray Machine. If you have a secret ID number (hash), this tool lets you look inside and see the actual words of the file or the details of the photo.
+        -git ls-tree <tree-ish>: Your Packing List. While cat-file shows you what is inside one item, ls-tree shows you a list of every file and folder inside a specific "Tree" (folder) snapshot.
