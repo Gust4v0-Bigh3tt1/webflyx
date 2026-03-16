@@ -15,18 +15,31 @@ Command Syntax:
             - A flag is like a special instruction you give to a command, usually starting with a -. For example, '-m' tells Git "I want to attach a message to this record."
 
 
-Configuring Git:
+Configuring Git('--global'):
     Before the work begin, you need to tell Git who you are! This information is attached to everything you do so people know who made the changes.
         -Identity: You set your user.name and user.email.
         -Default Branch: You can tell Git what to call your main workspace (usually main).
+        -Storage: '~/.gitconfig' (The "inside cover" for all your projects).*1
         -Commands:
             Set: 'git config set [scope] <key> <value>'
             Get: 'git config get [scope] <key>'
             Example: 'git config get init.defaultBranch'
+            if scope isn't specified git will use the default one ('--local').
         -Keys:
             -If the key is user.name, the value is "Your Name".
             -If the key is user.email, the value is "email@example.com".
             -If the key is init.defaultBranch, the value is "main"
+    Think of your Git config like a notebook. Your user.name and user.email are already written on the inside cover (the global config).
+    (*1):The ~ (tilde) is a shortcut that means "my home folder," which is where Git looks for your default identity.
+______________________________
+Configuring Git ('--Local'):
+    For specific projects, you can add "sticky notes" that only apply to that folder.
+        -Scope: Local (the default if you don't say otherwise).
+        -Storage: These live in .git/config inside your project.
+        -Priority: If you have a user.name set in both Global and Local, Git will always listen to the Local one first. The "sticky note" inside the chapter overrides the "inside cover" of the notebook.
+        -Commands:
+            Set: 'git config set <key> <value>'
+            List: 'git config list --local'
 
 
 The Repository:
