@@ -132,3 +132,29 @@ Inspection Tools:
         -git log: Your Photo Album. It shows you a list of every photo you’ve ever taken, who took it, and when.
         -git cat-file -p <hash>: Your X-Ray Machine. If you have a secret ID number (hash), this tool lets you look inside and see the actual words of the file or the details of the photo.
         -git ls-tree <tree-ish>: Your Packing List. While cat-file shows you what is inside one item, ls-tree shows you a list of every file and folder inside a specific "Tree" (folder) snapshot.
+
+*Context Summary: Git Apprentice Reference Guide
+    Core Goal: A living README.md that explains Git concepts chronologically as they appear in the Boot.dev curriculum, simplified in a way so that a 5-year-old coulf understand it while maintaining technical accuracy.
+
+    Key Analogies & Frameworks:
+
+    The Three States (The Room Photo):
+        Working Directory: The "Live Room" (modifying files).
+        Staging Area: The "Camera Viewfinder" (preparing the shot via git add).
+        Commit History: The "Photo Album" (the permanent record via git commit).
+    The 90/10 Rule:
+        50%: Daily solo workflow (status, add, commit).
+        40%: Collaboration/Remotes (The "Post Office" analogy for push/pull).
+        10%: Emergency Spells (Fixing mistakes like reset/revert).
+    The Secret Library (Content Addressing):
+        Blobs: The "Leaves" (file content only).
+        Trees: The "Branches" (directory structure/packing lists).
+        Commits: The "Snapshots" (The dated entry in the library log).
+        Hashes: Unique "Fingerprints" based on content (Deduplication via "Space" and "Time").
+    Documentation Standards:
+        Command Syntax: Mandatory arguments in <>, optional in [].
+        Formatting: Commands outside of lists are wrapped in ''.
+        Flags: Defined as "special instructions" (e.g., -m for messages).
+        Plumbing vs. Porcelain: The distinction between user-friendly tools (Porcelain) and "under-the-hood" X-ray tools (Plumbing).
+        
+    Current Status: The foundations (Config, Repo, Syntax, Porcelain/Plumbing, Three States, Deduplication, and Inspection Tools) are drafted. The "40%" and "10%" sections are currently high-level placeholders to be expanded as the student progresses through the course.*
