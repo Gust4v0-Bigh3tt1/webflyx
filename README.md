@@ -134,7 +134,8 @@ Inspection Tools:
         -git ls-tree <tree-ish>: Your Packing List. While cat-file shows you what is inside one item, ls-tree shows you a list of every file and folder inside a specific "Tree" (folder) snapshot.
 
 *Context Summary: Git Apprentice Reference Guide
-    Core Goal: A living README.md that explains Git concepts chronologically as they appear in the Boot.dev curriculum, simplified in a way so that a 5-year-old coulf understand it while maintaining technical accuracy.
+    this summary is from a README.md in "~/workspace/bootdotdev/curriculum/webflyx" that has the intent of grow it's documentacion alongside the development of webflix (project self made to teach how to use git with the help of boot.dev's curriculum's guidence)
+    Core Goal: A living README.md that explains Git concepts chronologically as they appear in the Boot.dev curriculum, simplified in a way so that a 5-year-old could understand it while maintaining technical accuracy.
 
     Key Analogies & Frameworks:
 
