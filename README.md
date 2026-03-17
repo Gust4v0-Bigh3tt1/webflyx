@@ -19,27 +19,35 @@ Configuring Git('--global'):
     Before the work begin, you need to tell Git who you are! This information is attached to everything you do so people know who made the changes.
         -Identity: You set your user.name and user.email.
         -Default Branch: You can tell Git what to call your main workspace (usually main).
-        -Storage: '~/.gitconfig' (The "inside cover" for all your projects).*1
+        -Storage: '~/.gitconfig' (The "inside cover" for all your projects).*(1)*
         -Commands:
             Set: 'git config set [scope] <key> <value>'
-            Get: 'git config get [scope] <key>'
+            Get: 'git config get [scope] <key>'*(2)*
             Example: 'git config get init.defaultBranch'
-            if scope isn't specified git will use the default one ('--local').
+            if scope isn't specified git will use the default one ('--local')*(3)*.
         -Keys:
             -If the key is user.name, the value is "Your Name".
             -If the key is user.email, the value is "email@example.com".
             -If the key is init.defaultBranch, the value is "main"
     Think of your Git config like a notebook. Your user.name and user.email are already written on the inside cover (the global config).
-    (*1):The ~ (tilde) is a shortcut that means "my home folder," which is where Git looks for your default identity.
+    *(1):The ~ (tilde) is a shortcut that means "my home folder," which is where Git looks for your default identity.*
+    *(2):You can't just ask for <key>; you must ask for <section>.<key>**(1)**, git follows a strict format, It is like looking for a specific word in a dictionary. You don't just look for "Definition"; you look for "Bear.Definition" so Git knows exactly which section to check.*
+        -**(1):a Section is like a Chapter Header in your notebook. If you haven't written any notes (keys) under that header yet, the header doesn't really "exist" in Git's eyes. As soon as you add your first "sticky note" (e.g., git config set webflyx.ceo "ThePrimeagen"), Git creates the "webflyx" chapter automatically to hold it. To find it use 'git config list'**
+    *(3):The Safety Rule: You must be "inside" a Git project folder to use or see 'Local' settings. If you try to 'set' a local key while standing outside a project, Git will get confused and tell you: "fatal: not in a git directory".*
+        -**(When Setting: If you don't specify a scope, Git tries to write to the "Sticky Note" (--local) in your current project. If you aren't inside a Git repository, the command will actually fail because there is no .git/config file to write to!)**
+        -**(When Getting: If you don't specify a scope, Git doesn't just look at the "Sticky Note." It looks at everything (Local, then Global, then System) and gives you the "winning" value.)**
 ______________________________
 Configuring Git ('--Local'):
     For specific projects, you can add "sticky notes" that only apply to that folder.
+        -Find: 'git config get <section>.<key>' (Used to pluck one specific "sticky note" out of the pile).
+        -Peek: 'git config list' (Used to see every single setting Git is currently using).
         -Scope: Local (the default if you don't say otherwise).
         -Storage: These live in .git/config inside your project.
         -Priority: If you have a user.name set in both Global and Local, Git will always listen to the Local one first. The "sticky note" inside the chapter overrides the "inside cover" of the notebook.
         -Commands:
             Set: 'git config set <key> <value>'
-            List: 'git config list --local'
+            List: 'git config list --local'*(1)*
+    *(1): It is worth noting that git config list (without flags) is the "Plumbing" way to see everything Git currently knows about your setup from all levels (system, global, and local).*
 
 
 The Repository:
@@ -52,10 +60,10 @@ The Repository:
 Porcelain and Plumbing(90/10 % rule):
     In Git, commands are divided into high-level ("porcelain") commands and low-level ("plumbing") commands. The porcelain commands are the ones that you will use most often as a developer to interact with your code.
         -Some porcelain commands are:
-            -git config set [scope] <key> <value> (*1)
+            -git config set [scope] <key> <value> *(1)*
                 -Example: git config set user.name "Your Name"
             -git status
-            -git add <file-path> (*2)
+            -git add <file-path> *(2)*
             -git commit -m <message>
             -git log
             -git push
@@ -67,12 +75,12 @@ Porcelain and Plumbing(90/10 % rule):
             -git cat-file <type> <hash>
                 -If a flag is used '<type>' isn't needed. Common flags: -p (print content), -t (show type).
             -git hash-object <file-path>
-            -git ls-tree <tree-ish> (*3)
-            -git rev-parse <name> (*4)
-    (*1):[scope] is global
-    (*2):(git add ., where the . acts as the <file-path> for "everything in the current directory.")
-    (*3):<tree-ish>: This is a fancy Git term for "something that points to a tree." Usually, this is the hash of a tree object, or simply HEAD, it lists all the files and sub-folders inside that tree. It shows you their permissions, whether they are a blob (a file) or another tree (a folder), and their unique hashes.
-    (*4):<name>:It tells you the full 40-character SHA-1 hash that the name points to. If you ask Git git rev-parse HEAD, it will tell you the exact hash of the commit you are currently standing on.
+            -git ls-tree <tree-ish> *(3)*
+            -git rev-parse <name> *(4)*
+    *(1):[scope] is global*
+    *(2):(git add ., where the . acts as the <file-path> for "everything in the current directory.")*
+    *(3):<tree-ish>: This is a fancy Git term for "something that points to a tree." Usually, this is the hash of a tree object, or simply HEAD, it lists all the files and sub-folders inside that tree. It shows you their permissions, whether they are a blob (a file) or another tree (a folder), and their unique hashes.*
+    *(4):<name>:It tells you the full 40-character SHA-1 hash that the name points to. If you ask Git git rev-parse HEAD, it will tell you the exact hash of the commit you are currently standing on.*
 
 The Three States:
     Git tracks your work through three different stages. A good analogy to think of it is:
@@ -97,14 +105,14 @@ The Three States:
             -The Tree Hash: reference to the "snapshot" of all files/folders at that moment (a photo of the roots in which the file belongs).
             -The Parent Hash: The ID of the commit that came before it (this creates the "chain" of history).
             -The Author & Committer: Your user.name and user.email.
-            -The Timestamp: The exact second the commit was made. (*1)
+            -The Timestamp: The exact second the commit was made. *(1)*
             -The Message: Whatever you wrote after the -m flag.
-        Blob Hash: Only depends on the content. (Same words = Same hash) (*2):
+        Blob Hash: Only depends on the content. (Same words = Same hash) *(2)*:
             The Size: It adds how many characters are in the file.
             The Content: It adds every single letter and space inside the file.
 
-    (*1):even if you make two identical commits with the same files and message, they will have different hashes because they happened at different times
-    (*2):Git does not include the filename in a blob's hash! That's why two files with different names but the same content will have the identical hash (Deduplication)
+    *(1):even if you make two identical commits with the same files and message, they will have different hashes because they happened at different times*
+    *(2):Git does not include the filename in a blob's hash! That's why two files with different names but the same content will have the identical hash (Deduplication)*
 
     Deduplication:
          Because Git uses hashes, it is efficient. If a file remains unchanged between commits, Git simply points to the existing hash rather than storing a duplicate copy.
