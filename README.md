@@ -134,7 +134,7 @@ The Three States:
                  A - B - C - D   (The Main Road)
                   \
                    E - F        (The Deep-Sea Branch)
-.   ___________________
+    ___________________
     The Snapshot Model:
         -Unlike some systems that store only "changes" (deltas), Git stores an entire snapshot (photo) of your files for every commit.
         -When Git hashes a file(blob), it only cares about two things: The Size and the Content.
@@ -172,8 +172,11 @@ The Workflow Hierarchy (50/100%): Porcelain and Plumbing (90/10 Rule)
             -'git add <file-path>': To point the camera at what you want to save.*(1)*
             -'git commit -m <message>': To snap the photo and save it forever.
             -'git log': Flipping through the photo album to see your past work.
-            -'git branch [name]': To name a new "What If?" portal (bookmark) and place it exactly where you are standing.*(2)*
-            -'git branch': Reveals all the bookmarks currently tucked into your album. The one with the star (or the different color) is the world you are currently standing in.*(3)*
+                -The Pocket Lens (--oneline): Shrinks each page to a single line.
+                -The True Name Lens (--decorate=full): Reveals the "Ref’s" full path.*(2)*
+                    -(--decorate=no):the branch names are no longer shown at all.
+            -'git branch [name]': To name a new "What If?" portal (bookmark) and place it exactly where you are standing.*(3)*
+            -'git branch': Reveals all the bookmarks currently tucked into your album. The one with the star (or the different color) is the world you are currently standing in.*(4)*
             -'git branch -m <old> <new>': This allows you to rename a bookmark without moving it to a different photo.
         It's most of what you need to work effectively as a solo developer.
     __________________________
@@ -189,26 +192,27 @@ The Workflow Hierarchy (50/100%): Porcelain and Plumbing (90/10 Rule)
             -Reverting: How to undo a photo if you don't like it.
             -Resetting: Moving your camera back to a previous spot in the room.
             -Merging: Stitching two different realities back together into one.(which is often where "Conflicts" (or "Curses") happen!)
-            -git rev-parse <name>: Finding the true 40-character "Fingerprint" (Hash) of a bookmark. *(4)*
+            -git rev-parse <name>: Finding the true 40-character "Fingerprint" (Hash) of a bookmark. *(5)*
             -git cat-file <type> <hash>: Peeking inside a specific object in the library.
                 -If a flag is used '<type>' isn't needed. Common flags: -p (print content), -t (show type).
             -git hash-object <file-path>
-            -git ls-tree <tree-ish>: Listing everything inside a snapshot to see their "Mode." *(5)*
+            -git ls-tree <tree-ish>: Listing everything inside a snapshot to see their "Mode." *(6)*
             - Manually editing '.git/config' or '~/.gitconfig' with a text editor. (Changing the kingdom's rules by hand instead of using the git config tool.)
                 - (This is the "Plumbing" way to change settings without using the 'git config' tool).
     ___________________________________________________________________________________________________________
     *(1):(git add ., where the . acts as the <file-path> for "everything in the current directory.")*
-    *(2)Branching: In a normal book, you read from page 1 to page 100 in a straight line. But a Wizard's Notebook is magical. Think of it like puting an extra bookmark in the project(book) instead of a copy of the whole library; it is just a sticky note (a pointer) that says "I am currently looking at this specific photo in the album.". The Master Scroll (master/main): This is the "True History" of the kingdom. It is the story everyone agrees is real.***(1)** **(2)**
+    *(2)The True Name Lens (--decorate=full): Reveals the "Ref’s" full path. This shows the exact "Shelf" in the Secret Library (refs/heads/) where the sticky note is kept.*
+    *(3)Branching: In a normal book, you read from page 1 to page 100 in a straight line. But a Wizard's Notebook is magical. Think of it like puting an extra bookmark in the project(book) instead of a copy of the whole library; it is just a sticky note (a pointer) that says "I am currently looking at this specific photo in the album.". The Master Scroll (master/main): This is the "True History" of the kingdom. It is the story everyone agrees is real.***(1)** **(2)**
         -**(1)The Movement: When you snap a new photo (commit), you don't need a new bookmark; you simply peel the sticky note off the old photo and slap it onto the new one. It always stays at The Tip of the Wand.***(1)*
             -*(1)The Tip of the Wand: The most recent photo in a branch is called the Tip. As you add new photos, the bookmark automatically slides forward to stay at the very end of that specific story.*
         -**(2)The Starting Point: Every notebook starts with a first bookmark already placed. This is why, when you run git branch for the first time in your project directory, you aren't standing in a "nameless void." You are already standing on the main branch.**
-    *(3)The Wizard's Focus (HEAD):*
+    *(4)The Wizard's Focus (HEAD):*
         *While you can have many bookmarks (Branches) in your album, you only have one set of eyes.*
             *-HEAD is the Wizard's Focus. It usually points to a Sticky Note (Branch).*
             *-When you move your focus to a different branch, Git quickly rearranges the furniture in the Live Room (Working Directory) to match the photo that bookmark is pointing to.*
             *-Plumbing Fact: If you look inside the secret file .git/HEAD, you won't see a hash; you'll see something like ref: refs/heads/main. It’s literally a pointer to a pointer!*
-    *(4):<name>:It tells you the full 40-character SHA-1 hash that the name points to. If you ask Git git rev-parse HEAD, it will tell you the exact hash of the commit you are currently standing on.*
-    *(5):<tree-ish>: This is a fancy Git term for "something that points to a tree." Usually, this is the hash of a tree object, or simply HEAD. It lists everything inside that snapshot and shows their "Mode"—a special code that tells Git if a file is a regular file, a folder, or a special 'executable' file (like a script that can run like a toy car on its own).*
+    *(5):<name>:It tells you the full 40-character SHA-1 hash that the name points to. If you ask Git git rev-parse HEAD, it will tell you the exact hash of the commit you are currently standing on.*
+    *(6):<tree-ish>: This is a fancy Git term for "something that points to a tree." Usually, this is the hash of a tree object, or simply HEAD. It lists everything inside that snapshot and shows their "Mode"—a special code that tells Git if a file is a regular file, a folder, or a special 'executable' file (like a script that can run like a toy car on its own).*
 
             
 Content Addressing(The Secret Library):
@@ -247,7 +251,7 @@ Inspection Tools:
 
 
 
-*Context Summary: Git Apprentice Reference Guide
+Context Summary: Git Apprentice Reference Guide
     -this summary is from a README.md in "~/workspace/bootdotdev/curriculum/webflyx" that has the intent of grow it's documentacion alongside the development of webflix (project self made to teach how to use git with the help of boot.dev's curriculum's guidence)
     -Core Goal: A living README.md that explains Git concepts chronologically as they appear in the Boot.dev curriculum. It uses a "Wizard’s Notebook" theme to simplify complex version control mechanics, simplified in a way so that a 5-year-old could understand it while maintaining technical accuracy.
 
@@ -292,4 +296,4 @@ Inspection Tools:
         -The Eraser Rule: Distinguishes between erasing a single line (unset) and scrubbing a whole chapter (remove-section).
     Current Status: Foundations are fully complete, covering configuration scopes, repository initialization, object hashing/deduplication, and branch visualization/lineage. The "Collaboration" and "Emergency Spell" (Merging/Resetting) chapters remain high-level placeholders for future curriculum milestones.
 
-     so, based on this entry of mine and this lesson what about this lesson I could add in my README.md entry to make it more complete? I could give the full README.md file if you wish.*
+     so, based on this entry of mine and this lesson what about this lesson I could add in my README.md entry to make it more complete? I could give the full README.md file if you wish.
