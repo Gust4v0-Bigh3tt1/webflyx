@@ -117,6 +117,7 @@ The Three States:
     ____________________________________________
     2-Staging Area/Index(The Camera Viewfinder):
         -after you made the changes in step 1, you're now going to "prepare to take a photo of the room" and mark the changes made.
+        -Technical Detail: The "Viewfinder" is physically stored in a file called .git/index. It’s the "Camera Sensor" holding all the data perfectly still until you’re ready to snap the photo (commit).*(1)*
         Command: 'git add <file-path>'.
     _________________________________
     3-Commit History(The Photo Album):
@@ -128,7 +129,7 @@ The Three States:
                 -The Side-Quests (Branches): When a wizard wants to try a new spell without ruining the main story, they create a "Side-Quest."
                 -The Fork in the Road: Use the text diagrams from the lesson to show how primes_branch or lanes_branch split off from a specific "photo" (commit) in the album.
             -The Map of Diverging Paths (Branches)
-                Sometimes a Wizard must work on two spells at once. We visualize this using a "Map":*(1)*
+                Sometimes a Wizard must work on two spells at once. We visualize this using a "Map":*(2)*
                        G - H    (The Sky-Castle Branch)
                       /
                  A - B - C - D   (The Main Road)
@@ -144,15 +145,17 @@ The Three States:
                 -The Tree Hash: reference to the "snapshot" of all files/folders at that moment (a photo of the roots in which the file belongs).
                 -The Parent Hash: The ID of the commit that came before it (this creates the "chain" of history).
                 -The Author & Committer: Your user.name and user.email.
-                -The Timestamp: The exact second the commit was made. *(2)*
+                -The Timestamp: The exact second the commit was made. *(3)*
                 -The Message: Whatever you wrote after the -m flag.
-            Blob Hash: Only depends on the content. (Same words = Same hash) *(3)*:
+            Blob Hash: Only depends on the content. (Same words = Same hash) *(4)*:
                 The Size: It adds how many characters are in the file.
                 The Content: It adds every single letter and space inside the file.
     ___________________________________________________________________________________________________________
-    *(1)The Rule of Memory: The Deep-Sea Branch consists of commits A, E, and F. It remembers where it came from (A), even if the Main Road travels further to D.*
-    *(2):even if you make two identical commits with the same files and message, they will have different hashes because they happened at different times*
-    *(3):Git does not include the filename in a blob's hash! That's why two files with different names but the same content will have the identical hash (Deduplication)*
+    *(1)The Sensor's Memory: The Index doesn't store the "books" themselves (the Blobs do that), but it stores the exact list of which fingerprints (hashes) are currently on the "Preparation Table" waiting to be photographed for the next Commit.*
+    *(2)The Rule of Memory: The Deep-Sea Branch consists of commits A, E, and F. It remembers where it came from (A), even if the Main Road travels further to D.(1)*
+        **(1)checkpoint hash: git also stores the last commit of each branch in a file inside the secret folder '.git/refs/heads'.**
+    *(3):even if you make two identical commits with the same files and message, they will have different hashes because they happened at different times*
+    *(4):Git does not include the filename in a blob's hash! That's why two files with different names but the same content will have the identical hash (Deduplication)*
 
     Deduplication:
         -Because Git uses hashes, it is efficient. If a file remains unchanged between commits, Git simply points to the existing hash rather than storing a duplicate copy.
