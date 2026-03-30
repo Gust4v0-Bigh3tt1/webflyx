@@ -188,6 +188,9 @@ The Workflow Hierarchy (50/100%): Porcelain and Plumbing (90/10 Rule)
                     Normally, git log only shows the path you are currently standing on.
                     -Adding --graph draws the physical vines and paths connecting the photos, showing exactly where the paths split at the Crossroads.
                     -Adding --all allows you to see every side-quest and parallel world at once, even those you aren't currently standing in.
+                -The Ancestry Lens (--parents): Reveals the raw Fingerprints (Hashes) of every commit's parent(s)
+                    directly in the log output. A normal commit shows one parent hash.
+                    A Bridge Commit (Merge Commit) shows two — one for each road that was stitched together.
             -'git branch [name]': To name a new "What If?" portal (bookmark) and place it exactly where you are standing.*(3)*
             -'git branch': Reveals all the bookmarks currently tucked into your album. The one with the star (or the different color) is the world you are currently standing in.*(4)*
             -'git switch <name>': allows you to switch branches
