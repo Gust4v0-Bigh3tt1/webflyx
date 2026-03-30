@@ -217,7 +217,7 @@ The Workflow Hierarchy (50/100%): Porcelain and Plumbing (90/10 Rule)
                     \     /
                      D - E        Deap-Sea Branch
                 -F remembers both C and E. It is the moment two parallel worlds became one again.
-                -The Map Renderer (--graph --parents): Adding --parents to git log reveals the two-parent nature of the Bridge Commit directly in the output, showing the raw hashes of both parents side by side.
+                -The Map Renderer (--graph --parents): Adding --parents to git log reveals the two-parent nature of the Bridge Commit directly in the output, showing the raw hashes of both parents side by side (You can verify the two-parent nature of any merge commit by running git log --parents. The Bridge Commit will be the only one in your history with two parent hashes listed beside it.).
                 command: 'git switch main''git merge <name>'(<name>=name of the branch).
                 (This is often where "Conflicts" or "Curses" happen — when both branches changed the same line of the same file since the Crossroads, Git cannot decide which version wins and asks you to resolve it by hand.)
             -git rev-parse <name>: Finding the true 40-character "Fingerprint" (Hash) of a bookmark. *(5)*
