@@ -180,6 +180,7 @@ The Workflow Hierarchy (50/100%): Porcelain and Plumbing (90/10 Rule)
                     -(--decorate=no):the branch names are no longer shown at all.
             -'git branch [name]': To name a new "What If?" portal (bookmark) and place it exactly where you are standing.*(3)*
             -'git branch': Reveals all the bookmarks currently tucked into your album. The one with the star (or the different color) is the world you are currently standing in.*(4)*
+            -'git switch <name>': allows you to switch branches
             -'git branch -m <old> <new>': This allows you to rename a bookmark without moving it to a different photo.
         It's most of what you need to work effectively as a solo developer.
     __________________________
