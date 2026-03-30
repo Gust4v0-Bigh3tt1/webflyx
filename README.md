@@ -135,6 +135,12 @@ The Three States:
                  A - B - C - D   (The Main Road)
                   \
                    E - F        (The Deep-Sea Branch)
+            -The Parallel Reality (Divergence):
+                Sometimes, the Master Scroll (Main) moves forward while you are still away on a Side-Quest. This creates a "Fork" where neither branch is ahead of the other; they have simply lived different lives.
+                 A - B - C - E  (Main: Added Contents.md)
+                          \
+                           D     (Side-Quest: Found the Classics)
+                Commit E and Commit D are "cousins." They share a grandfather (C), but they don't know about each other's treasures(details) yet.
     ___________________
     The Snapshot Model:
         -Unlike some systems that store only "changes" (deltas), Git stores an entire snapshot (photo) of your files for every commit.
@@ -153,7 +159,7 @@ The Three States:
     ___________________________________________________________________________________________________________
     *(1)The Sensor's Memory: The Index doesn't store the "books" themselves (the Blobs do that), but it stores the exact list of which fingerprints (hashes) are currently on the "Preparation Table" waiting to be photographed for the next Commit.*
     *(2)The Rule of Memory: The Deep-Sea Branch consists of commits A, E, and F. It remembers where it came from (A), even if the Main Road travels further to D.(1)*
-        **(1)checkpoint hash: git also stores the last commit of each branch in a file inside the secret folder '.git/refs/heads'.**
+        **(1)checkpoint hash: git also stores the last commit of each branch in a file inside the secret folder '.git/refs/heads' (These files are the Physical Bookmarks. If you peek inside .git/refs/heads/main, you will find the 40-character Fingerprint of the very last photo taken on that road).**
     *(3):even if you make two identical commits with the same files and message, they will have different hashes because they happened at different times*
     *(4):Git does not include the filename in a blob's hash! That's why two files with different names but the same content will have the identical hash (Deduplication)*
 
@@ -178,10 +184,14 @@ The Workflow Hierarchy (50/100%): Porcelain and Plumbing (90/10 Rule)
                 -The Pocket Lens (--oneline): Shrinks each page to a single line.
                 -The True Name Lens (--decorate=full): Reveals the "Ref’s" full path.*(2)*
                     -(--decorate=no):the branch names are no longer shown at all.
+                -The Lens of All-Sight (git log --graph --all --oneline):
+                    Normally, git log only shows the path you are currently standing on.
+                    -Adding --graph draws the physical vines and paths connecting the photos, showing exactly where the paths split at the Crossroads.
+                    -Adding --all allows you to see every side-quest and parallel world at once, even those you aren't currently standing in.
             -'git branch [name]': To name a new "What If?" portal (bookmark) and place it exactly where you are standing.*(3)*
             -'git branch': Reveals all the bookmarks currently tucked into your album. The one with the star (or the different color) is the world you are currently standing in.*(4)*
             -'git switch <name>': allows you to switch branches
-            -'git branch -m <old> <new>': This allows you to rename a bookmark without moving it to a different photo.
+            -'git branch -m <old> <new>': This allows you to rename a bookmark(branch) without moving it to a different photo.
         It's most of what you need to work effectively as a solo developer.
     __________________________
     -40% Remote Collaboration: The "Post Office"
@@ -215,6 +225,8 @@ The Workflow Hierarchy (50/100%): Porcelain and Plumbing (90/10 Rule)
             *-HEAD is the Wizard's Focus. It usually points to a Sticky Note (Branch).*
             *-When you move your focus to a different branch, Git quickly rearranges the furniture in the Live Room (Working Directory) to match the photo that bookmark is pointing to.*
             *-Plumbing Fact: If you look inside the secret file .git/HEAD, you won't see a hash; you'll see something like ref: refs/heads/main. It’s literally a pointer to a pointer!*
+            *-The Shifting Reality Rule:*
+                *-When you move your Focus (HEAD) to a different bookmark(branch), Git physically replaces the items in your Live Room (Working Directory). If you created a magical item on a Side-Quest and then teleport back to the Main Road, the item will vanish from your hand. It isn't gone; it is simply waiting for you back in the other reality.*
     *(5):<name>:It tells you the full 40-character SHA-1 hash that the name points to. If you ask Git git rev-parse HEAD, it will tell you the exact hash of the commit you are currently standing on.*
     *(6):<tree-ish>: This is a fancy Git term for "something that points to a tree." Usually, this is the hash of a tree object, or simply HEAD. It lists everything inside that snapshot and shows their "Mode"—a special code that tells Git if a file is a regular file, a folder, or a special 'executable' file (like a script that can run like a toy car on its own).*
 
