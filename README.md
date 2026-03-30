@@ -205,7 +205,17 @@ The Workflow Hierarchy (50/100%): Porcelain and Plumbing (90/10 Rule)
         -The last 10% is mostly about fixing mistakes, rolling back changes, and other advanced topics and "Emergency Spells" for when things go wrong:
             -Reverting: How to undo a photo if you don't like it.
             -Resetting: Moving your camera back to a previous spot in the room.
-            -Merging: Stitching two different realities back together into one.(which is often where "Conflicts" (or "Curses") happen!)
+            -Merging: Stitching two different realities back together into one.
+                When you cast a Merge Spell, Git follows three steps:
+                    1. Find the Last Shared Moment (Merge Base): Git hunts backwards through both timelines to find the last commit they both walked through together. This is your "Crossroads" commit.
+                    2. Replay the Changes: Git replays what each branch did since the Crossroads, then weaves those changes together.
+                    3. Snap the Bridge Commit: The result is a special photo with two parents instead of one — one parent from each branch. This is the Bridge Commit (F below).
+                 A - B - C - F    Main Road
+                    \     /
+                     D - E        Deap-Sea Branch
+                -F remembers both C and E. It is the moment two parallel worlds became one again.
+                -The Map Renderer (--graph --parents): Adding --parents to git log reveals the two-parent nature of the Bridge Commit directly in the output, showing the raw hashes of both parents side by side.
+                (This is often where "Conflicts" or "Curses" happen — when both branches changed the same line of the same file since the Crossroads, Git cannot decide which version wins and asks you to resolve it by hand.)
             -git rev-parse <name>: Finding the true 40-character "Fingerprint" (Hash) of a bookmark. *(5)*
             -git cat-file <type> <hash>: Peeking inside a specific object in the library.
                 -If a flag is used '<type>' isn't needed. Common flags: -p (print content), -t (show type).
