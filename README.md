@@ -357,11 +357,3 @@ Context Summary: Git Apprentice Reference Guide
         Foundations are fully complete, covering configuration scopes, repository initialization, object hashing/deduplication, branch visualization/lineage, and merge mechanics (Bridge Commit, fast-forward merge, and conflict awareness). Within the 10% Emergency Spells section, merging is fully documented, but Reverting and Resetting remain high-level placeholders with no commands or detail yet. The "Remote Collaboration" chapter (push/pull/clone) remains a high-level placeholder for future curriculum milestones.
 
      so, based on this entry of mine and this lesson what about this lesson I could add in my README.md entry to make it more complete? I could give the full README.md file if you wish.
-README.md:
-|-The Workflow Hierarchy (entry):
- |--50% Solo Mastery (section):
-  |---'git log' updated.
-  |---'-c' and '-d' flags added.
- |--10% Emergency Spells (section):
-  |---Merging updated.
-|-Context Summary(entry) updated.
