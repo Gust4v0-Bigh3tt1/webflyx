@@ -192,13 +192,14 @@ The Workflow Hierarchy: Porcelain and Plumbing (50/40/10 Rule)
                 -The Lens of All-Sight (--graph --all --oneline --decorate=full): use these flags to read commit history like a world map.
                     Normally, git log only shows the path you are currently standing on.
                 -The Map Renderer (--graph --parents): use these flags to read commit history like a map.
-            -'git branch [name]': To name a new "What If?" portal (bookmark) and place it exactly where you are standing.*(3)*
+            -'git branch [name]'(vine branch): To name a new "What If?" portal (bookmark) and place it exactly where you are standing.*(3)*
                 -'git branch -d <name>': The Safe Eraser. Deletes the branch named in the command, but      refuses if its photos haven't been merged yet.
                 -'git branch -D <name>': The Force Eraser. Deletes the branch regardless of merge status. Use with caution.
                 -'git branch -m <old> <new>': This allows you to rename a bookmark(branch) without moving it to a different photo.
             -'git branch': Reveals all the bookmarks currently tucked into your album. The one with the star (or the different color) is the world you are currently standing in.*(4)*
             -'git switch <name>': Moves your Focus (HEAD) to a different branch (allows you to switch branches)
-                'git switch -c <name>': Creates a new branch and switch to it in one command.
+                -'git switch -c <name>': Creates a new branch at your current location and switches to it immediately.
+                -'git switch -c <name> <COMMITHASH>': Creates a new branch starting specifically at that COMMITHASH (instead of where you are currently standing) and switches to it.
         It's most of what you need to work effectively as a solo developer.
     __________________________
     -40% Remote Collaboration: The "Post Office"
@@ -212,6 +213,12 @@ The Workflow Hierarchy: Porcelain and Plumbing (50/40/10 Rule)
         -The last 10% is mostly about fixing mistakes, rolling back changes, and other advanced topics and "Emergency Spells" for when things go wrong:
             -Reverting: How to undo a photo if you don't like it.
             -Resetting: Moving your camera back to a previous spot in the room.
+            -Rebasing: Moving the foundation of a branch.
+                Instead of stitching two histories together with a bridge (Merge), Rebase picks up your entire branch and moves it so it starts from the very latest photo on the Main Road.
+                -Command: 'git rebase main' (run while standing on your feature branch).
+                -The Result: A perfectly straight line of history. It’s like rewriting the past so your changes always happen on top of the newest work.
+                -⚠️ Warning: Never rebase the Main Road or any branch other wizards are already walking on. It rewrites the past and causes time-travel curses (conflicts) for your allies!
+            -The Handshake (rule of thumb): Rebase your own branch to polish your work, then ask the Manager to Merge it into the Main Road
             -Merging: Stitching two different realities back together into one.
                 -command: 'git switch main''git merge <name>'(<name>=name of the branch).
                 When you cast a Merge Spell, Git follows three steps:
