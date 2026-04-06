@@ -212,7 +212,10 @@ The Workflow Hierarchy: Porcelain and Plumbing (50/40/10 Rule)
     -10% Emergency Spells: Precision tools for fixing "cursed" repositories
         -The last 10% is mostly about fixing mistakes, rolling back changes, and other advanced topics and "Emergency Spells" for when things go wrong:
             -Reverting: How to undo a photo if you don't like it.
-            -Resetting: Moving your camera back to a previous spot in the room.
+            -Resetting (git reset): Moving your bookmark (Sticky Note) back to a previous spot in the album.
+                -The Gentle Rewind (--soft <COMMITHASH>): Moves your branch's Sticky Note back to an earlier photo, but does not change your room or your camera.
+                    -The Result: The "future" commits are removed from your history, but the changes from those photos are still sitting in your Staging Area, ready to be re-shot.
+                    -Use Case: When you realize you took a photo (committed) too early and want to add one more thing to it before saving it again.
             -Rebasing: Moving the foundation of a branch.
                 Instead of stitching two histories together with a bridge (Merge), Rebase picks up your entire branch and moves it so it starts from the very latest photo on the Main Road.
                 -Command: 'git rebase main' (run while standing on your feature branch).
@@ -361,6 +364,6 @@ Context Summary: Git Apprentice Reference Guide
         -The Nesting Rule: Flags and sub-behaviors are indented as children of their parent command, not listed as separate top-level entries.
         -The Bold Distinction: Sub-rules and named concepts within a footnote use **(bold)** to separate them from the footnote's plain text.
     Current Status:
-        Foundations are fully complete, covering configuration scopes, repository initialization, object hashing/deduplication, branch visualization/lineage, and merge mechanics (Bridge Commit, fast-forward merge, and conflict awareness). Within the 10% Emergency Spells section, merging is fully documented, but Reverting and Resetting remain high-level placeholders with no commands or detail yet. The "Remote Collaboration" chapter (push/pull/clone) remains a high-level placeholder for future curriculum milestones.
+        Foundations are fully complete, covering configuration scopes, repository initialization, object hashing/deduplication, branch visualization/lineage, and merge mechanics (Bridge Commit, fast-forward merge, and conflict awareness). Within the 10% Emergency Spells section, merging is fully documented, but Resetting is half flesh out and Reverting remain high-level placeholder with no command or detail yet. The "Remote Collaboration" chapter (push/pull/clone) remains a high-level placeholder for future curriculum milestones.
 
      so, based on this entry of mine and this lesson what about this lesson I could add in my README.md entry to make it more complete? I could give the full README.md file if you wish.
