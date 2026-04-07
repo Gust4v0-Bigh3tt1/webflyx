@@ -9,7 +9,7 @@ Command Syntax:
     -Arguments in angle brackets <> are mandatory and must be provided when running the command.
     -Arguments in square brackets [] are optional and can be included if needed.
         -For example, to create a new directory in your terminal, you would run:
-            -'mkdir <directory-name>'
+            -'`mkdir `<directory-name>'
                 -"mkdir" is the command
                 -<directory-name> is a required argument
         Flags:
@@ -25,7 +25,7 @@ Configuring Git:
         -These are the foundational rules set for every single user and project on this machine. You rarely need to edit this, as it is like changing the laws of the land itself.
             -Storage: /etc/gitconfig
             -Commands:
-                -'git config set --system <key> <value>' (Requires "Administrative Magic" / 'sudo' to change).
+                -'`git config set --system `<key> <value>' (Requires "Administrative Magic" / '`sudo`' to change).
         -Think of this as the stone tablet in the town square. Everyone can read it, but only the High Wizards can pick up the chisel to change it.
     ________________________________________________________________________________________________
     The Inside Cover (--global): Your personal identity for all your projects. (File: ~/.gitconfig).
@@ -38,12 +38,12 @@ Configuring Git:
             .........................................................................................
             -The “Notebook” Commands: (Config Porcelain)
                 -These are the specialized tools for writing, reading, and erasing the rules in your Config Notebooks.
-                    -'git config set [scope] <key> <value>' : Writing a new rule in a specific notebook.(e.g. 'git config set user.name "Your Name"')*(2)* *(3)*
-                    -'git config get [scope] <key>': Reading a specific rule.
-                        Example: 'git config get init.defaultBranch'
-                    -'git config unset [scope] <key>': The "Eraser" for a single line.
-                    -'git config remove-section [scope] <section>': The "Chapter Eraser" to rip out an entire page of rules.
-                    -'git config list': Your "Peek" tool to see every rule Git is currently following.*(4)*
+                    -'`git config set `[scope] <key> <value>' : Writing a new rule in a specific notebook.(e.g. '`git config set user.name "Your Name"`')*(2)* *(3)*
+                    -'`git config get `[scope] <key>': Reading a specific rule.
+                        Example: '`git config get init.defaultBranch`'
+                    -'`git config unset [scope] `<key>': The "Eraser" for a single line.
+                    -'`git config remove-section `[scope] <section>': The "Chapter Eraser" to rip out an entire page of rules.
+                    -'`git config list`': Your "Peek" tool to see every rule Git is currently following.*(4)*
                 if scope isn't specified git will use the default one ('--local')*(5)*.
             -Keys:
                 -If the key is user.name, the value is "Your Name".
@@ -61,7 +61,7 @@ Configuring Git:
         -**The Default Rule: If you don't pick one, Git usually defaults to --local.**
         -**The Project Requirement: Because the default is --local, Git must be able to find the hidden .git cave to write the note. If you aren't inside a project, it will throw a "fatal" error because it has no "Sticky Note" to write on!**
     *(4):'git config list' works by itself just fine it will give you a list of all your git config that has been set.***(1)** **(2)**
-        -**(1)The Filter: If you only want to see one rule, use 'git config get <key>'.if it exist.**
+        -**(1)The Filter: If you only want to see one rule, use '`git config get `<key>'.if it exist.**
         -**(2)The Full Scroll: You can also use 'cat ~/.gitconfig' to see all.(global only, for local use 'cat .git/config')**
     *(5):The Safety Rule: You must be "inside" a Git project folder to use or see 'Local' settings. If you try to 'set' a local key while standing outside a project, Git will get confused and tell you: "fatal: not in a git directory".*
         -**(When Setting: If you don't specify a scope, Git tries to write to the "Sticky Note" (--local) in your current project. If you aren't inside a Git repository, the command will actually fail because there is no .git/config file to write to!)**
@@ -70,21 +70,21 @@ Configuring Git:
     The Sticky Note (--local):Project-specific settings just for this folder. (File: .git/config).
         -Project-specific rules. These only exist inside the hidden .git cave of a specific repository.
         -For specific projects, you can add "sticky notes" that only apply to that folder.
-            -Find: 'git config get <section>.<key>' (Used to pluck one specific "sticky note" out of the pile).
-            -Peek: 'git config list' (Used to see every single setting Git is currently using).
+            -Find: '`git config get `<section>.<key>' (Used to pluck one specific "sticky note" out of the pile).
+            -Peek: '`git config list`' (Used to see every single setting Git is currently using).
             -Scope: Local (the default if you don't say otherwise).
             -Storage: These live in .git/config inside your project.
             -Priority: If you have a user.name set in both Global and Local, Git will always listen to the Local one first. The "sticky note" inside the chapter overrides the "inside cover" of the notebook.
-        -The "Hoarder" Rule (Duplicates): while most notebooks only let you have one <section>.<key> <value> per page, Git lets you stick as many as you want if you use a special "plus-sign" instruction ('git config set --append <section>.<key> <value>').*(1)*
+        -The "Hoarder" Rule (Duplicates): while most notebooks only let you have one <section>.<key> <value> per page, Git lets you stick as many as you want if you use a special "plus-sign" instruction ('`git config set --append `<section>.<key> <value>').*(1)*
             -Commands:
-                Set: 'git config set <key> <value>'
-                    -Append: 'git config set --append <key> <value>' (The "Stapler": adds a duplicate instead of replacing the old one).
-                List: 'git config list --local'*(3)*
+                Set: '`git config set `<key> <value>'
+                    -Append: '`git config set --append `<key> <value>' (The "Stapler": adds a duplicate instead of replacing the old one).
+                List: '`git config list --local`'*(3)*
                 Remove:
-                    -one: 'git config unset <key>'
-                    -all: 'git config unset --all <key>'*(4)*
+                    -one: '`git config unset `<key>'
+                    -all: '`git config unset --all `<key>'*(4)*
                     -Chapter Eraser:
-                        -the whole section: 'git config remove-section <section>'
+                        -the whole section: '`git config remove-section `<section>'
                         -If unset is an eraser for a single line (a key), remove-section is like ripping an entire page out of your notebook. Sometimes you create a "Chapter" (section) like [webflyx] that you realize you don't need anymore. Instead of erasing every single sticky note one by one, you can delete the whole header and everything inside it in one go.*(5)*
     ___________________________________________________________________________________________________________
     *(1): The --append flag is like using a stapler. Instead of replacing the old sticky note, you are stapling a new one right on top of it. Now you have a pile of notes for the same key!*
@@ -103,11 +103,11 @@ Configuring Git:
 
 The Repository:
     -Think of a Repository as a Wizard's Tower. The rooms and scrolls inside are your project files (the Working Directory). But hidden in the basement is a Secret Cave (.git) — a magical vault that remembers every version of every scroll that has ever existed in the tower, who changed them, and when.
-    -essentially is just a directory that contains a project (other directories and files). The only difference is that it also contains a hidden '.git' directory. That hidden directory is where Git stores all of its internal tracking and versioning information for the project. The '.git' directory is the heart of your project, containing the entire history and configuration of your repository.
-        -In order to make a '.git' repo you should:
+    -essentially is just a directory that contains a project (other directories and files). The only difference is that it also contains a hidden ".git" directory. That hidden directory is where Git stores all of its internal tracking and versioning information for the project. The ".git" directory is the heart of your project, containing the entire history and configuration of your repository.
+        -In order to make a ".git" repo you should:
             -make you project's directory
-            -inside it execute the 'git init [directory]' command
-        -Once done you should now have a hidden '.git' directory in your project's directory. This means you've successfully created a new Git repository! List (ls -a) the contents of the directory to confirm.
+            -inside it execute the '`git init `[directory]' command
+        -Once done you should now have a hidden ".git" directory in your project's directory. This means you've successfully created a new Git repository! List (ls -a) the contents of the directory to confirm.
 
 
 The Three States:
@@ -119,11 +119,11 @@ The Three States:
     2-Staging Area/Index(The Camera Viewfinder):
         -after you made the changes in step 1, you're now going to "prepare to take a photo of the room" and mark the changes made.
         -Technical Detail: The "Viewfinder" is physically stored in a file called .git/index. It’s the "Camera Sensor" holding all the data perfectly still until you’re ready to snap the photo (commit).*(1)*
-        Command: 'git add <file-path>'.
+        Command: '`git add `<file-path>'.
     _________________________________
     3-Commit History(The Photo Album):
         -Where Git takes the photo and permanently stores snapshots (photos) of your project
-        Command: 'git commit -m <message>' (the <message> must be in "").
+        Command: '`git commit -m `<message>' (the <message> must be in "").
         -The “Family Tree” (Branch Visualization):
             -history isn't always a single straight line.
                 -The Trunk (Main): The primary story of your quest.
@@ -178,52 +178,73 @@ The Workflow Hierarchy: Porcelain and Plumbing (50/40/10 Rule)
     __________________
     -50% Solo Mastery: Half of git 
         -These are your most common Porcelain commands. Use these to move through your day-to-day workflow
-            -'git status': To see what's happening in your room right now.
-            -'git add <file-path>': To point the camera at what you want to save.*(1)*
+            -'`git status`': To see what's happening in your room right now.
+            -'``git add ``<file-path>': To point the camera at what you want to save.*(1)*
             -'git commit -m <message>': To snap the photo and save it forever.
-            -'git log': Flipping through the photo album to see your past work.
-                -'-10': adding this flag make git show you only the n amount of past commits equivilent to the number input.(e.g. -10=10 last commits, -100=100 last commits.) 
-                -'--oneline': Shrinks each page to a single line.
-                -'--decorate=full': Reveals the "Ref’s" full path.*(2)*
-                -'--decorate=no': The branch names are no longer shown at all.
-                -'--graph': Adding this flag draws the physical vines and paths connecting the photos, showing exactly where the paths split at the Crossroads.
-                -'--all': Adding this flag allows you to see every side-quest and parallel world at once, even those you aren't currently standing in.
-                -'--parents': Adding this flag to git log reveals the two-parent nature of the Bridge Commit directly in the output, showing the raw hashes of both parents side by side directly in the log output.(You can verify the two-parent nature of any merge commit by running 'git log --parents'. The Bridge Commit will be the only one in your history with two parent hashes listed beside it.), A normal commit shows one parent hash.
-                -The Lens of All-Sight (--graph --all --oneline --decorate=full): use these flags to read commit history like a world map.
+            -'`git log`': Flipping through the photo album to see your past work.
+                -'`-10`': adding this flag make git show you only the n amount of past commits equivilent to the number input.(e.g. -10=10 last commits, -100=100 last commits.) 
+                -'`--oneline`': Shrinks each page to a single line.
+                -'`--decorate=full`': Reveals the "Ref’s" full path.*(2)*
+                -'`--decorate=no`': The branch names are no longer shown at all.
+                -'`--graph`': Adding this flag draws the physical vines and paths connecting the photos, showing exactly where the paths split at the Crossroads.
+                -'`--all`': Adding this flag allows you to see every side-quest and parallel world at once, even those you aren't currently standing in.
+                -'`--parents`': Adding this flag to git log reveals the two-parent nature of the Bridge Commit directly in the output, showing the raw hashes of both parents side by side directly in the log output.(You can verify the two-parent nature of any merge commit by running '`git log --parents`'. The Bridge Commit will be the only one in your history with two parent hashes listed beside it.), A normal commit shows one parent hash.
+                -The Lens of All-Sight (`--graph --all --oneline --decorate=full`): use these flags to read commit history like a world map.
                     Normally, git log only shows the path you are currently standing on.
-                -The Map Renderer (--graph --parents): use these flags to read commit history like a map.
-            -'git branch [name]'(vine branch): To name a new "What If?" portal (bookmark) and place it exactly where you are standing.*(3)*
-                -'git branch -d <name>': The Safe Eraser. Deletes the branch named in the command, but      refuses if its photos haven't been merged yet.
-                -'git branch -D <name>': The Force Eraser. Deletes the branch regardless of merge status. Use with caution.
-                -'git branch -m <old> <new>': This allows you to rename a bookmark(branch) without moving it to a different photo.
+                -The Map Renderer (`--graph --parents`): use these flags to read commit history like a map.
+            -'`git branch `[name]'(vine branch): To name a new "What If?" portal (bookmark) and place it exactly where you are standing.*(3)*
+                -'`git branch -d `<name>': The Safe Eraser. Deletes the branch named in the command, but      refuses if its photos haven't been merged yet.
+                -'`git branch -D `<name>': The Force Eraser. Deletes the branch regardless of merge status. Use with caution.
+                -'`git branch -m `<old> <new>': This allows you to rename a bookmark(branch) without moving it to a different photo.
             -'git branch': Reveals all the bookmarks currently tucked into your album. The one with the star (or the different color) is the world you are currently standing in.*(4)*
             -'git switch <name>': Moves your Focus (HEAD) to a different branch (allows you to switch branches)
-                -'git switch -c <name>': Creates a new branch at your current location and switches to it immediately.
-                -'git switch -c <name> <COMMITHASH>': Creates a new branch starting specifically at that COMMITHASH (instead of where you are currently standing) and switches to it.
+                -'`git switch -c `<name>': Creates a new branch at your current location and switches to it immediately.
+                -'`git switch -c `<name> <COMMITHASH>': Creates a new branch starting specifically at that COMMITHASH (instead of where you are currently standing) and switches to it.
         It's most of what you need to work effectively as a solo developer.
     __________________________
     -40% Remote Collaboration: The "Post Office"
         -Another 40% of Git is about collaborating and storing your work on a remote server (sharing your photo album with others), the commands are:
-            -'git remote add <name> <url>' (Adding a "Post Office" to send your photos to).
-            -'git push [remote] [branch]' (Sending your photos to the server).
-            -'git pull [remote] [branch]' (Getting photos from your friends' albums).
-            -'git clone <repository-url>': Copying an entire library from another kingdom to your local desk.
+            -'`git remote add `<name> <url>' (Adding a "Post Office" to send your photos to).
+            -'`git push `[remote] [branch]' (Sending your photos to the server).
+            -'`git pull `[remote] [branch]' (Getting photos from your friends' albums).
+            -'`git clone `<repository-url>': Copying an entire library from another kingdom to your local desk.
     ______________________
     -10% Emergency Spells: Precision tools for fixing "cursed" repositories
         -The last 10% is mostly about fixing mistakes, rolling back changes, and other advanced topics and "Emergency Spells" for when things go wrong:
             -Reverting: How to undo a photo if you don't like it.
-            -Resetting (git reset): Moving your bookmark (Sticky Note) back to a previous spot in the album.
-                -The Gentle Rewind (--soft <COMMITHASH>): Moves your branch's Sticky Note back to an earlier photo, but does not change your room or your camera.
-                    -The Result: The "future" commits are removed from your history, but the changes from those photos are still sitting in your Staging Area, ready to be re-shot.
-                    -Use Case: When you realize you took a photo (committed) too early and want to add one more thing to it before saving it again.
+            -Resetting: Moving your bookmark back in history, with optional control over whether the Camera Viewfinder and Live Room are also rewound.
+                Think of git reset as a time-adjustment spell with different strengths.
+                All reset modes move the branch bookmark.
+                The difference is whether Git also resets the staged snapshot and the files in your room.
+                -The Gentle Rewind ('`git reset --soft `<COMMITHASH>')
+                    Moves your branch's Sticky Note back to an earlier photo, but leaves the Camera Viewfinder and the Live Room untouched.
+                    -Commit History: moved back
+                    -Staging Area: unchanged
+                    -Working Directory: unchanged
+                    -The Result: the undone commit's changes are still staged and ready to be committed again.
+                    -Use Case: when you committed too early and want to re-shoot that work as part of a better commit.
+                -The Full Rewind ('`git reset --hard`<COMMITHASH>')
+                    Moves your branch's Sticky Note back to an earlier photo and forces both the Camera Viewfinder and the Live Room to match that older photo exactly.
+                        -Commit History: moved back
+                        -Staging Area: reset
+                        -Working Directory: reset
+                        -The Result: local staged and unstaged changes are discarded so everything matches the target commit.
+                        -Use Case: when you want to completely abandon the current local changes and return to an earlier snapshot.
+                        -Warning: this spell is destructive for uncommitted work.
+                -The Reset Rule
+                    The true power of git reset is not only where the Sticky Note moves, but also whether Git forces the Camera Viewfinder and the Live Room to rewind with it.
+                        | Mode | Branch Pointer | Staging Area | Working Directory |
+                        |---|---|---|---|
+                        | `--soft` | moved | unchanged | unchanged |
+                        | `--hard` | moved | reset | reset |
             -Rebasing: Moving the foundation of a branch.
                 Instead of stitching two histories together with a bridge (Merge), Rebase picks up your entire branch and moves it so it starts from the very latest photo on the Main Road.
-                -Command: 'git rebase main' (run while standing on your feature branch).
+                -Command: '`git rebase main`' (run while standing on your feature branch).
                 -The Result: A perfectly straight line of history. It’s like rewriting the past so your changes always happen on top of the newest work.
                 -⚠️ Warning: Never rebase the Main Road or any branch other wizards are already walking on. It rewrites the past and causes time-travel curses (conflicts) for your allies!
             -The Handshake (rule of thumb): Rebase your own branch to polish your work, then ask the Manager to Merge it into the Main Road
             -Merging: Stitching two different realities back together into one.
-                -command: 'git switch main''git merge <name>'(<name>=name of the branch).
+                -command: '`git switch main`''`git merge` <name>'(<name>=name of the branch).
                 When you cast a Merge Spell, Git follows three steps:
                     1. Find the Last Shared Moment (Merge Base): Git hunts backwards through both timelines to find the last commit they both walked through together. This is your "Crossroads" commit.
                     2. Replay the Changes: Git replays what each branch did since the Crossroads, then weaves those changes together.
@@ -237,10 +258,10 @@ The Workflow Hierarchy: Porcelain and Plumbing (50/40/10 Rule)
                           /                                 ------>                   (The Sky-Castle Branch)
                      A - B       (The Main Road)                      A - B - C - D   (The Main Road)
                 (This is often where "Conflicts" or "Curses" happen — when both branches changed the same line of the same file since the Crossroads, Git cannot decide which version wins and asks you to resolve it by hand.)
-            -'git rev-parse <name>': Finding the true 40-character "Fingerprint" (Hash) of a bookmark. *(5)*
-            -'git cat-file <type> <hash>': Peeking inside a specific object in the library.*(6)*
-            -'git hash-object <file-path>': Computes and returns the 40-character hash of any file's content without storing it. It is your "Fingerprint Calculator" — useful for checking what hash Git would assign to a file before committing it.
-            -'git ls-tree <tree-ish>': Listing everything inside a snapshot to see their "Mode." *(7)*
+            -'`git rev-parse `<name>': Finding the true 40-character "Fingerprint" (Hash) of a bookmark. *(5)*
+            -'`git cat-file `<type> <hash>': Peeking inside a specific object in the library.*(6)*
+            -'`git hash-object `<file-path>': Computes and returns the 40-character hash of any file's content without storing it. It is your "Fingerprint Calculator" — useful for checking what hash Git would assign to a file before committing it.
+            -'`git ls-tree `<tree-ish>': Listing everything inside a snapshot to see their "Mode." *(7)*
             - Manually editing '.git/config' or '~/.gitconfig' with a text editor. (Changing the kingdom's rules by hand instead of using the git config tool.)
                 - (This is the "Plumbing" way to change settings without using the 'git config' tool).
     ___________________________________________________________________________________________________________
@@ -292,14 +313,14 @@ Inspection Tools:
         -'git log': Your Photo Album. It shows you a list of every photo you’ve ever taken, who took it, and when.
             -If you want to avoid the pager entirely and just dump the whole history into your terminal so you can scroll with your mouse like a normal web page, you can use this command: ('git --no-pager log')
             -Or,the "Thumbnail View" is often much easier to read: ('git log --oneline')
-        -'git cat-file -p <hash>': Your X-Ray Machine. If you have a secret ID number (hash), this tool lets you look inside and see the actual words of the file or the details of the photo.
-        -'git ls-tree <tree-ish>': Your Packing List. While cat-file shows you what is inside one item, ls-tree shows you a list of every file and folder inside a specific "Tree" (folder) snapshot.
+        -'`git cat-file -p `<hash>': Your X-Ray Machine. If you have a secret ID number (hash), this tool lets you look inside and see the actual words of the file or the details of the photo.
+        -'`git ls-tree `<tree-ish>': Your Packing List. While cat-file shows you what is inside one item, ls-tree shows you a list of every file and folder inside a specific "Tree" (folder) snapshot.
         -'git config list --show-origin': It doesn't just show the settings; it tells you exactly which file (Kingdom, Inside Cover, or Sticky Note) each rule came from.
 
 
 
 Context Summary: Git Apprentice Reference Guide
-    -this summary is from a README.md in "~/workspace/bootdotdev/curriculum/webflyx" that has the intent of grow it's documentacion alongside the development of webflix (project self made to teach how to use git with the help of boot.dev's curriculum's guidence)
+    -this summary is from a README.md in "~/workspace/bootdotdev/curriculum/webflyx" that has the intent of grow it's documentacion alongside the development of webflix (project self made to teach how to use git with the help of boot.dev's curriculum's guidence) and to not be posted on GitHub, cause I'm just making it to help myself learn, if I wasn't I'd be forgetting most of the thing I'm "learning".
     -Core Goal: A living README.md that explains Git concepts chronologically as they appear in the Boot.dev curriculum. It uses a "Wizard’s Notebook" theme to simplify complex version control mechanics, simplified in a way so that a 5-year-old could understand it while maintaining technical accuracy.
 
     Key Analogies & Frameworks:
