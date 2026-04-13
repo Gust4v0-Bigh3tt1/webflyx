@@ -189,7 +189,8 @@ The Workflow Hierarchy: Porcelain and Plumbing (50/40/10 Rule)
                 -'`--graph`': Adding this flag draws the physical vines and paths connecting the photos, showing exactly where the paths split at the Crossroads.
                 -'`--all`': Adding this flag allows you to see every side-quest and parallel world at once, even those you aren't currently standing in.
                 -'`--parents`': Adding this flag to git log reveals the two-parent nature of the Bridge Commit directly in the output, showing the raw hashes of both parents side by side directly in the log output.(You can verify the two-parent nature of any merge commit by running '`git log --parents`'. The Bridge Commit will be the only one in your history with two parent hashes listed beside it.), A normal commit shows one parent hash.
-                -The Lens of All-Sight (`--graph --all --oneline --decorate=full`): use these flags to read commit history like a world map.
+                -'`--date-order`':This forces Git to show commits in chronological order, even if it means the lines in your --graph have to jump around much more wildly to keep the dates lined up.
+                -The Lens of All-Sight (`--graph --all --oneline --decorate=full --date-order`): use these flags to read commit history like a world map.
                     Normally, git log only shows the path you are currently standing on.
                 -The Map Renderer (`--graph --parents`): use these flags to read commit history like a map.
             -'`git branch `[name]'(vine branch): To name a new "What If?" portal (bookmark) and place it exactly where you are standing.*(3)*
