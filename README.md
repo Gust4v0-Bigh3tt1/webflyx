@@ -264,6 +264,11 @@ The Workflow Hierarchy: Porcelain and Plumbing (50/40/10 Rule)
                           /                                 ------>                   (The Sky-Castle Branch)
                      A - B       (The Main Road)                      A - B - C - D   (The Main Road)
                 (This is often where "Conflicts" or "Curses" happen — when both branches changed the same line of the same file since the Crossroads, Git cannot decide which version wins and asks you to resolve it by hand.)
+            -'`git reflog`':This will show you the commit hashes of your "lost" work due to "orphaning"*.
+                You can then use these methods to pull them back from the void: *(5)*
+                    '`git cherry-pick `<hash>':Use this if you want to grab specific orphaned commits and apply them one-by-one onto your current branch.
+                    '`git merge `<hash>': Use this if you found the "tip" of the lost branch in the reflog and want to bring the entire sequence of lost commits back at once.
+                    -'`git checkout -b `<new-branch-name> <hash>': This is often the easiest way! It creates a brand new branch pointer exactly where the orphaned commit is sitting, making it no longer an orphan.            
             -'`git rev-parse `<name>': Finding the true 40-character "Fingerprint" (Hash) of a bookmark. *(6)*
             -'`git cat-file `<type> <hash>': Peeking inside a specific object in the library.*(7)*
             -'`git hash-object `<file-path>': Computes and returns the 40-character hash of any file's content without storing it. It is your "Fingerprint Calculator" — useful for checking what hash Git would assign to a file before committing it.
@@ -285,9 +290,10 @@ The Workflow Hierarchy: Porcelain and Plumbing (50/40/10 Rule)
             *-The Shifting Reality Rule:*
                 *-When you move your Focus (HEAD) to a different bookmark(branch), Git physically replaces the items in your Live Room (Working Directory). If you created a magical item on a Side-Quest and then teleport back to the Main Road, the item will vanish from your hand. It isn't gone; it is simply waiting for you back in the other reality.*
     *(5) The Portability Rule: When working with local folders, using a Relative Path (like ../webflyx) is better than an Absolute Path (like /home/wizard/webflyx). It ensures that even if you move your entire "workspace" to a different desk, the connection between the two folders isn't broken.*
-    *(6):<name>:It tells you the full 40-character SHA-1 hash that the name points to. If you ask Git git rev-parse HEAD, it will tell you the exact hash of the commit you are currently standing on.*
-    *(7):If a flag is used '<type>' isn't needed. Common flags: -p (print content), -t (show type).*
-    *(8):<tree-ish>: This is a fancy Git term for "something that points to a tree." Usually, this is the hash of a tree object, or simply HEAD. It lists everything inside that snapshot and shows their "Mode"—a special code that tells Git if a file is a regular file, a folder, or a special 'executable' file (like a script that can run like a toy car on its own).*
+    *(6):"orphaning": The state where a commit hash exists in the .git objects database but is not reachable by any branch pointer. This usually happens after a git branch -D or a git rebase where the old versions of commits are left behind.*
+    *(7):<name>:It tells you the full 40-character SHA-1 hash that the name points to. If you ask Git git rev-parse HEAD, it will tell you the exact hash of the commit you are currently standing on.*
+    *(8):If a flag is used '<type>' isn't needed. Common flags: -p (print content), -t (show type).*
+    *(9):<tree-ish>: This is a fancy Git term for "something that points to a tree." Usually, this is the hash of a tree object, or simply HEAD. It lists everything inside that snapshot and shows their "Mode"—a special code that tells Git if a file is a regular file, a folder, or a special 'executable' file (like a script that can run like a toy car on its own).*
 
             
 Content Addressing(The Secret Library):
