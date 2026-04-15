@@ -86,6 +86,7 @@ Configuring Git:
                     -Chapter Eraser:
                         -the whole section: '`git config remove-section `<section>'
                         -If unset is an eraser for a single line (a key), remove-section is like ripping an entire page out of your notebook. Sometimes you create a "Chapter" (section) like [webflyx] that you realize you don't need anymore. Instead of erasing every single sticky note one by one, you can delete the whole header and everything inside it in one go.*(5)*
+                        -The Eraser Rule: Git's eraser is precision-tipped! While you can erase a whole "Chapter" (Section) using the 'remove-section' tool, using 'unset' only erases a single line. If you unset every line in a chapter, the empty Header might still hang around until you use the "Chapter Eraser" to scrub it away.
     ___________________________________________________________________________________________________________
     *(1): The --append flag is like using a stapler. Instead of replacing the old sticky note, you are stapling a new one right on top of it. Now you have a pile of notes for the same key!*
     *(2):When you have duplicates (like multiple <value>'s to a <section>.<key>), git config list will show all of them in a row. It’s the best way to see if your config has become "cursed" with too many entries!*
@@ -136,6 +137,8 @@ The Three States:
                  A - B - C - D   (The Main Road)
                   \
                    E - F        (The Deep-Sea Branch)
+                -Lineage and Inheritance: (branches)
+                    -The Ancestor Rule: A branch isn't just the new photos; it includes every photo that led up to it. A is the grandparent, E is the parent, and F is the current moment. Even if main moves on to D, primes_branch still remembers its roots at A.
             -The Parallel Reality (Divergence):
                 Sometimes, the Master Scroll (Main) moves forward while you are still away on a Side-Quest. This creates a "Fork" where neither branch is ahead of the other; they have simply lived different lives.
                  A - B - C - E  (Main: Added Contents.md)
@@ -315,39 +318,32 @@ The Workflow Hierarchy: Porcelain and Plumbing (50/40/10 Rule)
     *(11):<tree-ish>: This is a fancy Git term for "something that points to a tree." Usually, this is the hash of a tree object, or simply HEAD. It lists everything inside that snapshot and shows their "Mode"—a special code that tells Git if a file is a regular file, a folder, or a special 'executable' file (like a script that can run like a toy car on its own).*
 
             
-Content Addressing(The Secret Library):
+The Secret Library(Content Addressing & Inspection):
     -Git doesn't find your files by their names (like notes.txt). Instead, it gives every single thing a unique ID Number called a Hash.
     -It’s like a library where every book is filed by its exact fingerprint.
-    _________________
-    -The Eraser Rule: Git's eraser is precision-tipped! While you can erase a whole "Chapter" (Section) using the 'remove-section' tool, using 'unset' only erases a single line. If you unset every line in a chapter, the empty Header might still hang around until you use the "Chapter Eraser" to scrub it away.
-    _________________
-    -Lineage and Inheritance: (branches)
-        -The Ancestor Rule: A branch isn't just the new photos; it includes every photo that led up to it. A is the grandparent, E is the parent, and F is the current moment. Even if main moves on to D, primes_branch still remembers its roots at A.
-    _________________
     -If you change even a single letter in a book, its fingerprint changes, and Git gives this new version a new spot on the shelf. This way, nothing ever gets lost or mixed up!
     -Object Types (The Library Shelves):
         -Blob (File): Stores the content of a single file. (The Leaf).
         -Tree (Folder): Stores a list of Blobs and other Trees. (The Branch).
         -Commit (Snapshot): Points to a specific Tree to show how the whole project looked at one time.
         -Branch (The Sticky Note): A branch is not a folder or a copy! It is just a lightweight "Sticky Note" (Pointer) stuck to the side of a Commit.
-    --The Lightweight Rule (The Ghostly Bookmarks):
+    -The Lightweight Rule (The Ghostly Bookmarks):
         -Because a branch is just a tiny "Sticky Note" pointing to a Commit ID, it takes up almost zero space in your bag. 
-        -You could have 1,000 branches (1,000 different *"What If?"(1)* realities) and your library wouldn't get any heavier! 
+        -You could have 1,000 branches (1,000 different "What If?"* realities) and your library wouldn't get any heavier! *(1)*
         -You aren't duplicating the books; you are just adding more bookmarks to the same shelves.
+    -Inspection Tools:
+        Sometimes you need to look "under the hood" to see what Git is thinking. These are your tools:
+            -'git status': Your Map. It shows you where you are and what you've changed since the last photo.
+            -'git log': Your Photo Album. It shows you a list of every photo you’ve ever taken, who took it, and when.*(2)*
+                -If you want to avoid the pager entirely and just dump the whole history into your terminal so you can scroll with your mouse like a normal web page, you can use this command: ('git --no-pager log')
+                -Or,the "Thumbnail View" is often much easier to read: ('git log --oneline')
+            -'`git cat-file -p `<hash>': Your X-Ray Machine. If you have a secret ID number (hash), this tool lets you look inside and see the actual words of the file or the details of the photo.
+            -'`git ls-tree `<tree-ish>': Your Packing List. While cat-file shows you what is inside one item, ls-tree shows you a list of every file and folder inside a specific "Tree" (folder) snapshot.
+            -'git config list --show-origin': It doesn't just show the settings; it tells you exactly which file (Kingdom, Inside Cover, or Sticky Note) each rule came from.
     ___________________________________________________________________________________________________________
-    *(1)The "What If?" Portals: Creating a branch is like opening a portal to a parallel world. You can change the color of the castle to pink in the color-scheme portal without affecting the "True History" scroll. When you create 1000 branches, you aren't building 1000 new castles. You are just making 100 small bookmarks. They all point to the same stones and wood until you actually decide to change something. This is why branches are "cheap" and "lightweight."***(1)**
+    *(1)The "What If?" Portals: Creating a branch is like opening a portal to a parallel world. You can change the color of the castle to pink in the color-scheme portal without affecting the "True History" scroll. When you create 1000 branches, you aren't building 1000 new castles. You are just making 1000 small bookmarks. They all point to the same stones and wood until you actually decide to change something. This is why branches are "cheap" and "lightweight."* **(1)**
         -**(1)The weight of a Bookmark: A branch (sticky note) weighs exactly 41 bytes (40 characters for the Hash ID + 1 newline character). That is why the library doesn't get heavier!**
-
-
-Inspection Tools:
-    Sometimes you need to look "under the hood" to see what Git is thinking. These are your tools:
-        -'git status': Your Map. It shows you where you are and what you've changed since the last photo.
-        -'git log': Your Photo Album. It shows you a list of every photo you’ve ever taken, who took it, and when.
-            -If you want to avoid the pager entirely and just dump the whole history into your terminal so you can scroll with your mouse like a normal web page, you can use this command: ('git --no-pager log')
-            -Or,the "Thumbnail View" is often much easier to read: ('git log --oneline')
-        -'`git cat-file -p `<hash>': Your X-Ray Machine. If you have a secret ID number (hash), this tool lets you look inside and see the actual words of the file or the details of the photo.
-        -'`git ls-tree `<tree-ish>': Your Packing List. While cat-file shows you what is inside one item, ls-tree shows you a list of every file and folder inside a specific "Tree" (folder) snapshot.
-        -'git config list --show-origin': It doesn't just show the settings; it tells you exactly which file (Kingdom, Inside Cover, or Sticky Note) each rule came from.
+    *(2) For the full list of flags (--oneline, --graph, --all, etc.), see 'The Workflow Hierarchy / 50% Solo Mastery / git log'.*
 
 
 
@@ -369,7 +365,7 @@ Context Summary: Git Apprentice Reference Guide
             -Working Directory: The "Live Room" where you move furniture (modify files).
             -Staging Area/Index: The "Camera Viewfinder" (preparing the shot via git add).
             -Commit History: The "Photo Album" (the permanent record via git commit).
-        The Map of Diverging Paths (Branching):
+          -The Map of Diverging Paths (Branching):
             -The Family Tree: History is not a straight line; it is a series of "Side-Quests" (Branches) that split from the "Trunk" (Main).
             -The Ancestor Rule (Lineage): A branch isn't just a single photo; it is the entire collection of photos leading back to the beginning. (e.g., A-E-F for primes_branch).
             -The Tip of the Wand: The most recent photo in a branch. As the Wizard works, the "Sticky Note" automatically slides forward to stay at the Tip.
@@ -387,17 +383,17 @@ Context Summary: Git Apprentice Reference Guide
             -50% Solo Mastery: The daily loop of status, add, and commit.
             -40% Remote Collaboration: The "Post Office" (sharing albums via push/pull).
             -10% Emergency Spells: Precision tools for fixing "cursed" repositories (reset/revert/merge).
-        The Scrying Pool (Remotes & Fetching):
+          -The Scrying Pool (Remotes & Fetching):
             -The Remote Address: A bookmark in your Config Notebook pointing to another wizard's tower.
             -The Scrying Spell (fetch): Looking into the pool to see new scrolls. It brings the data into your Basement (.git/objects) but doesn't change your Live Room.
             -The Pull Formula: A combo spell where pull = fetch (Scry) + merge (Bridge Commit).
             -Ghostly Bookmarks (Remote Tracking Branches): Special sticky notes like origin/main that show where other wizards are standing. You can see them, but you can't stand on them!
             -The Basement Lantern (find .git/objects): A plumbing tool to verify that the Scrying Spell physically brought heavy crates (Packfiles) into your library.
-        The Merge Spells:
+          -The Merge Spells:
             -The Bridge Commit: A special photo with two parents — one from each branch — created when Git weaves two timelines together. Git finds the Crossroads, replays the changes from both sides, then snaps the Bridge Commit.
             -The Fast-Forward Merge (The Sliding Sticky Note): If Main has no new photos since the Crossroads, Git skips the Bridge Commit entirely and simply slides the main sticky note forward to the Tip of the other branch. No new photo is taken. Main must be a direct ancestor of the branch being merged.
             -Conflicts (The Curse): When both branches changed the same line of the same file since the Crossroads, Git cannot decide which version wins and asks you to resolve it by hand.
-        Porcelain vs. Plumbing:
+          -Porcelain vs. Plumbing:
             -Porcelain: User-friendly tools for daily work (e.g., git config set).
             -Plumbing: Under-the-hood X-ray tools (e.g., cat-file, rev-parse) and manual file editing.
         The Secret Library (Content Addressing):
@@ -405,14 +401,14 @@ Context Summary: Git Apprentice Reference Guide
             -Trees (The Branches): Packing lists showing the "Mode" (The Toy Car analogy).
             -Commits (The Snapshots): The dated, signed entry in the library log (Deduplication via "Time").
             -The Lightweight Rule (Ghostly Bookmarks): Branches are "cheap" because they aren't copies of the library. They are 41-byte files — tiny slips of paper that point to a Fingerprint (Hash). You can have 1,000 parallel worlds without the library getting any heavier.
-        Inspection Tools:
-          A dedicated section covering the "under the hood" tools:
-            -'git status': Your Map.
-            -'git log' (with flags: --oneline, --graph, --all, --decorate=full, --parents, -n): Your Photo Album.
-            -'git --no-pager log': Dumps the full history without the pager.
-            -'git cat-file -p <hash>': Your X-Ray Machine.
-            -'git ls-tree <tree-ish>': Your Packing List.
-            -'git config list --show-origin': Shows every rule and which file it came from.
+          -Inspection Tools:
+            A dedicated section covering the "under the hood" tools:
+                -'git status': Your Map.
+                -'git log' (with flags: --oneline, --graph, --all, --decorate=full, --parents, -n): Your Photo Album.
+                -'git --no-pager log': Dumps the full history without the pager.
+                -'git cat-file -p <hash>': Your X-Ray Machine.
+                -'git ls-tree <tree-ish>': Your Packing List.
+                -'git config list --show-origin': Shows every rule and which file it came from.
     Documentation Standards:
         -Command Syntax: Mandatory <>, optional [].
         -Scope Rule: Defined at first mention; defaults to --local for writing but searches all levels for reading.
