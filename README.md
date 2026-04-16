@@ -387,4 +387,4 @@ Context Summary: Git Apprentice Reference Guide
     Current Status:
         Foundations are fully complete, covering configuration scopes, repository initialization, object hashing/deduplication, branch visualization/lineage, and merge mechanics (Bridge Commit, fast-forward merge, and conflict awareness). Within the 10% Emergency Spells section, merging is fully documented, but Resetting is half flesh out and Reverting remain high-level placeholder with no command or detail yet. The "Remote Collaboration" chapter (push/pull/clone) remains a high-level placeholder for future curriculum milestones.
 
-     so, based on this entry of mine and this lesson what about this lesson I could add in my README.md entry to make it more complete? I could give the full README.md file if you wish.
+     so, based on this entry of mine and this lesson what about this lesson I could add in my README.md entry to make it more complete? I could give the full README.md file if you wish
