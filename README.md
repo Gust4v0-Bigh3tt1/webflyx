@@ -266,12 +266,14 @@ The Workflow Hierarchy: Porcelain and Plumbing (50/40/10 Rule)
                         | `--hard` | moved | reset | reset |
             -Rebasing: Moving the foundation of a branch.
                 Instead of stitching two histories together with a bridge (Merge), Rebase picks up your entire branch and moves it so it starts from the very latest photo on the Main Road.
+                -rebase your own local branches to polish history
                 -Command: '`git rebase main`' (run while standing on your feature branch).
                 -The Result: A perfectly straight line of history. It’s like rewriting the past so your changes always happen on top of the newest work.
                 -⚠️ Warning: Never rebase the Main Road or any branch other wizards are already walking on. It rewrites the past and causes time-travel curses (conflicts) for your allies!
             -The Handshake (rule of thumb): Rebase your own branch to polish your work, then ask the Manager to Merge it into the Main Road
             -Merging: Stitching two different realities back together into one.
                 -command: '`git switch main`''`git merge` <name>'(<name>=name of the branch).
+                -merge when integrating into shared branches like main to preserve true history and avoid cursing your teammates.
                 When you cast a Merge Spell, Git follows three steps:
                     1. Find the Last Shared Moment (Merge Base): Git hunts backwards through both timelines to find the last commit they both walked through together. This is your "Crossroads" commit.
                     2. Replay the Changes: Git replays what each branch did since the Crossroads, then weaves those changes together.
