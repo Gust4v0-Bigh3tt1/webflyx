@@ -181,10 +181,11 @@ i-Command Syntax:
     __________________
     -50% Solo Mastery: Half of git 
         -These are your most common Porcelain commands. Use these to move through your day-to-day workflow
-            -'`git status`': To see what's happening in your room right now.
-            -'``git add ``<file-path>': To point the camera at what you want to save.*(1)*
+            -`git status`: To see which files were changed and their current state.
+            -`git diff`: To see what changed in your room.
+            -'``git add `<file-path>': To point the camera at what you want to save.*(1)*
             -'git commit -m <message>': To snap the photo and save it forever.
-            -'`git log`': Flipping through the photo album to see your past work.
+            -`git log`: Flipping through the photo album to see your past work.
                 -'`-10`': adding this flag make git show you only the n amount of past commits equivilent to the number input.(e.g. -10=10 last commits, -100=100 last commits.) 
                 -'`--oneline`': Shrinks each page to a single line.
                 -'`--decorate=full`': Reveals the "Ref’s" full path.*(2)*
@@ -266,7 +267,7 @@ i-Command Syntax:
                     -The Sliding Rule: If you haven't added any unique photos to your local main, this will be a Fast-Forward. Your local sticky note just slides up to meet the Ghostly Bookmark on the horizon.
                     -The Mirror Limitation: you can only merge into your current focus. You can merge the "Ghostly Bookmark" into your "Main Road," but you can never merge your "Main Road" into a "Ghostly Bookmark." Those ghostly notes are protected by the Post Office's magic!
             -Rebasing: Moving the foundation of a branch.
-                Instead of stitching two histories together with a bridge (Merge), Rebase picks up your entire branch and re-snaps each photo so it starts from the very latest photo on the Main Road.
+                Instead of stitching two histories together with a bridge (Merge), Rebase picks up your entire branch and re-snaps each photo so it starts from the very latest photo on the Main Road remaking the commits and disregarding the history.
                 -Command: '`git rebase `<base-branch>' (run while standing on your feature branch).
                 -The Result: A perfectly straight line of history. New commit hashes are generated — the old photos become orphans.
                 -The Doctrine Check: Before rebasing, apply The Post Office Test (see Section 5). Only rebase Private Scrolls.
@@ -445,7 +446,7 @@ E-Context Summary: Git Apprentice Reference Guide
             -The Lightweight Rule: A branch is a 41-byte file. 1,000 branches add no meaningful weight to the library.
         _______________________________________
         The Workflow Hierarchy (50/40/10 Rule):
-            -50% Solo Mastery: The daily loop of `status`, `add`, `commit`, `log`, `branch`, and `switch`.
+            -50% Solo Mastery: The daily loop of `status`, `diff`, `add`, `commit`, `log`, `branch`, and `switch`.
             -40% Remote Collaboration: The "Post Office" — sharing albums via `remote`, `fetch`, `pull`, `push`, and `clone`.
             -10% Emergency Spells: Precision tools for fixing "cursed" repositories — `merge`, `rebase`, `reset`, `revert`, (sealed), `reflog`, and plumbing tools.
         -----------------------------------------
