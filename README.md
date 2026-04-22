@@ -284,7 +284,7 @@ i-Command Syntax:
                 -The Golden Rule: Rebase your OWN Private work to polish it. Merge when stitching your polished work back into the shared world.
             -Resetting: Moving your bookmark back in history, with optional control over whether the Camera Viewfinder and Live Room are also rewound.
                 Think of git reset as a time-adjustment spell with different strengths.
-                All reset modes move the branch bookmark.
+                All reset modes move the branch bookmark, think of it like a wire cutter.
                 The difference is whether Git also resets the staged snapshot and the files in your room.
                 -The Gentle Rewind ('`git reset --soft `<COMMITHASH>')
                     Moves your branch's Sticky Note back to an earlier photo, but leaves the Camera Viewfinder and the Live Room untouched.
@@ -293,6 +293,13 @@ i-Command Syntax:
                     -Working Directory: unchanged
                     -The Result: the undone commit's changes are still staged and ready to be committed again.
                     -Use Case: when you committed too early and want to re-shoot that work as part of a better commit.
+                -The Partial Rewind (git reset --mixed <COMMITHASH>)
+                    -Moves your branch's Sticky Note back to an earlier photo and resets the Camera Viewfinder, but leaves the Live Room untouched.
+                        -Commit History: moved back
+                        -Staging Area: reset
+                        -Working Directory: unchanged
+                        -The Result: the undone commit's changes are unstaged but still present as file edits in your room.
+                        -Use Case: when you want to undo a commit and un-stage its changes, but keep the actual file edits so you can rework and re-stage them more carefully. This is also Git's default behavior when no flag is specified.
                 -The Full Rewind ('`git reset --hard`<COMMITHASH>')
                     Moves your branch's Sticky Note back to an earlier photo and forces both the Camera Viewfinder and the Live Room to match that older photo exactly.
                         -Commit History: moved back
@@ -440,7 +447,7 @@ E-Context Summary: Git Apprentice Reference Guide
         The Workflow Hierarchy (50/40/10 Rule):
             -50% Solo Mastery: The daily loop of `status`, `add`, `commit`, `log`, `branch`, and `switch`.
             -40% Remote Collaboration: The "Post Office" — sharing albums via `remote`, `fetch`, `pull`, `push`, and `clone`.
-            -10% Emergency Spells: Precision tools for fixing "cursed" repositories — `merge`, `rebase`, `reset`, `revert` (sealed), `reflog`, and plumbing tools.
+            -10% Emergency Spells: Precision tools for fixing "cursed" repositories — `merge`, `rebase`, `reset`, `revert`, (sealed), `reflog`, and plumbing tools.
         -----------------------------------------
           -The Scrying Pool (Remotes & Fetching):
             -The Remote Address: A nickname pointing to another wizard's tower.
@@ -471,6 +478,7 @@ E-Context Summary: Git Apprentice Reference Guide
         --------------------------------------
           -Resetting (The Time-Adjustment Spell):
             -`--soft`: Moves the branch pointer back. Staging Area and Working Directory unchanged. Undone changes remain staged.
+            -`--mixed`: Moves the branch pointer back and resets the Staging Area, but leaves the Working Directory unchanged. Undone changes remain as unstaged file edits.
             -`--hard`: Moves the branch pointer back and resets both Staging Area and Working Directory to match. Destructive for uncommitted work.
         -----------------------------
           -The Memory Pool (`git reflog`):
