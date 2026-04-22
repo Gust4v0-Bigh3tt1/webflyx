@@ -397,28 +397,35 @@ i-Command Syntax:
 
 
 E-Context Summary: Git Apprentice Reference Guide
-    -this summary is from a README.md in "~/workspace/bootdotdev/curriculum/webflyx" that has the intent of grow it's documentacion alongside the development of webflix (project self made to teach how to use git with the help of boot.dev's curriculum's guidence) and to not be posted on GitHub, cause I'm just making it to help myself learn, if I wasn't I'd be forgetting most of the thing I'm "learning".
-    -Core Goal: A living README.md that explains Git concepts chronologically as they appear in the Boot.dev curriculum. It uses a "Wizard’s Notebook" theme to simplify complex version control mechanics, simplified in a way so that a 5-year-old could understand it while maintaining technical accuracy.
-
+    -This summary is from a README.md in ~/workspace/bootdotdev/curriculum/webflyx with the intent of growing its documentation alongside the development of webflyx (a self-made project to learn Git with Boot.dev's curriculum guidance) it will eventually be posted on GitHub, the `commands` will be properlly ajusted once this file is 100% done and ready to be posted, as of now it exists solely as a personal learning aid.
+    -Core Goal: A living README.md that explains Git concepts chronologically as they appear in the Boot.dev curriculum. It uses a "Wizard's Notebook" theme to simplify complex version control mechanics, simplified so a 5-year-old could understand it while maintaining technical accuracy.
+    ___________________________
     Key Analogies & Frameworks:
-
+        _____________________________________________
         The Config Notebook (The Hierarchy of Power):
-            -The Annex (--worktree): A shared scroll for wizards working in two places at once.
-            -The Sticky Note (--local): Project-specific settings that override the more general books.
+            -The Annex (--worktree): A separate scroll for shared drafts of the same project. Exists only when `extensions.worktreeConfig` is enabled.
+            -The Sticky Note (--local): Project-specific settings that override more general books. Default scope for writing.
             -The Inside Cover (--global): Your personal identity that follows you through every quest.
-            -The Kingdom's Law (--system): The stone tablet in the town square — rules for every wizard in the land.
+            -The Kingdom's Law (--system): The stone tablet in the town square — rules for every wizard on the land(machine).
             -The Detective (The Search Rule): Git always searches from the most specific (Annex/Local) to the most general (System) and stops as soon as it finds an answer.
+            -The Rule of Overriding: Worktree overrides Local, Local overrides Global, Global overrides System.
             -The Chapter Eraser (remove-section): Ripping out a whole section of settings when they become "nonsensical."
-            -The Eraser Rule: Distinguishes between erasing a single line (unset) and scrubbing a whole chapter (remove-section).
+            -The Eraser Rule: Distinguishes between erasing a single line (`unset`) and scrubbing a whole chapter (`remove-section`). Unsetting the last key leaves an empty header; `remove-section` fully purges it.
+            -The Hoarder Rule (Duplicates): `--append` staples a new value onto an existing key. A regular `unset` fails if duplicates exist; `--all` purges them.
+            -The Naming Convention: <section>.<key> format is mandatory. A section only exists as long as it has at least one key.
+            -The Project Requirement: Writing `--local` config requires being inside a Git repository.
+        __________________________________
         The Three States (The Room Photo):
             -Working Directory: The "Live Room" where you move furniture (modify files).
             -Staging Area/Index: The "Camera Viewfinder" (preparing the shot via git add).
             -Commit History: The "Photo Album" (the permanent record via git commit).
+        ------------------------------------------
           -The Map of Diverging Paths (Branching):
             -The Family Tree: History is not a straight line; it is a series of "Side-Quests" (Branches) that split from the "Trunk" (Main).
             -The Ancestor Rule (Lineage): A branch isn't just a single photo; it is the entire collection of photos leading back to the beginning. (e.g., A-E-F for primes_branch).
-            -The Tip of the Wand: The most recent photo in a branch. As the Wizard works, the "Sticky Note" automatically slides forward to stay at the Tip.
+            -The Tip of the Wand: The most recent photo in a branch. As the Wizard works, the "Sticky Note" automatically slides forward to stay at the newest commit.
             -The Wizard's Focus (HEAD): A glowing highlight that shows which "Sticky Note" the wizard is currently looking through. It is a "Pointer to a Pointer."
+            -The Shifting Reality Rule: Switching branches physically replaces the Working Directory contents.
             -The Crossroads: The specific commit where a side-quest originally split from the main road. In our map:
                        G - H    (The Sky-Castle Branch)
                       /
@@ -428,46 +435,86 @@ E-Context Summary: Git Apprentice Reference Guide
                 -B is the Crossroads for the Sky-Castle branch. It is the last moment both paths were the same. Understanding the Crossroads is the secret to eventually performing "Merge Spells" to bring those two worlds back together!
                 -The Parallel Reality (Divergence): When Main moves forward while a Side-Quest is still in progress, neither branch is ahead of the other — they have simply lived different lives.
                 -The Safe Eraser Rule: -d refuses to delete an unmerged branch. -D forces the deletion regardless.
+            -The Lightweight Rule: A branch is a 41-byte file. 1,000 branches add no meaningful weight to the library.
+        _______________________________________
         The Workflow Hierarchy (50/40/10 Rule):
-            -50% Solo Mastery: The daily loop of status, add, and commit.
-            -40% Remote Collaboration: The "Post Office" (sharing albums via push/pull).
-            -10% Emergency Spells: Precision tools for fixing "cursed" repositories (reset/revert/merge).
+            -50% Solo Mastery: The daily loop of `status`, `add`, `commit`, `log`, `branch`, and `switch`.
+            -40% Remote Collaboration: The "Post Office" — sharing albums via `remote`, `fetch`, `pull`, `push`, and `clone`.
+            -10% Emergency Spells: Precision tools for fixing "cursed" repositories — `merge`, `rebase`, `reset`, `revert` (sealed), `reflog`, and plumbing tools.
+        -----------------------------------------
           -The Scrying Pool (Remotes & Fetching):
-            -The Remote Address: A bookmark in your Config Notebook pointing to another wizard's tower.
-            -The Scrying Spell (fetch): Looking into the pool to see new scrolls. It brings the data into your Basement (.git/objects) but doesn't change your Live Room.
-            -The Pull Formula: A combo spell where pull = fetch (Scry) + merge (Bridge Commit).
-            -Ghostly Bookmarks (Remote Tracking Branches): Special sticky notes like origin/main that show where other wizards are standing. You can see them, but you can't stand on them!
-            -The Basement Lantern (find .git/objects): A plumbing tool to verify that the Scrying Spell physically brought heavy crates (Packfiles) into your library.
+            -The Remote Address: A nickname pointing to another wizard's tower.
+            -The Scrying Spell (`git fetch`): Looking into the pool to see new scrolls. `git fetch` brings the data into your Basement (`.git/objects`) but doesn't change your Live Room.
+                -`git fetch --all` (The Grand Scry): Fetches from every registered remote at once. 
+            -The Basement Lantern (`find .git/objects`): A plumbing tool that verifies that the heavy crates (Packfiles) physically arrived after a fetch.
+            -The Pull Formula: A combo spell where `git pull` = `git fetch` (Scry) + `git merge` (Bridge Commit). Changes the Live Room immediately.
+            -The Delivery (`git push`): Sends local commits to the remote and advances its sticky notes.
+                -`git push --force-with-lease` (The Polite Hex): Refuses to force-push if another wizard has delivered new photos since your last fetch. Always prefer this over bare `--force`.
+            -Ghostly Bookmarks (Remote Tracking Branches): Special sticky notes like `origin/main` that show where other wizards are standing. You can see them, but you can't stand on them! Only a new fetch updates them.
+            -The Mirror Limitation: You can merge a Ghostly Bookmark into your local branch, but never the reverse.
+        --------------------
           -The Merge Spells:
             -The Bridge Commit: A special photo with two parents — one from each branch — created when Git weaves two timelines together. Git finds the Crossroads, replays the changes from both sides, then snaps the Bridge Commit.
             -The Fast-Forward Merge (The Sliding Sticky Note): If Main has no new photos since the Crossroads, Git skips the Bridge Commit entirely and simply slides the main sticky note forward to the Tip of the other branch. No new photo is taken. Main must be a direct ancestor of the branch being merged.
+            -Merging the Horizon (Remote Merges): `git merge origin/main` brings remote history into local history.
             -Conflicts (The Curse): When both branches changed the same line of the same file since the Crossroads, Git cannot decide which version wins and asks you to resolve it by hand.
+        ---------------------------------------
+          -Rebasing (The Straight-Line Spell):
+            -Picks up the entire branch and re-snaps each photo starting from the latest commit on the base branch. New hashes are generated; old photos become orphans.
+            -Only rebase Private Scrolls. Never rebase Main or any shared branch.
+            -`git push --force` required after a rebase due to changed hashes. Always prefer `--force-with-lease`.
+        ------------------------------------------
+          -The Handshake (Merge vs. Rebase Decision):
+            -Rebase your own unpushed/private work to polish it and keep history linear.
+            -Merge when stitching polished work back into a shared branch, or when anyone has already pulled your branch.
+            -The Golden Rule: Rebase Private. Merge Public.
+        --------------------------------------
+          -Resetting (The Time-Adjustment Spell):
+            -`--soft`: Moves the branch pointer back. Staging Area and Working Directory unchanged. Undone changes remain staged.
+            -`--hard`: Moves the branch pointer back and resets both Staging Area and Working Directory to match. Destructive for uncommitted work.
+        -----------------------------
+          -The Memory Pool (`git reflog`):
+            -Shows every position HEAD has ever occupied, including orphaned commits after a rebase or force-delete.
+            -Local-only. Footprints fade after ~90 days.
+            -Resurrection options: `reset --hard <hash>` to undo a rewrite entirely, `cherry-pick <hash>` for a single orphan, `merge <hash>` for an entire lost lineage, `checkout -b <new-branch> <hash>` to rescue without disturbing current branches.
+        --------------------------------------------------------
+          -The Collaboration Doctrine (Public vs. Private History):
+            -Private Scrolls: Branches only on your desk, or pushed but not yet pulled by anyone. Safe to rewrite.
+            -Public Scrolls: Branches pulled by other wizards. Rewriting curses every ally holding a copy.
+            -The Post Office Test: "Has this scroll been delivered AND received by anyone else?" Yes → Merge. No → Rebase safe. Unsure → Merge.
+        --------------------------
           -Porcelain vs. Plumbing:
-            -Porcelain: User-friendly tools for daily work (e.g., git config set).
-            -Plumbing: Under-the-hood X-ray tools (e.g., cat-file, rev-parse) and manual file editing.
+            -Porcelain: User-friendly tools for daily work (e.g., `git config set`, `git log`, `git status`).
+            -Plumbing: X-ray tools, Under-the-hood inspection tools and manual file editing (e.g., `cat-file`, `rev-parse`, `hash-object`, `ls-tree`, etc.) .
+        ________________________________________
         The Secret Library (Content Addressing):
-            -Blobs (The Leaves): Fingerprinted content only (Deduplication via "Space").
-            -Trees (The Branches): Packing lists showing the "Mode" (The Toy Car analogy).
-            -Commits (The Snapshots): The dated, signed entry in the library log (Deduplication via "Time").
-            -The Lightweight Rule (Ghostly Bookmarks): Branches are "cheap" because they aren't copies of the library. They are 41-byte files — tiny slips of paper that point to a Fingerprint (Hash). You can have 1,000 parallel worlds without the library getting any heavier.
+            -Blobs (The Leaves): Fingerprinted content only. Deduplication via content ("Space").
+            -Trees (The Branches): Packing lists showing file Mode (regular file, folder, or executable).
+            -Commits (The Snapshots): Dated, signed entries in the library log. Deduplication via timestamp ("Time").
+            -Packfiles (The Shipping Crates): Many objects squashed into a single `.pack` file for efficient travel.
+            -The Index (.idx): A map for the packfile allowing instant lookup inside a massive crate.
+        --------------------
           -Inspection Tools:
-            A dedicated section covering the "under the hood" tools:
-                -'git status': Your Map.
-                -'git log' (with flags: --oneline, --graph, --all, --decorate=full, --parents, -n): Your Photo Album.
-                -'git --no-pager log': Dumps the full history without the pager.
-                -'git cat-file -p <hash>': Your X-Ray Machine.
-                -'git ls-tree <tree-ish>': Your Packing List.
-                -'git config list --show-origin': Shows every rule and which file it came from.
+            -`git status`: Your Map.
+            -`git log `(with flags: `--oneline`, `--graph`, `--all`, `--decorate=full`, `--parents`, `-n`, `--date-order`): Your Photo Album.
+            -`git --no-pager log`: Dumps the full history without the pager.
+            -`git cat-file -p <hash>`: Your X-Ray Machine.
+            -`git ls-tree <tree-ish>`: Your Packing List.
+            -`git config list --show-origin`: Shows every rule and which file it came from.
+            -`git rev-parse <name>`: Finds the true 40-character hash of a bookmark.
+            -`git hash-object <file-path>`: Computes the hash of a file without storing it.
+    ________________________
     Documentation Standards:
         -Command Syntax: Mandatory <>, optional [].
-        -Scope Rule: Defined at first mention; defaults to --local for writing but searches all levels for reading.
-        -The Naming Convention: Named concepts always follow the pattern The [Name] ([Technical Term]), e.g. "The Inside Cover (--global)." This makes scanning easier.
-        -The Verb Rule: Command descriptions start with an action verb in present tense ("Reveals," "Stores," "Deletes") for consistency.
-        -The Footnote Rule: Supplementary detail, exceptions, and plumbing facts go in numbered footnotes *(n)* rather than inline, to keep the main entry readable.
-        -The Analogy-First Rule: Every technical concept is introduced through its Wizard's Notebook analogy before the technical explanation is given.
+        -Scope Rule: Defined at first mention; defaults to `--local` for writing but searches all levels for reading.
+        -The Naming Convention: Named concepts always follow the pattern The [Name] ([Technical Term]), e.g. "The Inside Cover (--global)."
+        -The Verb Rule: Command descriptions start with an action verb in present tense ("Reveals," "Stores," "Deletes").
+        -The Footnote Rule: Supplementary detail, exceptions, and plumbing facts go in numbered footnotes *(n)* rather than inline.
+        -The Analogy-First Rule: Every technical concept is introduced through its Wizard's Notebook analogy before the technical explanation.
         -The Nesting Rule: Flags and sub-behaviors are indented as children of their parent command, not listed as separate top-level entries.
-        -The Bold Distinction: Sub-rules and named concepts within a footnote use **(bold)** to separate them from the footnote's plain text.
+        -The Bold Distinction: Sub-rules and named concepts within a footnote use (bold) to separate them from the footnote's plain text.
+    _______________
     Current Status:
-        Foundations are fully complete, covering configuration scopes, repository initialization, object hashing/deduplication, branch visualization/lineage, and merge mechanics. The Remote Collaboration chapter is now active; I have documented how to register "Post Offices" (Remotes), perform "Scrying Spells" (Fetch), and use the "Basement Lantern" to verify the arrival of compressed "Packfiles." The "Emergency Spells" section (10%) and Remote Colaboration section (40%) remains a work in progress, with Merging and Resetting fully fleshed out, while Reverting and Rebasing; push, clone and Ghostly Bookmarks (refs/remotes/) await further instruction.
+        Foundations are fully complete, covering configuration scopes, repository initialization, object hashing/deduplication, branch visualization/lineage, and merge mechanics. The Remote Collaboration chapter is active; documented how to register "Post Offices" (Remotes), perform "Scrying Spells" (Fetch), use the "Basement Lantern" to verify packfiles, push and clone. The "Emergency Spells" section (10%) is partially complete: Merging, Resetting, Rebasing, and Reflog are fully fleshed out, while Reverting remains a sealed scroll awaiting further instruction.
 
      so, based on this entry of mine and this lesson what about this lesson I could add in my README.md entry to make it more complete? I could give the full README.md file if you wish.
