@@ -163,16 +163,16 @@ i-Command Syntax:
     ___________________________________________________________________________________________________________
     *(1)The Sensor's Memory: The Index doesn't store the "books" themselves (the Blobs do that), but it stores the exact list of which fingerprints (hashes) are currently on the "Preparation Table" waiting to be photographed for the next Commit.*
     *(2)The Rule of Memory: The Deep-Sea Branch consists of commits A, E, and F. It remembers where it came from (A), even if the Main Road travels further to D.(1)*
-        **(1)checkpoint hash: git also stores the last commit of each branch in a file inside the secret folder '.git/refs/heads' (These files are the Physical Bookmarks. If you peek inside .git/refs/heads/main, you will find the 40-character Fingerprint of the very last photo taken on that road).**
+        +**(1)checkpoint hash: git also stores the last commit of each branch in a file inside the secret folder '.git/refs/heads' (These files are the Physical Bookmarks. If you peek inside .git/refs/heads/main, you will find the 40-character Fingerprint of the very last photo taken on that road).**
     *(3):even if you make two identical commits with the same files and message, they will have different hashes because they happened at different times*
     *(4):Git does not include the filename in a blob's hash! That's why two files with different names but the same content will have the identical hash (Deduplication)*
 
     Deduplication:
         -Because Git uses hashes, it is efficient. If a file remains unchanged between commits, Git simply points to the existing hash rather than storing a duplicate copy.
         -types of deduplication:
-            -Duplicate Content (Space):
+            --Duplicate Content (Space):
                 -if apple.txt and orange.txt both contain the word "Fruit", Git only saves one copy of "Fruit" and gives both names the same hash.
-            -Unchanged Files (Time):
+            --Unchanged Files (Time):
                 -If you have a project with 100 files, but you only change one file and make a new commit, Git is smart! It doesn't save 100 new files. It only saves the one you changed and points the new commit to the 99 hashes it already has from the previous commit.
 
 
@@ -180,100 +180,114 @@ i-Command Syntax:
     -In Git, commands are divided into high-level ("porcelain") commands and low-level ("plumbing") commands. The porcelain commands are the ones that you will use most often as a developer to interact with your code.
     __________________
     -50% Solo Mastery: Half of git 
-        -These are your most common Porcelain commands. Use these to move through your day-to-day workflow
-            -`git status`: To see which files were changed and their current state.
-            -`git diff`: To see what changed in your room.
-            -'``git add `<file-path>': To point the camera at what you want to save.*(1)*
-            -'git commit -m <message>': To snap the photo and save it forever.
-            -`git log`: Flipping through the photo album to see your past work.
-                -'`-10`': adding this flag make git show you only the n amount of past commits equivilent to the number input.(e.g. -10=10 last commits, -100=100 last commits.) 
-                -'`--oneline`': Shrinks each page to a single line.
-                -'`--decorate=full`': Reveals the "Ref’s" full path.*(2)*
-                -'`--decorate=no`': The branch names are no longer shown at all.
-                -'`--graph`': Adding this flag draws the physical vines and paths connecting the photos, showing exactly where the paths split at the Crossroads.
-                -'`--all`': Adding this flag allows you to see every side-quest and parallel world at once, even those you aren't currently standing in.
-                -'`--parents`': Adding this flag to git log reveals the two-parent nature of the Bridge Commit directly in the output, showing the raw hashes of both parents side by side directly in the log output.(You can verify the two-parent nature of any merge commit by running '`git log --parents`'. The Bridge Commit will be the only one in your history with two parent hashes listed beside it.), A normal commit shows one parent hash.
-                -'`--date-order`':This forces Git to show commits in chronological order, even if it means the lines in your --graph have to jump around much more wildly to keep the dates lined up.
-                -The Lens of All-Sight (`--graph --all --oneline --decorate=full --date-order`): use these flags to read commit history like a world map.
-                    Normally, git log only shows the path you are currently standing on.
-                -The Map Renderer (`--graph --parents`): use these flags to read commit history like a map.
-            -'`git branch `[name]'(vine branch): To name a new "What If?" portal (bookmark) and place it exactly where you are standing.*(3)*
-                -'`git branch -d `<name>': The Safe Eraser. Deletes the branch named in the command, but      refuses if its photos haven't been merged yet.
-                -'`git branch -D `<name>': The Force Eraser. Deletes the branch regardless of merge status. Use with caution.
-                -'`git branch -m `<old> <new>': This allows you to rename a bookmark(branch) without moving it to a different photo.
-            -'git branch': Reveals all the bookmarks currently tucked into your album. The one with the star (or the different color) is the world you are currently standing in.*(4)*
-            -'git switch <name>': Moves your Focus (HEAD) to a different branch (allows you to switch branches)
-                -'`git switch -c `<name>': Creates a new branch at your current location and switches to it immediately.
-                -'`git switch -c `<name> <COMMITHASH>': Creates a new branch starting specifically at that COMMITHASH (instead of where you are currently standing) and switches to it.
-        It's most of what you need to work effectively as a solo developer.
+        --These are your most common Porcelain commands. Use these to move through your day-to-day workflow
+            ---`git status`: To see which files were changed and their current state.
+            ---`git diff`: To see what changed in your room.
+            ---'`git add `<file-path>': To point the camera at what you want to save.*(1)*
+            ---'`git commit -m `<message>': To snap the photo and save it forever.
+            ---`git log`: Flipping through the photo album to see your past work.
+                ----'`-10`': adding this flag make git show you only the n amount of past commits equivilent to the number input.(e.g. -10=10 last commits, -100=100 last commits.) 
+                ----'`--oneline`': Shrinks each page to a single line.
+                ----'`--decorate=full`': Reveals the "Ref’s" full path.*(2)*
+                ----'`--decorate=no`': The branch names are no longer shown at all.
+                ----'`--graph`': Adding this flag draws the physical vines and paths connecting the photos, showing exactly where the paths split at the Crossroads.
+                ----'`--all`': Adding this flag allows you to see every side-quest and parallel world at once, even those you aren't currently standing in.
+                ----'`--parents`': Adding this flag to git log reveals the two-parent nature of the Bridge Commit directly in the output, showing the raw hashes of both parents side by side directly in the log output.(You can verify the two-parent nature of any merge commit by running '`git log --parents`'. The Bridge Commit will be the only one in your history with two parent hashes listed beside it.), A normal commit shows one parent hash.
+                ----'`--date-order`':This forces Git to show commits in chronological order, even if it means the lines in your --graph have to jump around much more wildly to keep the dates lined up.
+                ----The Lens of All-Sight (`--graph --all --oneline --decorate=full --date-order`): use these flags to read commit history like a world map.
+                    -----Normally, git log only shows the path you are currently standing on.
+                ----The Map Renderer (`--graph --parents`): use these flags to read commit history like a map.
+            ---'`git branch `[name]'(vine branch): To name a new "What If?" portal (bookmark) and place it exactly where you are standing.*(3)*
+                ----'`git branch -d `<name>': The Safe Eraser. Deletes the branch named in the command, but      refuses if its photos haven't been merged yet.
+                ----'`git branch -D `<name>': The Force Eraser. Deletes the branch regardless of merge status. Use with caution.
+                ----'`git branch -m `<old> <new>': This allows you to rename a bookmark(branch) without moving it to a different photo.
+            ---'git branch': Reveals all the bookmarks currently tucked into your album. The one with the star (or the different color) is the world you are currently standing in.*(4)*
+            ---'git switch <name>': Moves your Focus (HEAD) to a different branch (allows you to switch branches)
+                ----'`git switch -c `<name>': Creates a new branch at your current location and switches to it immediately.
+                ----'`git switch -c `<name> <COMMITHASH>': Creates a new branch starting specifically at that COMMITHASH (instead of where you are currently standing) and switches to it.
+        --It's most of what you need to work effectively as a solo developer.
     __________________________
     -40% Remote Collaboration: The "Post Office"
-        -Another 40% of Git is about collaborating and storing your work on a remote server (sharing your photo album with others), the commands are:
-            -'`git remote add `<name> <url>': (Registering a Post Office)
-                -Pinning the address of another wizard's tower to your notebook so you know where to send your carrier owls.
-                -Naming Rule: You must give this address a nickname (usually origin) so you don't have to type the long address every time you want to share work.
-                -Reachable Path: The <uri> is the specific map coordinates to that other library.
-                -'`git remote get-url `<name>': (Checking the Address)
-                    -Reveals the physical address associated with a remote nickname. *(5)*
-                    -'`git remote set-url `<name_of_remote> <new_relative_path>':(reset the URL by providing a new one)
-            -`git remote`: (tells you your conections)
-                -'`git remote -v`':(-v for Verbose) 
-                    -reveals both the Nickname (e.g., origin) and the Physical Address (URL) for that remote.*(6)*
-                    -(fetch): The path you use to Scry (pull data in).
-                    -(push): The path you use to Deliver (send your photos out). 
-                -'`git remote remove `<name_of_remote>':(removes a remote)
-            -'`git fetch `<remote_name>':(The Scrying Spell)
-                -You reach out to the other tower and pull their new "Photos" (commits) into your Secret Library (.git/objects). You can see them now, but they aren't in your Photo Album (local branches) yet.
-                -The Ghostly Bookmarks (refs/remotes/): When you fetch, Git creates special "Read-Only" sticky notes like origin/main. They represent the last known location of the wizards at the Post Office. You can look at them, but you can't move them yourself—only a new Scrying Spell can update them.
-                -If there's more than one remote, use:
-                    -`git fetch --all`: (The Grand Scry)
-                        -This reaches out to every address in your notebook at once and brings all their new data into your Secret Library (.git/objects).*(7)*
-                -To verifiy, use:
-                    `find .git/objects`: (The Basement Lantern)
-                        -Reveals the physical storage of your library. Before a fetch, it is an empty hall; after a fetch, it contains the heavy crates (Packfiles) of the remote's history.
-            -'`git pull `[remote] [branch]': (The Auto-Merge)
-                -This is a "Combo Spell." It performs a Fetch AND immediately tries to Merge those new photos into your current branch (git pull = git fetch + git merge). It changes your Live Room (Working Directory) right away; Use it with caution.
-            -'`git push `[remote] [branch]'(The Delivery):
-                -You send your local "Photos" from your library to their tower's library and move their sticky notes to match yours.
-                -'`git push --force `[remote] [branch]': (The Overwrite Hex) 
-                    -Commands the Post Office to REPLACE a shared scroll rather than append to it. Required after a rebase because commit hashes have changed.
-                -'`git push --force-with-lease `[remote] [branch]': (The Polite Hex) *(8)*
-                    -Refuses to cast if another wizard has delivered new photos since you last Scryed. Always prefer this over bare --force.
-                -⚠️ Warning: Force-pushing a Public Scroll violates The Tower Rule. See Section 5 before casting.
-            -'`git clone `<repository-url>': Copying an entire library from another kingdom to your local desk.
+        --Another 40% of Git is about collaborating and storing your work on a remote server (sharing your photo album with others), the commands are:
+            ---The Envoy (GitHub CLI - gh): *(5)*
+                ----A specialized messenger that speaks both the language of your local tower and the language of the Great Library (GitHub). 
+                    -----'gh auth login' (The Credentials Ritual):
+                        A one-time ceremony to introduce yourself to the Great Library. You receive a magical token so you don't have to shout your secret password across the kingdom every time you send a scroll.
+                    -----'gh auth status' (The Identity Check):
+                        Asking the Envoy to confirm who they are currently representing and if the Great Library still recognizes their seal.
+            ---'`git remote add `<name> <url>': (Registering a Post Office)
+                ----Pinning the address of another wizard's tower to your notebook so you know where to send your carrier owls.
+                ----Naming Rule: You must give this address a nickname (usually origin) so you don't have to type the long address every time you want to share work.
+                ----Reachable Path: The <uri> is the specific map coordinates to that other library.
+                ----'`git remote get-url `<name>': (Checking the Address)
+                    -----Reveals the physical address associated with a remote nickname. *(6)*
+                    -----'`git remote set-url `<name_of_remote> <new_relative_path>':(reset the URL by providing a new one)
+                ----The Identity Rule:
+                    While the incantation git remote add origin is universal, the map coordinates (URL) must contain your True GitHub Name.
+                    Correct: `...github.com/YourName/webflyx.git`
+                    Cursed: `...github.com/your-username/webflyx.git` (The Post Office will not find the tower!)
+            ---`git remote`: (tells you your conections)
+                ----'`git remote -v`': (-v for Verbose) 
+                    -----reveals both the Nickname (e.g., origin) and the Physical Address (URL) for that remote.*(7)*
+                    -----(fetch): The path you use to Scry (pull data in).
+                    -----(push): The path you use to Deliver (send your photos out).
+                ----'`git ls-remote`': (Peering into the Mailbox)
+                    -----The "Smoke Test." Reaches out across the kingdom to the Post Office to see if the tower is reachable and your Envoy (CLI) is recognized.
+                    -----The Result: If it returns the "From <url>" line and hashes, the connection is solid. If it fails, your map coordinates or credentials are cursed.
+                    -----The Advantage: It proves you can talk to the Post Office without actually having to download any heavy crates (fetch) yet.
+                ----'`git remote remove `<name_of_remote>':(removes a remote)
+            ---'`git fetch `<remote_name>':(The Scrying Spell)
+                ----You reach out to the other tower and pull their new "Photos" (commits) into your Secret Library (.git/objects). You can see them now, but they aren't in your Photo Album (local branches) yet.
+                ----The Ghostly Bookmarks (refs/remotes/): When you fetch, Git creates special "Read-Only" sticky notes like origin/main. They represent the last known location of the wizards at the Post Office. You can look at them, but you can't move them yourself—only a new Scrying Spell can update them.
+                ----If there's more than one remote, use:
+                    -----`git fetch --all`: (The Grand Scry)
+                        ------This reaches out to every address in your notebook at once and brings all their new data into your Secret Library (.git/objects).*(8)*
+                ----To verifiy, use:
+                    -----`find .git/objects`: (The Basement Lantern)
+                        ------Reveals the physical storage of your library. Before a fetch, it is an empty hall; after a fetch, it contains the heavy crates (Packfiles) of the remote's history.
+            ---'`git pull `[remote] [branch]': (The Auto-Merge)
+                ----This is a "Combo Spell." It performs a Fetch AND immediately tries to Merge those new photos into your current branch (git pull = git fetch + git merge). It changes your Live Room (Working Directory) right away; Use it with caution.
+            ---'`git push `[remote] [branch]'(The Delivery):
+                ----You send your local "Photos" from your library to their tower's library and move their sticky notes to match yours.
+                ----'`git push --force `[remote] [branch]': (The Overwrite Hex) 
+                    -----Commands the Post Office to REPLACE a shared scroll rather than append to it. Required after a rebase because commit hashes have changed.
+                ----'`git push --force-with-lease `[remote] [branch]': (The Polite Hex) *(9)*
+                    -----Refuses to cast if another wizard has delivered new photos since you last Scryed. Always prefer this over bare --force.
+                ----⚠️ Warning: Force-pushing a Public Scroll violates The Tower Rule. See Section 5 before casting.
+            ---'`git clone `<repository-url>': Copying an entire library from another kingdom to your local desk.
     ______________________
     -10% Emergency Spells: Precision tools for fixing "cursed" repositories
-        -The last 10% is mostly about fixing mistakes, rolling back changes, and other advanced topics and "Emergency Spells" for when things go wrong:
-            -Merging: Stitching two different realities back together into one.
-                -command: '`git switch main`''`git merge` <name>'(<name>=name of the branch).
-                -merge when integrating into shared branches like main to preserve true history and avoid cursing your teammates.
-                When you cast a Merge Spell, Git follows three steps:
-                    1. Find the Last Shared Moment (Merge Base): Git hunts backwards through both timelines to find the last commit they both walked through together. This is your "Crossroads" commit.
-                    2. Replay the Changes: Git replays what each branch did since the Crossroads, then weaves those changes together.
-                    3. Snap the Bridge Commit: The result is a special photo with two parents instead of one — one parent from each branch. This is the Bridge Commit (F below).
+        --The last 10% is mostly about fixing mistakes, rolling back changes, and other advanced topics and "Emergency Spells" for when things go wrong:
+            ---Merging: Stitching two different realities back together into one.
+                ----command: '`git switch main`''`git merge` <name>'(<name>=name of the branch).
+                ----merge when integrating into shared branches like main to preserve true history and avoid cursing your teammates.
+                ----When you cast a Merge Spell, Git follows three steps:
+                    -----1. Find the Last Shared Moment (Merge Base): Git hunts backwards through both timelines to find the last commit they both walked through together. This is your "Crossroads" commit.
+                    -----2. Replay the Changes: Git replays what each branch did since the Crossroads, then weaves those changes together.
+                    -----3. Snap the Bridge Commit: The result is a special photo with two parents instead of one — one parent from each branch. This is the Bridge Commit (F below).
                      A - B - C - F    (The Main Road)
                         \     /
                          D - E        (Deep-Sea Branch)
-                    -F remembers both C and E. It is the moment two parallel worlds became one again.
+                    -----F remembers both C and E. It is the moment two parallel worlds became one again.
                     -however, If the Main Road has no new photos since the Crossroads, Git skips the Bridge Commit entirely. It simply slides the main sticky note forward to the Tip of the other branch. No new photo is taken. Main must be a direct ancestor of the branch being merged.
                            C - D    (The Sky-Castle Branch)                             
                           /                                 ------>                   (The Sky-Castle Branch)
                      A - B       (The Main Road)                      A - B - C - D   (The Main Road)
-                (This is often where "Conflicts" or "Curses" happen — when both branches changed the same line of the same file since the Crossroads, Git cannot decide which version wins and asks you to resolve it by hand.)
-                -Merging the Horizon (Remote Merges):
-                    -You don't just merge your own side-quests; you can merge the "Ghostly Bookmarks" you found while Scrying.
-                    -Command: git merge origin/main (while standing on your local main).
-                    -The Result: This brings the "Remote History" into your "Local History."
-                    -The Sliding Rule: If you haven't added any unique photos to your local main, this will be a Fast-Forward. Your local sticky note just slides up to meet the Ghostly Bookmark on the horizon.
-                    -The Mirror Limitation: you can only merge into your current focus. You can merge the "Ghostly Bookmark" into your "Main Road," but you can never merge your "Main Road" into a "Ghostly Bookmark." Those ghostly notes are protected by the Post Office's magic!
-            -Rebasing: Moving the foundation of a branch.
-                Instead of stitching two histories together with a bridge (Merge), Rebase picks up your entire branch and re-snaps each photo so it starts from the very latest photo on the Main Road remaking the commits and disregarding the history.
-                -Command: '`git rebase `<base-branch>' (run while standing on your feature branch).
-                -The Result: A perfectly straight line of history. New commit hashes are generated — the old photos become orphans.
-                -The Doctrine Check: Before rebasing, apply The Post Office Test (see Section 5). Only rebase Private Scrolls.
-                -⚠️ Warning: Never rebase the Main Road or any shared branch. It rewrites the past and causes time-travel curses for your allies!
-                -The Rebase Recovery: If you accidentally rebase a Public Scroll, DO NOT force-push yet. Cast '`git reflog`' immediately to find the old tip hash, then use '`git reset --hard `<old-hash>' to restore it.
-            -The Handshake (Merge vs. Rebase Decision):
+                ----(This is often where "Conflicts" or "Curses" happen — when both branches changed the same line of the same file since the Crossroads, Git cannot decide which version wins and asks you to resolve it by hand.)
+                ----Merging the Horizon (Remote Merges):
+                    -----You don't just merge your own side-quests; you can merge the "Ghostly Bookmarks" you found while Scrying.
+                    -----Command: git merge origin/main (while standing on your local main).
+                    -----The Result: This brings the "Remote History" into your "Local History."
+                    -----The Sliding Rule: If you haven't added any unique photos to your local main, this will be a Fast-Forward. Your local sticky note just slides up to meet the Ghostly Bookmark on the horizon.
+                    -----The Mirror Limitation: you can only merge into your current focus. You can merge the "Ghostly Bookmark" into your "Main Road," but you can never merge your "Main Road" into a "Ghostly Bookmark." Those ghostly notes are protected by the Post Office's magic!
+            ---Rebasing: Moving the foundation of a branch.
+                ----Instead of stitching two histories together with a bridge (Merge), Rebase picks up your entire branch and re-snaps each photo so it starts from the very latest photo on the Main Road remaking the commits and disregarding the history.
+                ----Command: '`git rebase `<base-branch>' (run while standing on your feature branch).
+                ----The Result: A perfectly straight line of history. New commit hashes are generated — the old photos become orphans.
+                ----The Doctrine Check: Before rebasing, apply The Post Office Test (see Section 5). Only rebase Private Scrolls.
+                ----⚠️ Warning: Never rebase the Main Road or any shared branch. It rewrites the past and causes time-travel curses for your allies!
+                ----The Rebase Recovery: If you accidentally rebase a Public Scroll, DO NOT force-push yet. Cast '`git reflog`' immediately to find the old tip hash, then use '`git reset --hard `<old-hash>' to restore it.
+            ---The Handshake (Merge vs. Rebase Decision):
                 | Situation | Spell | Why |
                 |---|---|---|
                 | Polishing your own unpushed branch | Rebase | Private Scroll — safe to rewrite |
@@ -283,79 +297,80 @@ i-Command Syntax:
                 | Recovering from an accidental Public rebase | Reflog + reset | Resurrect the old tip BEFORE force-pushing spreads the curse |
                 | Combining work from a teammate's branch | Merge | Their Scroll is Public by definition |
                 -The Golden Rule: Rebase your OWN Private work to polish it. Merge when stitching your polished work back into the shared world.
-            -Resetting: Moving your bookmark back in history, with optional control over whether the Camera Viewfinder and Live Room are also rewound.
-                Think of git reset as a time-adjustment spell with different strengths.
-                All reset modes move the branch bookmark, think of it like a wire cutter.
-                The difference is whether Git also resets the staged snapshot and the files in your room.
-                -The Gentle Rewind ('`git reset --soft `<COMMITHASH>')
-                    Moves your branch's Sticky Note back to an earlier photo, but leaves the Camera Viewfinder and the Live Room untouched.
-                    -Commit History: moved back
-                    -Staging Area: unchanged
-                    -Working Directory: unchanged
-                    -The Result: the undone commit's changes are still staged and ready to be committed again.
-                    -Use Case: when you committed too early and want to re-shoot that work as part of a better commit.
-                -The Partial Rewind (git reset --mixed <COMMITHASH>)
-                    -Moves your branch's Sticky Note back to an earlier photo and resets the Camera Viewfinder, but leaves the Live Room untouched.
-                        -Commit History: moved back
-                        -Staging Area: reset
-                        -Working Directory: unchanged
-                        -The Result: the undone commit's changes are unstaged but still present as file edits in your room.
-                        -Use Case: when you want to undo a commit and un-stage its changes, but keep the actual file edits so you can rework and re-stage them more carefully. This is also Git's default behavior when no flag is specified.
-                -The Full Rewind ('`git reset --hard`<COMMITHASH>')
-                    Moves your branch's Sticky Note back to an earlier photo and forces both the Camera Viewfinder and the Live Room to match that older photo exactly.
-                        -Commit History: moved back
-                        -Staging Area: reset
-                        -Working Directory: reset
-                        -The Result: local staged and unstaged changes are discarded so everything matches the target commit.
-                        -Use Case: when you want to completely abandon the current local changes and return to an earlier snapshot.
-                        -Warning: this spell is destructive for uncommitted work.
-                -The Reset Rule
-                    The true power of git reset is not only where the Sticky Note moves, but also whether Git forces the Camera Viewfinder and the Live Room to rewind with it.
+            ---Resetting: Moving your bookmark back in history, with optional control over whether the Camera Viewfinder and Live Room are also rewound.
+                ----Think of git reset as a time-adjustment spell with different strengths.
+                ----All reset modes move the branch bookmark, think of it like a wire cutter.
+                ----The difference is whether Git also resets the staged snapshot and the files in your room.
+                ----The Gentle Rewind ('`git reset --soft `<COMMITHASH>')
+                    -----Moves your branch's Sticky Note back to an earlier photo, but leaves the Camera Viewfinder and the Live Room untouched.
+                    -----Commit History: moved back
+                    -----Staging Area: unchanged
+                    -----Working Directory: unchanged
+                    -----The Result: the undone commit's changes are still staged and ready to be committed again.
+                    -----Use Case: when you committed too early and want to re-shoot that work as part of a better commit.
+                ----The Partial Rewind (git reset --mixed <COMMITHASH>)
+                    -----Moves your branch's Sticky Note back to an earlier photo and resets the Camera Viewfinder, but leaves the Live Room untouched.
+                        ------Commit History: moved back
+                        ------Staging Area: reset
+                        ------Working Directory: unchanged
+                        ------The Result: the undone commit's changes are unstaged but still present as file edits in your room.
+                        ------Use Case: when you want to undo a commit and un-stage its changes, but keep the actual file edits so you can rework and re-stage them more carefully. This is also Git's default behavior when no flag is specified.
+                ----The Full Rewind ('`git reset --hard`<COMMITHASH>')
+                    -----Moves your branch's Sticky Note back to an earlier photo and forces both the Camera Viewfinder and the Live Room to match that older photo exactly.
+                        ------Commit History: moved back
+                        ------Staging Area: reset
+                        ------Working Directory: reset
+                        ------The Result: local staged and unstaged changes are discarded so everything matches the target commit.
+                        ------Use Case: when you want to completely abandon the current local changes and return to an earlier snapshot.
+                        ------Warning: this spell is destructive for uncommitted work.
+                ----The Reset Rule
+                    -----The true power of git reset is not only where the Sticky Note moves, but also whether Git forces the Camera Viewfinder and the Live Room to rewind with it.
                         | Mode | Branch Pointer | Staging Area | Working Directory |
                         |---|---|---|---|
                         | `--soft` | moved | unchanged | unchanged |
                         | `--hard` | moved | reset | reset |
-            -Reverting: How to undo a photo if you don't like it. *(Sealed Scroll)*
-            -'`git reflog`': (The Memory Pool)
-                -The Memory Pool will show you the commit hashes of your "lost" work due to *"orphaning"* . Even when a scroll is rewritten or a bookmark force-erased, Git remembers every position HEAD has ever occupied — like footprints in wet sand near a reflecting pool.*(9)*
-                -The Local-Only Rule: The Pool exists in YOUR tower (.git/logs/), never at the Post Office. You cannot scry another wizard's footprints, and they cannot scry yours.
-                -The Expiry Rule: Footprints fade after ~90 days. Act quickly after a mistake!
-                You can then use The Resurrection Ritual to pull them back from the void (when to use which spell):
-                    -If you want to undo YOUR OWN branch rewrite entirely → '`git reset --hard `<hash>'
-                    -If you want just ONE specific orphan photo → '`git cherry-pick `<hash>':
-                        -Use this if you want to grab specific orphaned commits and apply them one-by-one onto your current branch.
-                    -If you want the orphan's ENTIRE lineage → '`git merge `<hash>':
-                        -Use this if you found the "tip" of the lost branch in the reflog and want to bring the entire sequence of lost commits back at once.
-                    -If you want to rescue an orphan WITHOUT disturbing current branches → '`git checkout -b `<new-branch-name> <hash>':
-                        -This is often the easiest way! It creates a brand new branch pointer exactly where the orphaned commit is sitting, making it no longer an orphan.
-            -'`git rev-parse `<name>': Finding the true 40-character "Fingerprint" (Hash) of a bookmark. *(10)*
-            -'`git cat-file `<type> <hash>': Peeking inside a specific object in the library.*(11)*
-            -'`git hash-object `<file-path>': Computes and returns the 40-character hash of any file's content without storing it. It is your "Fingerprint Calculator" — useful for checking what hash Git would assign to a file before committing it.
-            -'`git ls-tree `<tree-ish>': Listing everything inside a snapshot to see their "Mode." *(12)*
-            - Manually editing '.git/config' or '~/.gitconfig' with a text editor. (Changing the kingdom's rules by hand instead of using the git config tool.)
-                - (This is the "Plumbing" way to change settings without using the 'git config' tool).
+            ---Reverting: How to undo a photo if you don't like it. *(Sealed Scroll)*
+            ---'`git reflog`': (The Memory Pool)
+                ----The Memory Pool will show you the commit hashes of your "lost" work due to *"orphaning"* . Even when a scroll is rewritten or a bookmark force-erased, Git remembers every position HEAD has ever occupied — like footprints in wet sand near a reflecting pool.*(10)*
+                ----The Local-Only Rule: The Pool exists in YOUR tower (.git/logs/), never at the Post Office. You cannot scry another wizard's footprints, and they cannot scry yours.
+                ----The Expiry Rule: Footprints fade after ~90 days. Act quickly after a mistake!
+                ----You can then use The Resurrection Ritual to pull them back from the void (when to use which spell):
+                    -----If you want to undo YOUR OWN branch rewrite entirely → '`git reset --hard `<hash>'
+                    -----If you want just ONE specific orphan photo → '`git cherry-pick `<hash>':
+                        ------Use this if you want to grab specific orphaned commits and apply them one-by-one onto your current branch.
+                    -----If you want the orphan's ENTIRE lineage → '`git merge `<hash>':
+                        ------Use this if you found the "tip" of the lost branch in the reflog and want to bring the entire sequence of lost commits back at once.
+                    -----If you want to rescue an orphan WITHOUT disturbing current branches → '`git checkout -b `<new-branch-name> <hash>':
+                        ------This is often the easiest way! It creates a brand new branch pointer exactly where the orphaned commit is sitting, making it no longer an orphan.
+            ---'`git rev-parse `<name>': Finding the true 40-character "Fingerprint" (Hash) of a bookmark. *(11)*
+            ---'`git cat-file `<type> <hash>': Peeking inside a specific object in the library.*(12)*
+            ---'`git hash-object `<file-path>': Computes and returns the 40-character hash of any file's content without storing it. It is your "Fingerprint Calculator" — useful for checking what hash Git would assign to a file before committing it.
+            ---'`git ls-tree `<tree-ish>': Listing everything inside a snapshot to see their "Mode." *(13)*
+            --- Manually editing '.git/config' or '~/.gitconfig' with a text editor. (Changing the kingdom's rules by hand instead of using the git config tool.)
+                ---- (This is the "Plumbing" way to change settings without using the 'git config' tool).
     ___________________________________________________________________________________________________________
     *(1):(git add ., where the . acts as the <file-path> for "everything in the current directory.")*
     *(2)The True Name Lens (--decorate=full): Reveals the "Ref’s" full path. This shows the exact "Shelf" in the Secret Library (refs/heads/) where the sticky note is kept.*
     *(3)Branching: In a normal book, you read from page 1 to page 100 in a straight line. But a Wizard's Notebook is magical. Think of it like puting an extra bookmark in the project(book) instead of a copy of the whole library; it is just a sticky note (a pointer) that says "I am currently looking at this specific photo in the album.". The Master Scroll (master/main): This is the "True History" of the kingdom. It is the story everyone agrees is real.***(1)** **(2)**
         -**(1)The Movement: When you snap a new photo (commit), you don't need a new bookmark; you simply peel the sticky note off the old photo and slap it onto the new one. It always stays at The Tip of the Wand.***(1)*
-            -*(1)The Tip of the Wand: The most recent photo in a branch is called the Tip. As you add new photos, the bookmark automatically slides forward to stay at the very end of that specific story.*
+            --*(1)The Tip of the Wand: The most recent photo in a branch is called the Tip. As you add new photos, the bookmark automatically slides forward to stay at the very end of that specific story.*
         -**(2)The Starting Point: Every notebook starts with a first bookmark already placed. This is why, when you run git branch for the first time in your project directory, you aren't standing in a "nameless void." You are already standing on the main branch.**
     *(4)The Wizard's Focus (HEAD):*
-        *While you can have many bookmarks (Branches) in your album, you only have one set of eyes.*
-            *-HEAD is the Wizard's Focus. It usually points to a Sticky Note (Branch).*
-            *-When you move your focus to a different branch, Git quickly rearranges the furniture in the Live Room (Working Directory) to match the photo that bookmark is pointing to.*
-            *-Plumbing Fact: If you look inside the secret file .git/HEAD, you won't see a hash; you'll see something like ref: refs/heads/main. It’s literally a pointer to a pointer!*
-            *-The Shifting Reality Rule:*
-                *-When you move your Focus (HEAD) to a different bookmark(branch), Git physically replaces the items in your Live Room (Working Directory). If you created a magical item on a Side-Quest and then teleport back to the Main Road, the item will vanish from your hand. It isn't gone; it is simply waiting for you back in the other reality.*
-    *(5) The Portability Rule: When working with local folders, using a Relative Path (like ../webflyx) is better than an Absolute Path (like /home/wizard/webflyx). It ensures that even if you move your entire "workspace" to a different desk, the connection between the two folders isn't broken.*
-    *(6)The One-Way Mirror Rule: Most of the time, the fetch and push addresses are the same. But some powerful wizards set a different push address to send their scrolls to a secondary vault while still scrying from the main library.*
-    *(7)The Multi-Mirror Rule: You can see the "Tips" of many different worlds at once (origin/main, upstream/main, and your own main). You choose which one to merge into your own "Live Room."*
-    *(8) The Lease Mechanic: --force-with-lease compares the remote's current tip to the tip you last Scryed. If they match, your force push proceeds. If they differ, Git refuses — protecting you from overwriting an ally's delivery you hadn't seen yet.*
-    *(9):"orphaning": The state where a commit hash exists in the .git objects database but is not reachable by any branch pointer. This usually happens after a git branch -D or a git rebase where the old versions of commits are left behind.*
-    *(10):<name>:It tells you the full 40-character SHA-1 hash that the name points to. If you ask Git git rev-parse HEAD, it will tell you the exact hash of the commit you are currently standing on.*
-    *(11):If a flag is used '<type>' isn't needed. Common flags: -p (print content), -t (show type).*
-    *(12):<tree-ish>: This is a fancy Git term for "something that points to a tree." Usually, this is the hash of a tree object, or simply HEAD. It lists everything inside that snapshot and shows their "Mode"—a special code that tells Git if a file is a regular file, a folder, or a special 'executable' file (like a script that can run like a toy car on its own).*
+        -*While you can have many bookmarks (Branches) in your album, you only have one set of eyes.*
+            --*-HEAD is the Wizard's Focus. It usually points to a Sticky Note (Branch).*
+            --*-When you move your focus to a different branch, Git quickly rearranges the furniture in the Live Room (Working Directory) to match the photo that bookmark is pointing to.*
+            --*-Plumbing Fact: If you look inside the secret file .git/HEAD, you won't see a hash; you'll see something like ref: refs/heads/main. It’s literally a pointer to a pointer!*
+            --*-The Shifting Reality Rule:*
+                ---*-When you move your Focus (HEAD) to a different bookmark(branch), Git physically replaces the items in your Live Room (Working Directory). If you created a magical item on a Side-Quest and then teleport back to the Main Road, the item will vanish from your hand. It isn't gone; it is simply waiting for you back in the other reality.*
+    *(5)The Magic Carriage (Protocols): When the Envoy asks for your "preferred protocol," you are choosing the road your scrolls travel on. HTTPS is the "Standard Road"—it's easy to use and passes through most kingdom checkpoints (firewalls) without trouble. SSH is the "Secret Tunnel"—it uses a set of magical keys (public/private) for even higher security, but requires more setup.*
+    *(6) The Portability Rule: When working with local folders, using a Relative Path (like ../webflyx) is better than an Absolute Path (like /home/wizard/webflyx). It ensures that even if you move your entire "workspace" to a different desk, the connection between the two folders isn't broken.*
+    *(7)The One-Way Mirror Rule: Most of the time, the fetch and push addresses are the same. But some powerful wizards set a different push address to send their scrolls to a secondary vault while still scrying from the main library.*
+    *(8)The Multi-Mirror Rule: You can see the "Tips" of many different worlds at once (origin/main, upstream/main, and your own main). You choose which one to merge into your own "Live Room."*
+    *(9) The Lease Mechanic: --force-with-lease compares the remote's current tip to the tip you last Scryed. If they match, your force push proceeds. If they differ, Git refuses — protecting you from overwriting an ally's delivery you hadn't seen yet.*
+    *(10):"orphaning": The state where a commit hash exists in the .git objects database but is not reachable by any branch pointer. This usually happens after a git branch -D or a git rebase where the old versions of commits are left behind.*
+    *(11):<name>:It tells you the full 40-character SHA-1 hash that the name points to. If you ask Git git rev-parse HEAD, it will tell you the exact hash of the commit you are currently standing on.*
+    *(12):If a flag is used '<type>' isn't needed. Common flags: -p (print content), -t (show type).*
+    *(13):<tree-ish>: This is a fancy Git term for "something that points to a tree." Usually, this is the hash of a tree object, or simply HEAD. It lists everything inside that snapshot and shows their "Mode"—a special code that tells Git if a file is a regular file, a folder, or a special 'executable' file (like a script that can run like a toy car on its own).*
 
 
 5-The Collaboration Doctrine (Public vs. Private History):
@@ -410,7 +425,7 @@ E-Context Summary: Git Apprentice Reference Guide
     ___________________________
     Key Analogies & Frameworks:
         _____________________________________________
-        The Config Notebook (The Hierarchy of Power):
+        1-The Config Notebook (The Hierarchy of Power):
             -The Annex (--worktree): A separate scroll for shared drafts of the same project. Exists only when `extensions.worktreeConfig` is enabled.
             -The Sticky Note (--local): Project-specific settings that override more general books. Default scope for writing.
             -The Inside Cover (--global): Your personal identity that follows you through every quest.
@@ -423,7 +438,7 @@ E-Context Summary: Git Apprentice Reference Guide
             -The Naming Convention: <section>.<key> format is mandatory. A section only exists as long as it has at least one key.
             -The Project Requirement: Writing `--local` config requires being inside a Git repository.
         __________________________________
-        The Three States (The Room Photo):
+        3-The Three States (The Room Photo):
             -Working Directory: The "Live Room" where you move furniture (modify files).
             -Staging Area/Index: The "Camera Viewfinder" (preparing the shot via git add).
             -Commit History: The "Photo Album" (the permanent record via git commit).
@@ -445,7 +460,7 @@ E-Context Summary: Git Apprentice Reference Guide
                 -The Safe Eraser Rule: -d refuses to delete an unmerged branch. -D forces the deletion regardless.
             -The Lightweight Rule: A branch is a 41-byte file. 1,000 branches add no meaningful weight to the library.
         _______________________________________
-        The Workflow Hierarchy (50/40/10 Rule):
+        4-The Workflow Hierarchy (50/40/10 Rule):
             -50% Solo Mastery: The daily loop of `status`, `diff`, `add`, `commit`, `log`, `branch`, and `switch`.
             -40% Remote Collaboration: The "Post Office" — sharing albums via `remote`, `fetch`, `pull`, `push`, and `clone`.
             -10% Emergency Spells: Precision tools for fixing "cursed" repositories — `merge`, `rebase`, `reset`, `revert`, (sealed), `reflog`, and plumbing tools.
@@ -486,17 +501,17 @@ E-Context Summary: Git Apprentice Reference Guide
             -Shows every position HEAD has ever occupied, including orphaned commits after a rebase or force-delete.
             -Local-only. Footprints fade after ~90 days.
             -Resurrection options: `reset --hard <hash>` to undo a rewrite entirely, `cherry-pick <hash>` for a single orphan, `merge <hash>` for an entire lost lineage, `checkout -b <new-branch> <hash>` to rescue without disturbing current branches.
-        --------------------------------------------------------
-          -The Collaboration Doctrine (Public vs. Private History):
-            -Private Scrolls: Branches only on your desk, or pushed but not yet pulled by anyone. Safe to rewrite.
-            -Public Scrolls: Branches pulled by other wizards. Rewriting curses every ally holding a copy.
-            -The Post Office Test: "Has this scroll been delivered AND received by anyone else?" Yes → Merge. No → Rebase safe. Unsure → Merge.
         --------------------------
           -Porcelain vs. Plumbing:
             -Porcelain: User-friendly tools for daily work (e.g., `git config set`, `git log`, `git status`).
             -Plumbing: X-ray tools, Under-the-hood inspection tools and manual file editing (e.g., `cat-file`, `rev-parse`, `hash-object`, `ls-tree`, etc.) .
+        ________________________________________________________
+        5-The Collaboration Doctrine (Public vs. Private History):
+            -Private Scrolls: Branches only on your desk, or pushed but not yet pulled by anyone. Safe to rewrite.
+            -Public Scrolls: Branches pulled by other wizards. Rewriting curses every ally holding a copy.
+            -The Post Office Test: "Has this scroll been delivered AND received by anyone else?" Yes → Merge. No → Rebase safe. Unsure → Merge.
         ________________________________________
-        The Secret Library (Content Addressing):
+        6-The Secret Library (Content Addressing):
             -Blobs (The Leaves): Fingerprinted content only. Deduplication via content ("Space").
             -Trees (The Branches): Packing lists showing file Mode (regular file, folder, or executable).
             -Commits (The Snapshots): Dated, signed entries in the library log. Deduplication via timestamp ("Time").
