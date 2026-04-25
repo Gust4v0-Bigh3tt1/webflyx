@@ -1,1 +1,1 @@
-Welcome to Webflyx! This is a project I'm using to master the art of Git. You can find my extensive technical notes in GIT_LEARNING_NOTES.md.
+*Welcome to Webflyx!*  [This is a project I'm using to master the art of Git.] `You can find my extensive technical notes in` <GIT_LEARNING_NOTES.md>.
