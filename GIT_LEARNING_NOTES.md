@@ -294,13 +294,25 @@ ________________________________________________________________________________
       - '`git push --force-with-lease [remote] [branch]`': (The Polite Hex) *(9)*
         Refuses to cast if another wizard has delivered new photos since you last Scryed. Always prefer this over bare --force.
     - ⚠️ Warning: Force-pushing a Public Scroll violates The Tower Rule. See Section 5 before casting.
+  - #### The Council of Peers: (Pull Requests) *(10)*
+    ###### A formal ceremony held at the **Great Library (GitHub)** rather than inside your local tower. It is a way to propose that your "Side-Quest" (Branch) be officially woven into the "Kingdom's Law" (Main Branch).
+    - The Proposal Scroll: When you push a branch, you create a Pull Request to show the other wizards exactly which "Photos" (commits) you intend to add.
+    - The Scrying Review: Other wizards look at your proposal. They can leave "Glowing Runes" (Comments) on specific lines of your scroll to suggest better incantations.
+    - The Update Ritual: If the council suggests changes, you simply modify the files in your tower, commit them, and Deliver ('`push`') again. The Proposal Scroll at the Great Library updates automatically to reflect your new work!
+    - The Master’s Seal (The Merge): Once the council is satisfied, the "Merge" button is pressed. This officially performs the Bridge Commit or Fast-Forward at the Great Library, making your Side-Quest part of the permanent history.
+  - #### Resolving the Clash of Timelines (Merge Conflicts):
+    ###### core truths(conditions):
+    - The Interrupted Ritual: Git stops the merge halfway and marks the cursed files.
+    - The Conflict Marks: Strange runes like `<<<<<<< HEAD`, `=======`, and `>>>>>>>` appear inside your files, showing both versions of reality simultaneously.
+    - The Hand-Picked Truth: You must manually delete the runes and the version of the code you don't want, leaving only the "True" version behind.
+    - The Final Seal: Once the file is fixed, you '`add`' it and '`commit`' to finish the bridge. 
   - #### '`git clone <repository-url>`': Copying an entire library from another kingdom to your local desk.
                 
 - ### 10% Emergency Spells: Precision tools for fixing "cursed" repositories
   ##### The last 10% is mostly about fixing mistakes, rolling back changes, and other advanced topics and "Emergency Spells" for when things go wrong:
   - #### Merging: Stitching two different realities back together into one.
-    - command: '`git switch main`''`git merge <name>`' (<_name_>=name of the branch).
     merge when integrating into shared branches like main to preserve true history and avoid cursing your teammates.
+    - command: '`git switch main`''`git merge <name>`' (<_name_>=name of the branch).
     When you cast a Merge Spell, Git follows three steps:
       - 1. Find the Last Shared Moment (Merge Base): Git hunts backwards through both timelines to find the last commit they both walked through together. This is your "Crossroads" commit.
       - 2. Replay the Changes: Git replays what each branch did since the Crossroads, then weaves those changes together.
@@ -374,7 +386,7 @@ ________________________________________________________________________________
         | `--hard` | moved | reset | reset |
   - #### Reverting: How to undo a photo if you don't like it. *(Sealed Scroll)*
   - #### '`git reflog`': (The Memory Pool)
-    The Memory Pool will show you the commit hashes of your "lost" work due to *"orphaning"* . Even when a scroll is rewritten or a bookmark force-erased, Git remembers every position HEAD has ever occupied — like footprints in wet sand near a reflecting pool.*(10)*
+    The Memory Pool will show you the commit hashes of your "lost" work due to *"orphaning"* . Even when a scroll is rewritten or a bookmark force-erased, Git remembers every position HEAD has ever occupied — like footprints in wet sand near a reflecting pool.*(11)*
     - The Local-Only Rule: The Pool exists in YOUR tower (.git/logs/), never at the Post Office. You cannot scry another wizard's footprints, and they cannot scry yours.
     - The Expiry Rule: Footprints fade after ~90 days. Act quickly after a mistake!
     - You can then use The Resurrection Ritual to pull them back from the void (when to use which spell):
@@ -386,13 +398,13 @@ ________________________________________________________________________________
       - If you want to rescue an orphan WITHOUT disturbing current branches → '`git checkout -b <new-branch-name> <hash>`':
         - This is often the easiest way! It creates a brand new branch pointer exactly where the orphaned commit is sitting, making it no longer an orphan.
   - #### '`git rev-parse <name>`':
-    Finding the true 40-character "Fingerprint" (Hash) of a bookmark. *(11)*
+    Finding the true 40-character "Fingerprint" (Hash) of a bookmark. *(12)*
   - #### '`git cat-file <type> <hash>`':
-    Peeking inside a specific object in the library.*(12)*
+    Peeking inside a specific object in the library.*(13)*
   - #### '`git hash-object <file-path>`':
     Computes and returns the 40-character hash of any file's content without storing it. It is your "Fingerprint Calculator" — useful for checking what hash Git would assign to a file before committing it.
   - #### '`git ls-tree <tree-ish>`':
-    Listing everything inside a snapshot to see their "Mode." *(13)*
+    Listing everything inside a snapshot to see their "Mode." *(14)*
   - ##### Manually editing '.git/config' or '~/.gitconfig' with a text editor. (Changing the kingdom's rules by hand instead of using the git config tool.)
     ##### (This is the "Plumbing" way to change settings without using the 'git config' tool).
 ___________________________________________________________________________________________________________
@@ -414,10 +426,11 @@ ________________________________________________________________________________
 - *(7)The One-Way Mirror Rule: Most of the time, the fetch and push addresses are the same. But some powerful wizards set a different push address to send their scrolls to a secondary vault while still scrying from the main library.*
 - *(8)The Multi-Mirror Rule: You can see the "Tips" of many different worlds at once (origin/main, upstream/main, and your own main). You choose which one to merge into your own "Live Room."*
 - *(9) The Lease Mechanic: --force-with-lease compares the remote's current tip to the tip you last Scryed. If they match, your force push proceeds. If they differ, Git refuses — protecting you from overwriting an ally's delivery you hadn't seen yet.*
-- *(10):"orphaning": The state where a commit hash exists in the .git objects database but is not reachable by any branch pointer. This usually happens after a git branch -D or a git rebase where the old versions of commits are left behind.*
-- *(11):<_name_>:It tells you the full 40-character SHA-1 hash that the name points to. If you ask Git git rev-parse HEAD, it will tell you the exact hash of the commit you are currently standing on.*
-- *(12):If a flag is used '<_type_>' isn't needed. Common flags: -p (print content), -t (show type).*
-- *(13):<_tree-ish_>: This is a fancy Git term for "something that points to a tree." Usually, this is the hash of a tree object, or simply HEAD. It lists everything inside that snapshot and shows their "Mode"—a special code that tells Git if a file is a regular file, a folder, or a special 'executable' file (like a script that can run like a toy car on its own).*
+- *(10) The UI Barrier: Unlike push or fetch, a Pull Request is a feature of the Post Office (GitHub/GitLab), not a core Git command. While the Envoy (gh pr create) can start the ceremony, it usually culminates in the visual interface of the Great Library.*
+- *(11):"orphaning": The state where a commit hash exists in the .git objects database but is not reachable by any branch pointer. This usually happens after a git branch -D or a git rebase where the old versions of commits are left behind.*
+- *(12):<_name_>:It tells you the full 40-character SHA-1 hash that the name points to. If you ask Git git rev-parse HEAD, it will tell you the exact hash of the commit you are currently standing on.*
+- *(13):If a flag is used '<_type_>' isn't needed. Common flags: -p (print content), -t (show type).*
+- *(14):<_tree-ish_>: This is a fancy Git term for "something that points to a tree." Usually, this is the hash of a tree object, or simply HEAD. It lists everything inside that snapshot and shows their "Mode"—a special code that tells Git if a file is a regular file, a folder, or a special 'executable' file (like a script that can run like a toy car on its own).*
 _________________________________________________
 
 
