@@ -1,11 +1,11 @@
 # A self made project to learn Git with boot.dev's guidence
 
 ## Version Control:
-##### - Git is a tool for tracking changes(snapshots/photos) to files over time, allowing you to "travel back in time" to previous versions of your work.
+##### Git is a tool for tracking changes(snapshots/photos) to files over time, allowing you to "travel back in time" to previous versions of your work.
 
 
 ## i. Command Syntax:
-- Arguments in between ' ' are commands or pices of one in between normal text.
+- Arguments in between '` `' are commands or pices of one in between normal text.
 - Arguments in angle brackets <> are mandatory and must be provided when running the command.
 - Arguments in square brackets [] are optional and can be included if needed.
   - For example, to create a new directory in your terminal, you would run:
@@ -18,19 +18,19 @@
 
 
 ## 1. Configuring Git:
-##### - Before the work begin, you need to tell Git who you are! This information is attached to everything you do so people know who made the changes.(go to "The Inside Cover (--global)/The “Notebook” Commands" to see how to apply your Identity)
+######  Before the work begin, you need to tell Git who you are! This information is attached to everything you do so people know who made the changes.(go to "The Inside Cover (--global)/The “Notebook” Commands" to see how to apply your Identity)
 - The Rule of Overriding: If a setting exists in more than one "level", Git always listens to the most specific one. (Worktree (The Annex) overrides Local (Sticky Note), Local (Sticky Note) overrides Global (Inside Cover), Global (Inside Cover) overrides System (Kingdom's Law).)
 
-### The Kingdom’s Law (--system): Settings for everyone on this computer. (File: /etc/gitconfig).
-##### - These are the foundational rules set for every single user and project on this machine. You rarely need to edit this, as it is like changing the laws of the land itself.
+### The Kingdom’s Law (`--system`): Settings for everyone on this computer. (File: /etc/gitconfig).
+###### These are the foundational rules set for every single user and project on this machine. You rarely need to edit this, as it is like changing the laws of the land itself.
   - Storage: /etc/gitconfig
   - Commands:
     - '`git config set --system <key> <value>`' 
       (Requires "Administrative Magic" / '`sudo`' to change).
 - Think of this as the stone tablet in the town square. Everyone can read it, but only the High Wizards can pick up the chisel to change it.
 
-### The Inside Cover (--global): Your personal identity for all your projects. (File: ~/.gitconfig).
-##### - Your default identity. These settings follow you across every project you ever start.
+### The Inside Cover (`--global`): Your personal identity for all your projects. (File: ~/.gitconfig).
+###### Your default identity. These settings follow you across every project you ever start.
   - Identity: You set your user.name and user.email.
   - Default Branch: You can tell Git what to call your main workspace (usually main).
   - Storage: '~/.gitconfig' (The "inside cover" for all your projects).*(1)*
@@ -52,24 +52,24 @@
     - If the key is init.defaultBranch, the value is "main"
 ___________________________________________________________________________________________________________
 - *(1): [scope] tells Git which notebook to write in.*
-    - **'--global' (The Inside Cover): For all projects in your kingdom.**
-    - **'--local' (The Sticky Note): Just for this specific project.**
+    - **'`--global`' (The Inside Cover): For all projects in your kingdom.**
+    - **'`--local`' (The Sticky Note): Just for this specific project.**
     - **The ~ (tilde) is a shortcut that means "my home folder," which is where Git looks for your default identity.**
-- *(2):You can't just ask for <_key_>; you must ask for *<_section_>.<_key_> ***(1)**, git follows a strict format, It is like looking for a specific word in a dictionary. You don't just look for "Definition"; you look for "Bear.Definition" so Git knows exactly which section to check.**(2)***
+- *(2):You can't just ask for <_key_>; you must ask for <_section_>.<_key_> **(1)**, git follows a strict format, It is like looking for a specific word in a dictionary. You don't just look for "Definition"; you look for "Bear.Definition" so Git knows exactly which section to check. **(2)***
     - **(1):a Section is like a Chapter Header in your notebook. If you haven't written any notes (keys) under that header yet, the header doesn't really "exist" in Git's eyes. As soon as you add your first "sticky note" (e.g., git config set webflyx.ceo "ThePrimeagen"), Git creates the "webflyx" chapter automatically to hold it. To find it use 'git config list'**
-    - **(2):Existence Rule: A section only exists as long as it has at least one key. If you unset the last key, it will leave a empty [section] header behind in the .git/config file. (To remove it, go to "The Sticky Note ('--Local')/Commands/Remove/Chapter Eraser").**
+    - **(2):Existence Rule: A section only exists as long as it has at least one key. If you unset the last key, it will leave a empty [section] header behind in the .git/config file. (To remove it, go to "The Sticky Note ('`--Local`')/Commands/Remove/Chapter Eraser").**
 - *(3):[scope] can be --global (the inside cover) or --local (the sticky note).*
     - **The Default Rule: If you don't pick one, Git usually defaults to --local.**
     - **The Project Requirement: Because the default is --local, Git must be able to find the hidden .git cave to write the note. If you aren't inside a project, it will throw a "fatal" error because it has no "Sticky Note" to write on!**
-- *(4):'git config list' works by itself just fine it will give you a list of all your git config that has been set.***(1)** **(2)**
+- *(4):'`git config list`' works by itself just fine it will give you a list of all your git config that has been set.***(1)** **(2)**
     - **(1)The Filter: If you only want to see one rule, use '`git config get <key>`'.if it exist.**
-    - **(2)The Full Scroll: You can also use 'cat ~/.gitconfig' to see all.(global only, for local use 'cat .git/config')**
-- *(5):The Safety Rule: You must be "inside" a Git project folder to use or see 'Local' settings. If you try to 'set' a local key while standing outside a project, Git will get confused and tell you: "fatal: not in a git directory".*
-    - **(When Setting: If you don't specify a scope, Git tries to write to the "Sticky Note" (--local) in your current project. If you aren't inside a Git repository, the command will actually fail because there is no .git/config file to write to!)**
-    - **(When Getting(The Search Rule): When reading a setting (get), Git is a detective. It searches from the most specific (Local) to the most general (System) until it finds an answer. The first answer it finds is the one it gives you)**
+    - **(2)The Full Scroll: You can also use '`cat ~/.gitconfig`' to see all.(global only, for local use '`cat .git/config`')**
+- *(5):The Safety Rule: You must be "inside" a Git project folder to use or see '`--Local`' settings. If you try to '`set`' a local key while standing outside a project, Git will get confused and tell you: "fatal: not in a git directory".*
+    - **(When Setting: If you don't specify a scope, Git tries to write to the "Sticky Note" (`--local`) in your current project. If you aren't inside a Git repository, the command will actually fail because there is no .git/config file to write to!)**
+    - **(When Getting(The Search Rule): When reading a setting (get), Git is a detective. It searches from the most specific (`--Local`) to the most general (`--System`) until it finds an answer. The first answer it finds is the one it gives you)**
 ______________________________________________________________________________________________
-### The Sticky Note (--local):Project-specific settings just for this folder. (File: .git/config).
-Project-specific rules. These only exist inside the hidden .git cave of a specific repository.
+### The Sticky Note (`--local`):Project-specific settings just for this folder. (File: .git/config).
+###### Project-specific rules. These only exist inside the hidden .git cave of a specific repository.
 - For specific projects, you can add "sticky notes" that only apply to that folder.
   - Find: '`git config get <section>.<key>`' (Used to pluck one specific "sticky note" out of the pile).
   - Peek: '`git config list`' (Used to see every single setting Git is currently using).
@@ -87,17 +87,17 @@ Project-specific rules. These only exist inside the hidden .git cave of a specif
     - Chapter Eraser:
         - the whole section: '`git config remove-section <section>`'
         - If unset is an eraser for a single line (a key), remove-section is like ripping an entire page out of your notebook. Sometimes you create a "Chapter" (section) like [webflyx] that you realize you don't need anymore. Instead of erasing every single sticky note one by one, you can delete the whole header and everything inside it in one go. *(5)*
-        - The Eraser Rule: Git's eraser is precision-tipped! While you can erase a whole "Chapter" (Section) using the 'remove-section' tool, using 'unset' only erases a single line. If you unset every line in a chapter, the empty Header might still hang around until you use the "Chapter Eraser" to scrub it away.
+        - The Eraser Rule: Git's eraser is precision-tipped! While you can erase a whole "Chapter" (Section) using the '`remove-section`' tool, using '`unset`' only erases a single line. If you unset every line in a chapter, the empty Header might still hang around until you use the "Chapter Eraser" to scrub it away.
 ___________________________________________________________________________________________________________
-- *(1): The --append flag is like using a stapler. Instead of replacing the old sticky note, you are stapling a new one right on top of it. Now you have a pile of notes for the same key!*
+- *(1): The `--append` flag is like using a stapler. Instead of replacing the old sticky note, you are stapling a new one right on top of it. Now you have a pile of notes for the same key!*
 - *(2):When you have duplicates (like multiple <_value_>'s to a <_section_>.<_key_>), git config list will show all of them in a row. It’s the best way to see if your config has become "cursed" with too many entries!*
-- *(3): It is worth noting that git config list (without flags) is the "Plumbing" way to see everything Git currently knows about your setup from all levels (system, global, and local).*
-- *(4): unset: Removes just one instance of the key. unset --all: The "Deep Clean." It purges every single duplicate of that key from the config at once.**(1)***
-    - **(1):If you have duplicates, a regular unset will fail because Git is too scared to pick just one. You must use --all to clear the pile, or specify exactly which one to remove.**
+- *(3): It is worth noting that git config list (without flags) is the "Plumbing" way to see everything Git currently knows about your setup from all levels (`--system`, `--global`, and `--local`).*
+- *(4): unset: Removes just one instance of the key. unset `--all`: The "Deep Clean." It purges every single duplicate of that key from the config at once.**(1)***
+    - **(1):If you have duplicates, a regular unset will fail because Git is too scared to pick just one. You must use `--all` to clear the pile, or specify exactly which one to remove.**
 - *(5):Rule of Thumb: Use this when a section is "nonsensical"—meaning Git doesn't use it for its own magic, and you don't want it cluttering your workspace.*
 _____________________________________________________________________________________________________________
-### The Annex (--worktree): A separate scroll for shared drafts of the same project. (File: .git/config.worktree)
-A Worktree allows you to have multiple branches of the same project checked out in different folders at the same time. This scroll holds settings that apply only to that specific branch's workspace. (Extremely Rare).
+### The Annex (`--worktree`): A separate scroll for shared drafts of the same project. (File: .git/config.worktree)
+###### A Worktree allows you to have multiple branches of the same project checked out in different folders at the same time. This scroll holds settings that apply only to that specific branch's workspace. (Extremely Rare).
   - Storage: .git/config.worktree
   - Usage: Only exists if you have enabled the 'extensions.worktreeConfig' spell.
 ###### Think of this as a shared annex to your "Secret Cave" (Local). It’s for when a wizard needs to be in two places at once, working on two different versions of the same spell.
@@ -196,6 +196,8 @@ ________________________________________________________________________________
       To snap the photo and save it forever.
     - #### '`git log`:
       Flipping through the photo album to see your past work.
+      - ##### '`--no-pager`':
+        dumps the log directly into the scroll of your terminal instead of opening a separate reading window.
       - ##### '`-10`':
         adding this flag make git show you only the n amount of past commits equivilent to the number input.(e.g. -10=10 last commits, -100=100 last commits.) 
       - ##### '`--oneline`':
@@ -211,7 +213,7 @@ ________________________________________________________________________________
       - ##### '`--parents`':
         Adding this flag to git log reveals the two-parent nature of the Bridge Commit directly in the output, showing the raw hashes of both parents side by side directly in the log output.(You can verify the two-parent nature of any merge commit by running '`git log --parents`'. The Bridge Commit will be the only one in your history with two parent hashes listed beside it.), A normal commit shows one parent hash.
       - ##### '`--date-order`':
-       This forces Git to show commits in chronological order, even if it means the lines in your --graph have to jump around much more wildly to keep the dates lined up.
+        This forces Git to show commits in chronological order, even if it means the lines in your --graph have to jump around much more wildly to keep the dates lined up.
       - ##### The Lens of All-Sight (`--graph --all --oneline --decorate=full --date-order`):
         use these flags to read commit history like a world map.
         Normally, git log only shows the path you are currently standing on.
@@ -272,9 +274,12 @@ ________________________________________________________________________________
     - To verifiy, use:
       - `find .git/objects`: (The Basement Lantern)
         - Reveals the physical storage of your library. Before a fetch, it is an empty hall; after a fetch, it contains the heavy crates (Packfiles) of the remote's history.
-  - #### '`git pull [remote] [branch]`': (The Auto-Merge)
-    This is a "Combo Spell." It performs a Fetch AND immediately tries to Merge those new photos into your current branch (git pull = git fetch + git merge). It changes your Live Room (Working Directory) right away; Use it with caution.
-  - #### '`git push [remote] [branch]`': (The Delivery)
+  - #### '`git pull [<remote>/<branch>]`': (The Auto-Merge)
+    This is a "Combo Spell." It performs a Fetch AND immediately tries to Merge those new photos into your current branch ('`git pull`' = '`git fetch`' + '`git merge`'). It changes your Live Room (Working Directory) right away; Use it with caution.
+    By default, a pull performs a Merge spell. However, you can configure the tower to use Rebase instead. '`set`' '`git config set pull.rebase false`' to ensure we always use the Bridge Commit method."
+    - The Divergence Rule: A Bridge Commit (Merge Commit) only appears if the two paths have diverged. If the local path has no unique photos that the remote doesn't have, Git will simply "Fast-Forward" (slide the sticky note).
+    - The Clean Floor Rule: You cannot weave timelines if your Live Room (Working Directory) is messy. 
+  - #### '`git push [<remote>/<branch>]`': (The Delivery)
     You send your local 'photos'(commits) from your library to their 'tower's library'(remote branch) and move their sticky notes to match yours.
     Push only affects the remote; it does not change your local branch pointer.
     - Example: `git push origin main`
@@ -325,7 +330,7 @@ ________________________________________________________________________________
     - The Result: A perfectly straight line of history. New commit hashes are generated — the old photos become orphans.
     - The Doctrine Check: Before rebasing, apply The Post Office Test (see Section 5). Only rebase Private Scrolls.
     - ⚠️ Warning: Never rebase the Main Road or any shared branch. It rewrites the past and causes time-travel curses for your allies!
-    - The Rebase Recovery: If you accidentally rebase a Public Scroll, DO NOT force-push yet. Cast '`git reflog`' immediately to find the old tip hash, then use '`git reset --hard `<old-hash>' to restore it.
+    - The Rebase Recovery: If you accidentally rebase a Public Scroll, DO NOT force-push yet. Cast '`git reflog`' immediately to find the old tip hash, then use '`git reset --hard <old-hash>`' to restore it.
   - #### The Handshake (Merge vs. Rebase Decision):
       | Situation | Spell | Why |
       |---|---|---|
@@ -373,21 +378,25 @@ ________________________________________________________________________________
     - The Local-Only Rule: The Pool exists in YOUR tower (.git/logs/), never at the Post Office. You cannot scry another wizard's footprints, and they cannot scry yours.
     - The Expiry Rule: Footprints fade after ~90 days. Act quickly after a mistake!
     - You can then use The Resurrection Ritual to pull them back from the void (when to use which spell):
-      - If you want to undo YOUR OWN branch rewrite entirely → '`git reset --hard `<hash>'
-      - If you want just ONE specific orphan photo → '`git cherry-pick `<hash>':
+      - If you want to undo YOUR OWN branch rewrite entirely → '`git reset --hard <hash>`'
+      - If you want just ONE specific orphan photo → '`git cherry-pick <hash>`':
         - Use this if you want to grab specific orphaned commits and apply them one-by-one onto your current branch.
-      - If you want the orphan's ENTIRE lineage → '`git merge `<hash>':
+      - If you want the orphan's ENTIRE lineage → '`git merge <hash>`':
         - Use this if you found the "tip" of the lost branch in the reflog and want to bring the entire sequence of lost commits back at once.
-      - If you want to rescue an orphan WITHOUT disturbing current branches → '`git checkout -b `<new-branch-name> <hash>':
+      - If you want to rescue an orphan WITHOUT disturbing current branches → '`git checkout -b <new-branch-name> <hash>`':
         - This is often the easiest way! It creates a brand new branch pointer exactly where the orphaned commit is sitting, making it no longer an orphan.
-  - #### '`git rev-parse `<name>': Finding the true 40-character "Fingerprint" (Hash) of a bookmark. *(11)*
-  - #### '`git cat-file `<type> <hash>': Peeking inside a specific object in the library.*(12)*
-  - #### '`git hash-object `<file-path>': Computes and returns the 40-character hash of any file's content without storing it. It is your "Fingerprint Calculator" — useful for checking what hash Git would assign to a file before committing it.
-  - #### '`git ls-tree `<tree-ish>': Listing everything inside a snapshot to see their "Mode." *(13)*
+  - #### '`git rev-parse <name>`':
+    Finding the true 40-character "Fingerprint" (Hash) of a bookmark. *(11)*
+  - #### '`git cat-file <type> <hash>`':
+    Peeking inside a specific object in the library.*(12)*
+  - #### '`git hash-object <file-path>`':
+    Computes and returns the 40-character hash of any file's content without storing it. It is your "Fingerprint Calculator" — useful for checking what hash Git would assign to a file before committing it.
+  - #### '`git ls-tree <tree-ish>`':
+    Listing everything inside a snapshot to see their "Mode." *(13)*
   - ##### Manually editing '.git/config' or '~/.gitconfig' with a text editor. (Changing the kingdom's rules by hand instead of using the git config tool.)
     ##### (This is the "Plumbing" way to change settings without using the 'git config' tool).
 ___________________________________________________________________________________________________________
-- *(1):(git add ., where the . acts as the <file-path> for "everything in the current directory.")*
+- *(1):(git add ., where the . acts as the <_file-path_> for "everything in the current directory.")*
 - *(2)The True Name Lens (--decorate=full): Reveals the "Ref’s" full path. This shows the exact "Shelf" in the Secret Library (refs/heads/) where the sticky note is kept.*
 - *(3)Branching: In a normal book, you read from page 1 to page 100 in a straight line. But a Wizard's Notebook is magical. Think of it like puting an extra bookmark in the project(book) instead of a copy of the whole library; it is just a sticky note (a pointer) that says "I am currently looking at this specific photo in the album.". The Master Scroll (master/main): This is the "True History" of the kingdom. It is the story everyone agrees is real.***(1)** **(2)**
   - **(1)The Movement: When you snap a new photo (commit), you don't need a new bookmark; you simply peel the sticky note off the old photo and slap it onto the new one. It always stays at The Tip of the Wand.***(1)*
@@ -406,9 +415,9 @@ ________________________________________________________________________________
 - *(8)The Multi-Mirror Rule: You can see the "Tips" of many different worlds at once (origin/main, upstream/main, and your own main). You choose which one to merge into your own "Live Room."*
 - *(9) The Lease Mechanic: --force-with-lease compares the remote's current tip to the tip you last Scryed. If they match, your force push proceeds. If they differ, Git refuses — protecting you from overwriting an ally's delivery you hadn't seen yet.*
 - *(10):"orphaning": The state where a commit hash exists in the .git objects database but is not reachable by any branch pointer. This usually happens after a git branch -D or a git rebase where the old versions of commits are left behind.*
-- *(11):<name>:It tells you the full 40-character SHA-1 hash that the name points to. If you ask Git git rev-parse HEAD, it will tell you the exact hash of the commit you are currently standing on.*
-- *(12):If a flag is used '<type>' isn't needed. Common flags: -p (print content), -t (show type).*
-- *(13):<tree-ish>: This is a fancy Git term for "something that points to a tree." Usually, this is the hash of a tree object, or simply HEAD. It lists everything inside that snapshot and shows their "Mode"—a special code that tells Git if a file is a regular file, a folder, or a special 'executable' file (like a script that can run like a toy car on its own).*
+- *(11):<_name_>:It tells you the full 40-character SHA-1 hash that the name points to. If you ask Git git rev-parse HEAD, it will tell you the exact hash of the commit you are currently standing on.*
+- *(12):If a flag is used '<_type_>' isn't needed. Common flags: -p (print content), -t (show type).*
+- *(13):<_tree-ish_>: This is a fancy Git term for "something that points to a tree." Usually, this is the hash of a tree object, or simply HEAD. It lists everything inside that snapshot and shows their "Mode"—a special code that tells Git if a file is a regular file, a folder, or a special 'executable' file (like a script that can run like a toy car on its own).*
 _________________________________________________
 
 
@@ -427,7 +436,7 @@ _________________________________________________
     - Recovery requires coordination: either the rewriter resurrects the old tip (see The Memory Pool), or every ally must manually reset their local copies.
 
             
-### 6-The Secret Library(Content Addressing & Inspection):
+## 6-The Secret Library(Content Addressing & Inspection):
   Git doesn't find your files by their names (like notes.txt). Instead, it gives every single thing a unique ID Number called a Hash.
   It’s like a library where every book is filed by its exact fingerprint.
   If you change even a single letter in a book, its fingerprint changes, and Git gives this new version a new spot on the shelf. This way, nothing ever gets lost or mixed up!
@@ -457,11 +466,11 @@ ________________________________________________________________________________
 - *(2) For the full list of flags (--oneline, --graph, --all, etc.), see 'The Workflow Hierarchy / 50% Solo Mastery / git log'.*
 ___________________________________________________________________________________________________________
 
-### E-Context Summary: Git Apprentice Reference Guide
+## E-Context Summary: Git Apprentice Reference Guide
 - This summary is from _GIT_LEARNING_NOTES.md_ in <_~/workspace/bootdotdev/curriculum/webflyx_> with the intent of growing its documentation alongside the development of webflyx (a self-made project to learn Git with Boot.dev's curriculum guidance) it exists as a personal learning aid.
 - Core Goal: A living _GIT_LEARNING_NOTES.md_ that explains Git concepts chronologically as they appear in the Boot.dev curriculum. It uses a "Wizard's Notebook" theme to simplify complex version control mechanics, simplified so a 5-year-old could understand it while maintaining technical accuracy.
 
-#### Key Analogies & Frameworks:
+### Key Analogies & Frameworks:
 
 - ##### 1-The Config Notebook (The Hierarchy of Power):
     - The Annex (--worktree): A separate scroll for shared drafts of the same project. Exists only when `extensions.worktreeConfig` is enabled.
@@ -473,7 +482,7 @@ ________________________________________________________________________________
     - The Chapter Eraser (remove-section): Ripping out a whole section of settings when they become "nonsensical."
     - The Eraser Rule: Distinguishes between erasing a single line (`unset`) and scrubbing a whole chapter (`remove-section`). Unsetting the last key leaves an empty header; `remove-section` fully purges it.
     - The Hoarder Rule (Duplicates): `--append` staples a new value onto an existing key. A regular `unset` fails if duplicates exist; `--all` purges them.
-    - The Naming Convention: <section>.<key> format is mandatory. A section only exists as long as it has at least one key.
+    - The Naming Convention: <_section_>.<_key_> format is mandatory. A section only exists as long as it has at least one key.
     - The Project Requirement: Writing `--local` config requires being inside a Git repository.
 _____________________
 - ##### 3-The Three States (The Room Photo):
@@ -568,7 +577,7 @@ ______________
 ____________________________
 - ##### Inspection Tools:
   - `git status`: Your Map.
-  - `git log `(with flags: `--oneline`, `--graph`, `--all`, `--decorate=full`, `--parents`, `-n`, `--date-order`): Your Photo Album.
+  - `git log `(with flags: `--oneline`, `--graph`, `--all`, `--decorate=full`, `--parents`, `-n`, `--date-order`, `--no-pager`): Your Photo Album.
   - `git --no-pager log`: Dumps the full history without the pager.
   - `git cat-file -p <hash>`: Your X-Ray Machine.
   - `git ls-tree <tree-ish>`: Your Packing List.
