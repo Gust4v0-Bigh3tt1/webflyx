@@ -309,7 +309,7 @@ ________________________________________________________________________________
       - ##### '`git branch -vv`' (The Tracking Lens):
         Use Case: Instantly see which local branches are ahead/behind their remote counterparts — invaluable before pushing or pulling. It's the "am I in sync?" spell.
         Shows each local branch alongside:
-        - Its current commit hash (short)
+        - Its current commit hash (short) *(12a)*
         - The upstream remote-tracking branch it follows (e.g., [origin/feature/payments])
         - Its divergence status (e.g., [origin/main: ahead 2, behind 1])
         - The latest commit message
@@ -371,6 +371,13 @@ ________________________________________________________________________________
       - To verifiy, use:
         - `find .git/objects`: (The Basement Lantern)
           Reveals the physical storage of your library. Before a fetch, it is an empty hall; after a fetch, it contains the heavy crates (Packfiles) of the remote's history.
+    - **The Sentinel's Watch (S.I.S.):**
+        `git fetch, git status, git branch -vv, git log --graph --all --oneline --decorate=full --date-order`
+        The Situation Inspection Sequence ritual performed after a rest or upon entering the tower to observe the progress of the Guild. It reveals the distance between your local scrolls and the remote's truth.
+        - **The Stale Ghost Rule:** This ritual is mandatory because without the initial fetch, your log and status are merely haunting you with old data.
+        - **The Tracking Lens:** Uses `branch -vv` (see Solo Mastery) to check ahead/behind status.
+        - **The All-Sight Lens:** Uses `log --graph --all...` (see Solo Mastery) to visualize the gap.
+    - **Remote Merge Conflicts** (when the Guild's work and your work clash) (sealed scroll)
   - #### The Delivery Hall (Pushing & Pulling):
     ##### Where photos travel between your tower and the Guild — both directions.
     - #### '`git pull [<remote> <branch>]`': (The Auto-Merge)
@@ -596,6 +603,7 @@ ________________________________________________________________________________
 - *(10) The UI Barrier: Unlike push or fetch, a Pull Request is a feature of the Post Office (GitHub/GitLab), not a core Git command. While the Envoy (gh pr create) can start the ceremony, it usually culminates in the visual interface of the Great Library.*
 - *(11):"orphaning": The state where a commit hash exists in the .git objects database but is not reachable by any branch pointer. This usually happens after a git branch -D or a git rebase where the old versions of commits are left behind.*
 - *(12):<_name_>:It tells you the full 40-character SHA-1 hash that the name points to. If you ask Git git rev-parse HEAD, it will tell you the exact hash of the commit you are currently standing on.*
+  - **(12a) The Short-Hand Signature: Usually, only the first 7 characters are needed to identify a commit (e.g., `a1b2c3d`). Git uses this abbreviated fingerprint in `branch -vv` and `log --oneline` to save space in the notebook.**
 - *(13):If a flag is used '<_type_>' isn't needed. Common flags: -p (print content), -t (show type).*
 - *(14):<_tree-ish_>: This is a fancy Git term for "something that points to a tree." Usually, this is the hash of a tree object, or simply HEAD. It lists everything inside that snapshot and shows their "Mode"—a special code that tells Git if a file is a regular file, a folder, or a special 'executable' file (like a script that can run like a toy car on its own).*
 _________________________________________________
@@ -826,6 +834,8 @@ ____________________
       - `git fetch --all` (The Grand Scry): Fetches from every registered remote at once.
         - The Multi-Mirror Rule: You can see the Tips of many worlds at once and choose which to merge.
       - `find .git/objects` (The Basement Lantern): Plumbing tool that physically verifies the heavy crates (Packfiles) arrived after a fetch.
+      - **The Sentinel's Watch (S.I.S.):** `git fetch, git status, git branch -vv, git log --graph --all --oneline --decorate=full --date-order`, the Situation Identification Sequence is great for using it after a short rest to see the progress of your Guild.
+      - **Remote Merge Conflicts** (when the Guild's work and your work clash) (sealed scroll)
 
     - **The Delivery Hall (Pushing):**
       - `git pull [<remote> <branch>]` (The Auto-Merge): Combo spell — `git fetch` + `git merge`. Changes your Live Room immediately. Use with caution.
