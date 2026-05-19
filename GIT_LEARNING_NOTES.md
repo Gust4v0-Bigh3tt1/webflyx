@@ -14,6 +14,7 @@
     "<_directory-name_>" is a required argument
 
   - Flags:
+
     A flag is like a special instruction you give to a command, usually starting with a -. For example, '-m' tells Git "I want to attach a message to this record."
 
 
@@ -312,6 +313,7 @@ ________________________________________________________________________________
         - Its current commit hash (short) *(12a)*
         - The upstream remote-tracking branch it follows (e.g., [origin/feature/payments])
         - Its divergence status (e.g., [origin/main: ahead 2, behind 1])
+          - Note: Ahead/Behind indicators only appear if the Speed-Dial Doctrine is active for that branch (see Delivery Hall).
         - The latest commit message
       - ##### '`git branch -d <name>`':
         The Safe Eraser. Deletes the branch named in the command, but `-d` refuses if its photos haven't been merged yet.
@@ -377,6 +379,7 @@ ________________________________________________________________________________
         - **The Stale Ghost Rule:** This ritual is mandatory because without the initial fetch, your log and status are merely haunting you with old data.
         - **The Tracking Lens:** Uses `branch -vv` (see Solo Mastery) to check ahead/behind status.
         - **The All-Sight Lens:** Uses `log --graph --all...` (see Solo Mastery) to visualize the gap.
+        - **The Tracking Lens:** Reveals the link established by the Speed-Dial Doctrine
     - **Remote Merge Conflicts** (when the Guild's work and your work clash) (sealed scroll)
   - #### The Delivery Hall (Pushing & Pulling):
     ##### Where photos travel between your tower and the Guild — both directions.
@@ -388,18 +391,53 @@ ________________________________________________________________________________
     - #### '`git push [<remote> <branch>]`': (The Delivery)
       You send your local 'photos'(commits) from your library to their 'tower's library'(remote branch) and move their sticky notes to match yours.
       Push only affects the remote; it does not change your local branch pointer.
+
       - Example: `git push origin main`
-      - Requires authentication.
+
+      - Requires authentication.          
+      - If you must deliver to multiple kingdoms (e.g., GitHub and a private backup server), you have two options:
+
+        - **Sequential Delivery:** git push origin main followed by git push backup main.
+        - **The Multi-Remote Mirror (Advanced):** You can configure a single remote nickname (like mirror) to have multiple pushurl entries in your .git/config. Then, git push mirror would broadcast to all. *(sealed scroll)*
+
       - Advanced forms:
         - '`git push <remote> <localbranch>:<remotebranch>`':
           push a local branch to a differently named remote branch
         - '`git push <remote> :<remotebranch>`': 
          delete a remote branch by pushing an empty ref
         - '`git push --force [<remote> <branch>]`': (The Overwrite Hex) 
+
           Commands the Post Office to REPLACE a shared scroll rather than append to it. Required after a rebase because commit hashes have changed.
         - '`git push --force-with-lease [<remote> <branch>]`': (The Polite Hex) *(9)*
+
           Refuses to cast if another wizard has delivered new photos since you last Scryed. Always prefer this over bare --force.
+        
+        - '`git push --all <remote>`': (The Global Delivery Hex)
+
+          Delivers EVERY local branch in your notebook to the specified Post Office at once.
+          - **The Risk:** Unlike `git fetch --all`, which is a safe scrying spell, this is a massive "in-side-out" operation. It can clutter the Guild's library with your messy, half-finished side-quests.
+          - **The Asymmetry Rule:** While you can scry all remotes at once (`fetch --all`), Git forbids pushing to all remotes at once to prevent accidental global corruption.
+
       - ⚠️ Warning: Force-pushing a Public Scroll violates The Tower Rule. See Section 5 before casting.
+        
+        - '`git push -u <remote> <branch>`': (The Speed-Dial Ritual):
+
+          - **The Linking Spell (`-u` or `--set-upstream`):** Usually cast during the first delivery: `git push -u origin <branch>`.
+
+          - **The Automation:** Once this ritual is performed, you can simply type `git push` or `git pull` without specifying the remote or branch name. Git "remembers" where this branch belongs.
+
+          - **The Tracking Status:** Once linked, `git status` and `git branch -vv` can see through the portal to tell you if you are "ahead" (have unsent photos) or "behind" (missing Guild photos).
+
+          - **The Default Rule:** Setting upstream writes a rule to your local tower's .git/config. If you are standing on feature-login and have set its upstream to origin/feature-login, a bare git push assumes that destination. (1 set per branch, in your main `git push`sends to X place, while in a branch `git push` sends to Y place.)
+          
+          - **The Manual Override:** Explicit commands always trump the Speed-Dial. If you cast git push backup main, Git ignores the upstream setting for that specific delivery.
+          
+          - **The Monogamy Rule:** A local branch can only track one remote branch at a time. Casting -u to a new destination overwrites the previous link.
+          
+          - **The Unsetting Spell:** Use git branch --unset-upstream to rip the Speed-Dial out of your notebook. This returns the branch to a "manual-only" delivery state.
+          
+          - **The S.I.S. Benefit:** Enables `git status` to tell you if you are "ahead" or "behind" the Guild's version.
+
     - #### The Council Chamber (Pull Requests):
       ##### A formal ceremony held at the Great Library (GitHub), not inside your local tower. It is a way to propose that your "Side-Quest" (Branch) be officially woven into the "Kingdom's Law" (Main Branch).
       - #### The Council of Peers: (Pull Requests) *(10)*
@@ -410,7 +448,7 @@ ________________________________________________________________________________
         - The Master’s Seal (The Merge): Once the council is satisfied, the "Merge" button is pressed. This officially performs the Bridge Commit or Fast-Forward at the Great Library, making your Side-Quest part of the permanent history.
         - The Final Integration: After the Council (GitHub) approves, the merge is executed in the Great Library. This creates a new "state of truth" on the remote.
         - Catching Up: Your local tower doesn't know the merge happened yet! You must switch to your local main and use git pull origin main to slide your local sticky note to the new Tip.    
-        - Vanishing the Scaffolding: Once the merge is complete, the Side-Quest branch is "spent." Use git branch -d <branch> to remove the local bookmark.
+        - Vanishing the Scaffolding: Once the merge is complete, the Side-Quest branch is "spent." Use `git branch -d <branch>` to remove the local bookmark.
     - #### Resolving the Clash of Timelines (Merge Conflicts):
       ###### core truths(conditions):
       - The Interrupted Ritual: Git stops the merge halfway and marks the cursed files.
@@ -849,7 +887,11 @@ ____________________
         - `git push --force [<remote> <branch>]` (The Overwrite Hex): Commands the Post Office to REPLACE a shared scroll. Required after a rebase because hashes changed.
         - `git push --force-with-lease [<remote> <branch>]` (The Polite Hex): Refuses to cast if another wizard delivered new photos since your last Scry. Always prefer over bare `--force`.
         - The Lease Mechanic: `--force-with-lease` compares the remote's current tip to the tip you last fetched — refuses if they differ.
+        - `git push --all <remote>` (The Global Delivery Hex): Pushes every local branch to one remote; carries high clutter risk.
+          - **The Asymmetry Rule:** Scrying (`fetch --all`) is global and safe; Delivery (`push`) is specific to prevent kingdom-wide corruption.
         - ⚠️ Warning: Force-pushing a Public Scroll violates The Tower Rule.
+        
+        - `git push -u <remote> <branch>` (The Speed-Dial): Pushes work and links local/remote branches for shorthand use and status tracking.
       - `git clone <repository-url>`: Copies an entire library from another kingdom to your local desk.
 
     - **The Council Chamber (Pull Requests):**
