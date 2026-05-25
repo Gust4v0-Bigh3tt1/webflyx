@@ -159,33 +159,38 @@ ________________________________________________________________________________
       - #### The Founding Spell:
         - Use `touch .gitignore` in the root or any subdirectory.
         - Edit as plain text—one pattern per line. Paths are relative to the location of that specific `.gitignore` file.
+        - Comments (#): Lines starting with # are ignored by Git and serve as notes for other wizards.
 
       - #### The Matching Engine:
         Git runs **a path component match** (full segment match).
         - `secure` matches `project/secure/` and `project/src/secure/`.
         - `secure` does NOT match `project/secure_notes.txt`.
+        
+        - ##### The Wildcard (*): 
+          Matches any number of characters except for the directory separator (`/`). 
+          `*.txt` matches `princess_diaries.txt` and `contacts/your_mom.txt`.
+          
+        - ##### The Negation Escape Hatch (!):
+          Use `!` to un-ignore specific items within ignored areas.
+          
+            secure/
+            !secure/shareable.txt
 
-      - #### The Evaluation Order (Nested Cloaks):
-        Git reads `.gitignore` files from **most specific to least specific**. A cloak in a subdirectory overrides the root cloak for all paths inside that specific room and its closets. A nested cloak's rules are processed last, meaning it can "veto" the root's laws using the Negation Escape Hatch.
+          This is a common pattern for ignoring a secrets folder while preserving one safe file.
 
-        - **The Wizard's Rule:** To keep an ignored folder structure alive in the Photo Album, you must leave a "Lesser Scroll" (usually an empty .gitkeep file) inside and negate it in the cloak.
-
-      - #### The Anchor Rule:
+      - #### The Anchor Rule (Rooted Patterns):
         A leading `/` pins the pattern to the directory where that specific `.gitignore` file lives.
-        - If `/debug.log` is in root, it ignores `project/debug.log`.
+        - `/main.py` ignores `main.py` in the root, but NOT `src/main.py`.
         - If `/debug.log` is in `src/assets/`, it ignores `project/src/assets/debug.log`, but ignores NOTHING in `project/src/`.
         - A trailing `/` (e.g., `secure/`) forces directory-only matching.
 
-      - #### The Persistence Rule (The "Already Seen" Exception):
-        The cloak only hides "Untracked Ghosts." If a file is already in the **Photo Album (Commit History)**, it remains tracked. To apply the cloak to a tracked file, you must first purge it from the **Camera Viewfinder (Index)** via `git rm --cached <file>`.
+      - #### The Order of Precedence:
+        The order of patterns determines their effect; later lines can override earlier ones.
+        
+            temp/*
+            !temp/instructions.md
 
-      - #### The Negation Escape Hatch:
-        Use `!` to un-ignore specific items within ignored areas.
-
-            secure
-            !secure/shareable.txt
-
-        This is a common pattern for ignoring a secrets folder while preserving one safe file.
+        Everything in `temp/` is ignored *except* for `instructions.md`. If the order were reversed, the wildcard would re-cloak the instructions file.
 
 - ### 3-The Photo Album (Commit History):
 
@@ -780,11 +785,11 @@ _________________________________________________
     - '`git log`': Your Photo Album. It shows you a list of every photo you've ever taken, who took it, and when. *(6)*
         If you want to avoid the pager entirely and just dump the whole history into your terminal so you can scroll with your mouse like a normal web page, you can use this command: ('git --no-pager log')
         Or, the "Thumbnail View" is often much easier to read: ('`git log --oneline`')
-        - '`git cat-file -p <hash>`': Your X-Ray Machine. If you have a secret ID number (hash), this tool lets you look inside and see the actual words of the file or the details of the photo.
-        - '`git cat-file -t <hash>`': The Label Reader. Reveals only the *type* of an object (blob, tree, commit, or tag) without exposing its contents.
-        - '`git ls-tree <tree-ish>`': Your Packing List. While cat-file shows you what is inside one item, ls-tree shows you a list of every file and folder inside a specific "Tree" (folder) snapshot. *(7)*
-        - '`git rev-parse <ref>`': Your Translator. Resolves any reference (a Sticky Note name, HEAD, a short hash) into its full 40-character Hash ID.
-        - '`git config list --show-origin`': It doesn't just show the settings; it tells you exactly which file (Kingdom, Inside Cover, or Sticky Note) each rule came from.
+    - '`git cat-file -p <hash>`': Your X-Ray Machine. If you have a secret ID number (hash), this tool lets you look inside and see the actual words of the file or the details of the photo.
+    - '`git cat-file -t <hash>`': The Label Reader. Reveals only the *type* of an object (blob, tree, commit, or tag) without exposing its contents.
+    - '`git ls-tree <tree-ish>`': Your Packing List. While cat-file shows you what is inside one item, ls-tree shows you a list of every file and folder inside a specific "Tree" (folder) snapshot. *(7)*
+    - '`git rev-parse <ref>`': Your Translator. Resolves any reference (a Sticky Note name, HEAD, a short hash) into its full 40-character Hash ID.
+    - '`git config list --show-origin`': It doesn't just show the settings; it tells you exactly which file (Kingdom, Inside Cover, or Sticky Note) each rule came from.
 ___________________________________________________________________________________________________________
 #### **FOOTNOTES:**
 - *(1) The Nameless Leaf: A blob is pure content. The same exact file content stored in two different folders under two different filenames produces only **one** blob in the library — both folders' trees just point to the same leaf.*
@@ -858,6 +863,12 @@ _____________________
   - **The Live Room (Working Directory):** Where you move furniture (modify files).
   - **The Camera Viewfinder (Staging Area / Index):** Preparing the shot via `git add`. Physically stored in `.git/index`.
     - **The Invisibility Cloak (.gitignore):** Plain text file at repo root — patterns listed inside are invisible to Git's entire pipeline from Staging onward.
+      - **Founding Spell:** `touch .gitignore` at any level; relative pathing.
+      - **Comments (#):** Silenced lines for wizard notes.
+      - **Wildcards (*):** Matches characters but stops at slashes.
+      - **Negation (!):** Un-ignores specific scrolls; must follow the cloaking rule.
+      - **Anchors (/):** Leading pins to current level; trailing forces directory-only.
+      - **The Order Rule:** Later lines override earlier ones (Linear Precedence).
   - **The Photo Album (Commit History):** The permanent record via `git commit`.
   - **The Snapshot Model:** Git stores complete photos, not deltas.
     - **Commit Hash composition:** tree + parent + author + timestamp + message.
