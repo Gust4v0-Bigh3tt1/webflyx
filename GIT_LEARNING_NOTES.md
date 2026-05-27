@@ -192,6 +192,22 @@ ________________________________________________________________________________
 
         Everything in `temp/` is ignored *except* for `instructions.md`. If the order were reversed, the wildcard would re-cloak the instructions file.
 
+      - #### The Selection Doctrine: Deciding What to Cloak
+
+        Not every scrap of parchment belongs in the Secret Library. We apply four filters to keep our Tower from becoming cluttered with junk:
+
+        1. **Generated Artifacts:** If a file can be birthed by a tool (like `pandoc` turning Markdown into HTML), we do not track it. It is redundant; as long as we have the source, we can regenerate the result.
+        2. **External Dependencies:** Large crates of potions and tools (like `node_modules` or `venv`) belong to the merchant, not our history. We track the list of what we need, but not the items themselves.
+        3. **Personal Preferences:** Your specific desk height or quill ink color (editor settings) shouldn't be forced on other wizards in the guild.
+        4. **The Dangerous Secrets:** API keys and passwords are like True Names—if they are recorded in the Photo Album, any thief who sees the album gains power over your realm.
+
+      - #### The Eviction Hex: Correcting Mistakes
+        Sometimes, a wizard accidentally prepares a photo (`git add`) or even snaps one (`git commit`) of a file that should have been cloaked. Simply adding the file to the `.gitignore` later will not make the existing photo vanish. To fix this, we use:
+
+        `git rm --cached <file>`
+
+        This command "evicts" the scroll from the **Camera Viewfinder (Index)** while leaving the physical scroll sitting on your desk in the **Live Room (Working Directory)**. Once evicted and cloaked, Git will finally stop watching it.
+
 - ### 3-The Photo Album (Commit History):
 
   Where Git takes the photo and permanently stores snapshots of your project.
@@ -413,7 +429,7 @@ Roughly 50% of the time you'll be using Solo Mastery commands, 40% Remote Collab
           Reveals the physical storage of your library. Before a fetch, it is an empty hall; after a fetch, it contains the heavy crates (Packfiles) of the remote's history.
 
     - **The Sentinel's Watch (S.I.S.):**
-        `git fetch, git status, git branch -vv, git log --graph --all --oneline --decorate=full --date-order`
+        `git fetch && git status && git branch -vv && git log --graph --all --oneline --decorate=full --date-order`
         The Situation Inspection Sequence ritual performed after a rest or upon entering the tower to observe the progress of the Guild. It reveals the distance between your local scrolls and the remote's truth.
         - **The Stale Ghost Rule:** This ritual is mandatory because without the initial fetch, your log and status are merely haunting you with old data.
         - **The Tracking Lens:** Uses `branch -vv` (see Solo Mastery) to check ahead/behind status.
@@ -446,7 +462,7 @@ Roughly 50% of the time you'll be using Solo Mastery commands, 40% Remote Collab
         - '`git push <remote> <localbranch>:<remotebranch>`':
           push a local branch to a differently named remote branch
         - '`git push <remote> :<remotebranch>`': 
-         delete a remote branch by pushing an empty ref
+          delete a remote branch by pushing an empty ref
         - **'`git push --force [<remote> <branch>]`': (The Overwrite Hex)**
 
           Commands the Post Office to REPLACE a shared scroll rather than append to it. Required after a rebase because commit hashes have changed.
@@ -492,7 +508,7 @@ Roughly 50% of the time you'll be using Solo Mastery commands, 40% Remote Collab
 
         - **The Update Ritual:** If the council suggests changes, you simply modify the files in your tower, commit them, and Deliver ('`push`') again. The Proposal Scroll at the Great Library updates automatically to reflect your new work!
 
-        - **The Master’s Seal (The Merge):** Once the council is satisfied, the "Merge" button is pressed. This officially performs the Bridge Commit or Fast-Forward at the Great Library, making your Side-Quest part of the permanent history.
+        - **The Master’s Seal (The Merge):** Once the council is satisfied and it's "up to date and ready to merge", the "Merge" button is pressed. This officially performs the Bridge Commit or Fast-Forward at the Great Library, making your Side-Quest part of the permanent history.
 
         - **The Final Integration:** After the Council (GitHub) approves, the merge is executed in the Great Library. This creates a new "state of truth" on the remote.
 
@@ -869,6 +885,12 @@ _____________________
       - **Negation (!):** Un-ignores specific scrolls; must follow the cloaking rule.
       - **Anchors (/):** Leading pins to current level; trailing forces directory-only.
       - **The Order Rule:** Later lines override earlier ones (Linear Precedence).
+      - **The Selection Doctrine (What to Cloak):** Rules for deciding which scrolls stay out of the library.
+        - **(a) The Generated (Compiled):** Ignore anything the machine builds from source (e.g., advert.html from advert.md).
+        - **(b) The Dependencies (Crates):** Ignore external libraries (e.g., node_modules) that can be re-summoned via manifest.
+        - **(c) The Personal (Quill Settings):** Ignore editor-specific configs that don't belong in other towers.
+        - **(d) The Dangerous (Secrets):** Ignore .env and API keys; these must never enter the Photo Album.
+      - **The Eviction Hex (git rm --cached):** Removes a scroll from the Staging Area/Index without burning it from the Working Directory. Necessary when a scroll was accidentally photographed before being cloaked.
   - **The Photo Album (Commit History):** The permanent record via `git commit`.
   - **The Snapshot Model:** Git stores complete photos, not deltas.
     - **Commit Hash composition:** tree + parent + author + timestamp + message.
