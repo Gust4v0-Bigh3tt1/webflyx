@@ -49,8 +49,8 @@ Your default identity. These settings follow you across every project you ever s
 
 Think of your Git config like a notebook. Your user.name and user.email are written on the inside cover (the global config).
 .........................................................................................
-  - The "Notebook" Commands: (Config Porcelain)
-    These are the specialized tools for writing, reading, and erasing the rules in your Config Notebooks.
+  - The Quill of Law: (Config Porcelain)
+    These are the specialized tools for writing, reading, and erasing the rules in your law book.
       - '`git config set [scope] <key> <value>`' : Writing a new rule in a specific notebook.(e.g. '`git config set user.name "Your Name"`') *(5)* *(6)*
       - '`git config get [scope] <key>`': Reading a specific rule.
         Example: '`git config get init.defaultBranch`'
@@ -88,7 +88,7 @@ Project-specific rules. These only exist inside the hidden .git cave of a specif
   - **Scope:** Local (the default if you don't say otherwise).
   - **Storage:** These live in .git/config inside your project.
   - **Priority:** If you have a user.name set in both Global and Local, Git will always listen to the Local one first. The "sticky note" inside the chapter overrides the "inside cover" of the notebook.
-- **The Hoarder Rule (Duplicates):** While most notebooks only let you have one `<section>.<key> <value>` per page, Git lets you stick as many as you want if you use the "stapler" instruction (`git config set --append <section>.<key> <value>`). *(1)*
+- **The Hoarder Rule (Duplicates):** While most law books only let you have one `<section>.<key> <value>` per page, Git lets you stick as many as you want if you use the "stapler" instruction (`git config set --append <section>.<key> <value>`). *(1)*
   - **Commands:**
     - **Set:** '`git config set <key> <value>`'
         Append: '`git config set --append <key> <value>`' (The "Stapler": adds a duplicate instead of replacing the old one).
@@ -104,6 +104,7 @@ ________________________________________________________________________________
 #### **FOOTNOTES:**
 - *(1) The `--append` flag is like using a stapler. Instead of replacing the old sticky note, you are stapling a new one right on top of it. Now you have a pile of notes for the same key!*
 - *(2) When you have duplicates (like multiple `<value>`s for a `<section>.<key>`), `git config list` will show all of them in a row. It's the best way to see if your config has become "cursed" with too many entries. It is also worth noting that `git config list` (without flags) is the "Plumbing" way to see everything Git currently knows about your setup from all levels (`--system`, `--global`, and `--local`).*
+  - **(2.a) '`git config list --show-origin`': It doesn't just show the settings; it tells you exactly which file (Kingdom, Inside Cover, or Sticky Note) each rule came from.**
 - *(3) `unset` removes just one instance of the key. `unset --all` is the "Deep Clean" — it purges every single duplicate of that key from the config at once.*
     - **(3.a) If you have duplicates, a regular `unset` will fail because Git is too scared to pick just one. You must use `--all` to clear the pile, or specify exactly which one to remove.**
 - *(4) Rule of Thumb: Use `remove-section` when a section is "nonsensical" — meaning Git doesn't use it for its own magic, and you don't want it cluttering your workspace.*
@@ -291,7 +292,7 @@ ________________________________________________________________________________
 
 Roughly 50% of the time you'll be using Solo Mastery commands, 40% Remote Collaboration commands, and the last 10% Emergency Spells. In Git, commands are also divided into high-level ("porcelain") commands and low-level ("plumbing") commands. The porcelain commands are the ones you'll use most often as a developer to interact with your code.
                     
-- ### 50% Solo Mastery: Half of git 
+- ### 50% The Wizard's Cantrips (Solo Mastery): Half of git's toolbox
   These are your most common Porcelain commands. Use these to move through your day-to-day workflow
     - #### '`git status`': 
       To see which rooms(files) were changed and their current state.
@@ -436,7 +437,7 @@ Roughly 50% of the time you'll be using Solo Mastery commands, 40% Remote Collab
         - **The All-Sight Lens:** Uses `log --graph --all...` (see Solo Mastery) to visualize the gap.
         - **The Tracking Lens:** Reveals the link established by the Speed-Dial Doctrine
 
-    - **Remote Merge Conflicts** (when the Guild's work and your work clash) *(sealed scroll)*
+    - **Remote Merge Conflicts (The Guild's Clash):** When a 'pull' reveals that the Post Office's scrolls and your local scrolls have changed the same lines. Resolved via the standard **'Hand-Picked Truth'** ritual.
 
   - #### **The Delivery Hall (Pushing & Pulling):**
     Where photos travel between your tower and the Guild — both directions.
@@ -456,7 +457,7 @@ Roughly 50% of the time you'll be using Solo Mastery commands, 40% Remote Collab
       - If you must deliver to multiple kingdoms (e.g., GitHub and a private backup server), you have two options:
 
         - **Sequential Delivery:** git push origin main followed by git push backup main.
-        - **The Multi-Remote Mirror (Advanced):** You can configure a single remote nickname (like mirror) to have multiple pushurl entries in your .git/config. Then, git push mirror would broadcast to all. *(sealed scroll)*
+        - **The Multi-Remote Mirror (Broadcast Delivery):** Using '`git remote set-url --add --push` to link one nickname to multiple kingdom addresses, allowing one delivery to reach many towers.
 
       - **Advanced forms:**
         - '`git push <remote> <localbranch>:<remotebranch>`':
@@ -677,7 +678,8 @@ Roughly 50% of the time you'll be using Solo Mastery commands, 40% Remote Collab
                 --mixed  →  affects branch pointer + viewfinder     (medium)
                 --hard   →  affects branch pointer + viewfinder + live room  (full destruction)
 
-  - ### **Reverting:** How to undo a photo if you don't like it. *(Sealed Scroll)*
+  - ### **Reverting (The Polite Undo):**
+    Taking a new photo (commit) that records the exact opposite changes of a previous one to undo a mistake without erasing history.
 
   - ### **'`git reflog`': (The Memory Pool)**
     The Memory Pool will show you the commit hashes of your "lost" work due to *"orphaning"* . Even when a scroll is rewritten or a bookmark force-erased, Git remembers every position HEAD has ever occupied — like footprints in wet sand near a reflecting pool.*(11)*
@@ -923,7 +925,7 @@ ____________________
 - ### **4-The Workflow Hierarchy (50/40/10 Rule):**
   Roughly 50% of the time you'll use Solo Mastery commands, 40% Remote Collaboration, and the last 10% Emergency Spells. Git also splits commands into Porcelain (user-friendly) and Plumbing (under-the-hood).
 
-  - **50% Solo Mastery (Daily Loop):**
+  - **50% The Wizard's Cantrips (Solo Mastery) (Daily Loop):**
     - `git status`: Reveals which rooms (files) changed and their current state.
     - `git diff` (The Comparison Lens): Shows line-by-line differences between two states.
       - `git diff` — Working Directory vs. Staging Area
@@ -992,7 +994,7 @@ ____________________
       - `find .git/objects` **(The Basement Lantern):** Plumbing tool that physically verifies the heavy crates (Packfiles) arrived after a fetch.
       - **The Sentinel's Watch (S.I.S.):** `git fetch, git status, git branch -vv, git log --graph --all --oneline --decorate=full --date-order`, the Situation Identification Sequence is great for using it after a short rest to see the progress of your Guild.
 
-      - **Remote Merge Conflicts** (when the Guild's work and your work clash) *(sealed scroll)*
+      -** Remote Merge Conflicts (The Guild's Clash):** When a 'pull' reveals that the Post Office's scrolls and your local scrolls have changed the same lines. Resolved via the standard 'Hand-Picked Truth' ritual.
 
     - **The Delivery Hall (Pushing):**
       - `git pull [<remote> <branch>]` **(The Auto-Merge):** Combo spell — `git fetch` + `git merge`. Changes your Live Room immediately. Use with caution.
@@ -1064,7 +1066,7 @@ ____________________
       - `git reset --mixed <COMMITHASH>` **(The Partial Rewind):** Branch pointer moved · Camera Viewfinder reset · Live Room unchanged. Undone changes become unstaged file edits. Default when no flag specified.
       - `git reset --hard <COMMITHASH>` **(The Full Rewind):** Branch pointer moved · Camera Viewfinder reset · Live Room reset. ⚠️ Destructive for uncommitted work.
 
-    - **Reverting:** *(Sealed Scroll — covered separately)*
+    - **Reverting (The Polite Undo):** Taking a new photo (commit) that records the exact opposite changes of a previous one to undo a mistake without erasing history.
 
     - **`git reflog` (The Memory Pool):**
 
