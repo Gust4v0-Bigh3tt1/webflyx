@@ -20,7 +20,7 @@ Git is a tool for tracking changes(snapshots/photos) to files over time, allowin
     A flag is like a special instruction you give to a command, usually starting with a -. For example, '-m' tells Git "I want to attach a message to this record."
 
 ## 1. Configuring Git:
-Before the work begin, you need to tell Git who you are! This information is attached to everything you do so people know who made the changes.(go to "The Inside Cover (--global)/The "Notebook" Commands" to see how to apply your Identity)
+Before the work begin, you need to tell Git who you are! This information is attached to everything you do so people know who made the changes.(go to "The Inside Cover (--global)>The Quill of Law" to see how to apply your Identity)
 
 - **The Rule of Overriding:** If a setting exists in more than one "level", Git always listens to the most specific one. (Worktree (The Annex) overrides Local (Sticky Note), Local (Sticky Note) overrides Global (Inside Cover), Global (Inside Cover) overrides System (Kingdom's Law).)
 
@@ -680,6 +680,8 @@ Roughly 50% of the time you'll be using Solo Mastery commands, 40% Remote Collab
 
   - ### **Reverting (The Polite Undo):**
     Taking a new photo (commit) that records the exact opposite changes of a previous one to undo a mistake without erasing history.
+
+    **command:** `git revert <commit_hash>` to undo the bad commit without changing the commit history
 
   - ### **'`git reflog`': (The Memory Pool)**
     The Memory Pool will show you the commit hashes of your "lost" work due to *"orphaning"* . Even when a scroll is rewritten or a bookmark force-erased, Git remembers every position HEAD has ever occupied — like footprints in wet sand near a reflecting pool.*(11)*
